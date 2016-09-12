@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.AccountRuleDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.AccountRule">
+		<id column="RULE_ID" property="ruleId" jdbcType="CHAR" />
+		<result column="ACCOUNT_TYPE" property="accountType" jdbcType="CHAR" />
+		<result column="PAYER_SUBJECT_NO" property="payerSubjectNo"
+			jdbcType="VARCHAR" />
+		<result column="PAYER_FLAG" property="payerFlag" jdbcType="CHAR" />
+		<result column="PAYEE_SUBJECT_NO" property="payeeSubjectNo"
+			jdbcType="VARCHAR" />
+		<result column="PAYEE_FLAG" property="payeeFlag" jdbcType="CHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		RULE_ID, ACCOUNT_TYPE, PAYER_SUBJECT_NO, PAYER_FLAG,
+		PAYEE_SUBJECT_NO,
+		PAYEE_FLAG,
+		UPDATE_TIME, REMARK
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_ACCOUNT_RULE
+		where RULE_ID = #{ruleId,jdbcType=CHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		T_ACCOUNT_RULE
+		where RULE_ID = #{ruleId,jdbcType=CHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.AccountRule">
+		insert into T_ACCOUNT_RULE
+		(RULE_ID, ACCOUNT_TYPE, PAYER_SUBJECT_NO,
+		PAYER_FLAG, PAYEE_SUBJECT_NO,
+		PAYEE_FLAG,
+		UPDATE_TIME, REMARK)
+		values (#{ruleId,jdbcType=CHAR},
+		#{accountType,jdbcType=CHAR},
+		#{payerSubjectNo,jdbcType=VARCHAR},
+		#{payerFlag,jdbcType=CHAR}, #{payeeSubjectNo,jdbcType=VARCHAR},
+		#{payeeFlag,jdbcType=CHAR},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.AccountRule">
+		insert into T_ACCOUNT_RULE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ruleId != null">
+				RULE_ID,
+			</if>
+			<if test="accountType != null">
+				ACCOUNT_TYPE,
+			</if>
+			<if test="payerSubjectNo != null">
+				PAYER_SUBJECT_NO,
+			</if>
+			<if test="payerFlag != null">
+				PAYER_FLAG,
+			</if>
+			<if test="payeeSubjectNo != null">
+				PAYEE_SUBJECT_NO,
+			</if>
+			<if test="payeeFlag != null">
+				PAYEE_FLAG,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ruleId != null">
+				#{ruleId,jdbcType=CHAR},
+			</if>
+			<if test="accountType != null">
+				#{accountType,jdbcType=CHAR},
+			</if>
+			<if test="payerSubjectNo != null">
+				#{payerSubjectNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payerFlag != null">
+				#{payerFlag,jdbcType=CHAR},
+			</if>
+			<if test="payeeSubjectNo != null">
+				#{payeeSubjectNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payeeFlag != null">
+				#{payeeFlag,jdbcType=CHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.AccountRule">
+		update T_ACCOUNT_RULE
+		<set>
+			<if test="accountType != null">
+				ACCOUNT_TYPE = #{accountType,jdbcType=CHAR},
+			</if>
+			<if test="payerSubjectNo != null">
+				PAYER_SUBJECT_NO = #{payerSubjectNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payerFlag != null">
+				PAYER_FLAG = #{payerFlag,jdbcType=CHAR},
+			</if>
+			<if test="payeeSubjectNo != null">
+				PAYEE_SUBJECT_NO = #{payeeSubjectNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payeeFlag != null">
+				PAYEE_FLAG = #{payeeFlag,jdbcType=CHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where RULE_ID = #{ruleId,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.AccountRule">
+		update
+		T_ACCOUNT_RULE
+		set ACCOUNT_TYPE = #{accountType,jdbcType=CHAR},
+		PAYER_SUBJECT_NO = #{payerSubjectNo,jdbcType=VARCHAR},
+		PAYER_FLAG =
+		#{payerFlag,jdbcType=CHAR},
+		PAYEE_SUBJECT_NO =
+		#{payeeSubjectNo,jdbcType=VARCHAR},
+		PAYEE_FLAG =
+		#{payeeFlag,jdbcType=CHAR},
+		UPDATE_TIME =
+		#{updateTime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where RULE_ID = #{ruleId,jdbcType=CHAR}
+	</update>
+
+	<select id="findAccountRuleByKey" parameterType="String"
+		resultMap="BaseResultMap">
+		<![CDATA[
+			select * from T_ACCOUNT_RULE where RULE_ID = #{ruleId}
+		]]>
+	</select>
+
+	<select id="findAccountRuleByAccountType" parameterType="String"
+		resultMap="BaseResultMap"> 
+		<![CDATA[ select * from T_ACCOUNT_RULE where ACCOUNT_TYPE = #{accountType} 
+		]]>
+	</select>
+
+	<select id="findAccountRuleList" resultMap="BaseResultMap">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="baseDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="baseDynamicQuery" />
+				limit #{pageVO.startSize,
+				jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="getDealTypeCount" resultType="int">
+		select
+		count(RULE_ID)
+		from T_ACCOUNT_RULE
+		<include refid="dynamicPageWhere" />
+	</select>
+	<sql id="baseDynamicQuery">
+		select * from T_ACCOUNT_RULE
+		<include refid="dynamicPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by RULE_ID
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+	<sql id="dynamicPageWhere">
+		<where>
+			1=1
+			<if test="accountRule.ruleId!=null and accountRule.ruleId!=''">
+				<![CDATA[ and RULE_ID = #{accountRule.ruleId,jdbcType=CHAR}]]>
+			</if>
+			<if test="accountRule.accountType!=null and accountRule.accountType!=''">
+				<![CDATA[ and ACCOUNT_TYPE = #{accountRule.accountType,jdbcType=CHAR}]]>
+			</if>
+			<if
+				test="accountRule.payerSubjectNo!=null and accountRule.payerSubjectNo!=''">
+				<![CDATA[ and PAYER_SUBJECT_NO = #{accountRule.payerSubjectNo,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="accountRule.payerFlag!=null and accountRule.payerFlag!=''">
+				<![CDATA[ and PAYER_FLAG = #{accountRule.payerFlag,jdbcType=CHAR}]]>
+			</if>
+			<if
+				test="accountRule.payeeSubjectNo!=null and accountRule.payeeSubjectNo!=''">
+				<![CDATA[ and PAYEE_SUBJECT_NO = #{accountRule.payeeSubjectNo,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="accountRule.payeeFlag!=null and accountRule.payeeFlag!=''">
+				<![CDATA[ and PAYEE_FLAG = #{accountRule.payeeFlag,jdbcType=CHAR}]]>
+			</if>
+			<if test="accountRule.updateTime!=null and accountRule.updateTime!=''">
+				<![CDATA[ and UPDATE_TIME = #{accountRule.updateTime,jdbcType=TIMESTAMP}]]>
+			</if>
+			<if test="accountRule.remark!=null and accountRule.remark!=''">
+				<![CDATA[ and REMARK = #{accountRule.remark,jdbcType=VARCHAR}]]>
+			</if>
+		</where>
+	</sql>
+
+
+</mapper>

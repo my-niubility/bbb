@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.BIOtSequenceDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.BIOtSequenceKey" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <id column="CURDATE" property="curdate" jdbcType="CHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.zlebank.model.BIOtSequenceKey" >
+    delete from BI_OT_SEQUENCE
+    where ID = #{id,jdbcType=INTEGER}
+      and CURDATE = #{curdate,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.BIOtSequenceKey" >
+    insert into BI_OT_SEQUENCE (ID, CURDATE)
+    values (#{id,jdbcType=INTEGER}, #{curdate,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.BIOtSequenceKey" >
+    insert into BI_OT_SEQUENCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="curdate != null" >
+        CURDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="curdate != null" >
+        #{curdate,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

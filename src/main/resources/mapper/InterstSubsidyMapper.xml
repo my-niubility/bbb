@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.InterstSubsidyDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.InterstSubsidy" >
+    <id column="PAYMENT_ID" property="paymentId" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+    <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="INVEST_AMT" property="investAmt" jdbcType="DECIMAL" />
+    <result column="EXPECT_EARNING" property="expectEarning" jdbcType="DECIMAL" />
+    <result column="PAYMENT_DATE" property="paymentDate" jdbcType="CHAR" />
+    <result column="BEGIN_INTEREST_DATE" property="beginInterestDate" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PAYMENT_ID, CUST_ID, CUST_NAME, PROJECT_ID, INVEST_AMT, EXPECT_EARNING, PAYMENT_DATE, 
+    BEGIN_INTEREST_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_INTEREST_SUBSIDY
+    where PAYMENT_ID = #{paymentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_INTEREST_SUBSIDY
+    where PAYMENT_ID = #{paymentId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.InterstSubsidy" >
+    insert into T_INTEREST_SUBSIDY (PAYMENT_ID, CUST_ID, CUST_NAME, 
+      PROJECT_ID, INVEST_AMT, EXPECT_EARNING, 
+      PAYMENT_DATE, BEGIN_INTEREST_DATE)
+    values (#{paymentId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=VARCHAR}, #{investAmt,jdbcType=DECIMAL}, #{expectEarning,jdbcType=DECIMAL}, 
+      #{paymentDate,jdbcType=CHAR}, #{beginInterestDate,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.InterstSubsidy" >
+    insert into T_INTEREST_SUBSIDY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paymentId != null" >
+        PAYMENT_ID,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="custName != null" >
+        CUST_NAME,
+      </if>
+      <if test="projectId != null" >
+        PROJECT_ID,
+      </if>
+      <if test="investAmt != null" >
+        INVEST_AMT,
+      </if>
+      <if test="expectEarning != null" >
+        EXPECT_EARNING,
+      </if>
+      <if test="paymentDate != null" >
+        PAYMENT_DATE,
+      </if>
+      <if test="beginInterestDate != null" >
+        BEGIN_INTEREST_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paymentId != null" >
+        #{paymentId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="investAmt != null" >
+        #{investAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="expectEarning != null" >
+        #{expectEarning,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentDate != null" >
+        #{paymentDate,jdbcType=CHAR},
+      </if>
+      <if test="beginInterestDate != null" >
+        #{beginInterestDate,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.InterstSubsidy" >
+    update T_INTEREST_SUBSIDY
+    <set >
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        CUST_NAME = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="investAmt != null" >
+        INVEST_AMT = #{investAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="expectEarning != null" >
+        EXPECT_EARNING = #{expectEarning,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentDate != null" >
+        PAYMENT_DATE = #{paymentDate,jdbcType=CHAR},
+      </if>
+      <if test="beginInterestDate != null" >
+        BEGIN_INTEREST_DATE = #{beginInterestDate,jdbcType=CHAR},
+      </if>
+    </set>
+    where PAYMENT_ID = #{paymentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.InterstSubsidy" >
+    update T_INTEREST_SUBSIDY
+    set CUST_ID = #{custId,jdbcType=VARCHAR},
+      CUST_NAME = #{custName,jdbcType=VARCHAR},
+      PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      INVEST_AMT = #{investAmt,jdbcType=DECIMAL},
+      EXPECT_EARNING = #{expectEarning,jdbcType=DECIMAL},
+      PAYMENT_DATE = #{paymentDate,jdbcType=CHAR},
+      BEGIN_INTEREST_DATE = #{beginInterestDate,jdbcType=CHAR}
+    where PAYMENT_ID = #{paymentId,jdbcType=VARCHAR}
+  </update>
+</mapper>

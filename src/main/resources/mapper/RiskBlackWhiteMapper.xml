@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.RiskBlackWhiteDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.RiskBlackWhite" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="BW_TYPE" property="bwType" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="CREATED_TIME" property="createdTime" jdbcType="DATE" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zlebank.model.RiskBlackWhite" >
+    insert into T_RISK_BLACK_WHITE (ID, CUST_ID, BW_TYPE, 
+      TYPE, CREATED_TIME, DESCRIPTION
+      )
+    values (#{id,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, #{bwType,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{createdTime,jdbcType=DATE}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.RiskBlackWhite" >
+    insert into T_RISK_BLACK_WHITE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="bwType != null" >
+        BW_TYPE,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="createdTime != null" >
+        CREATED_TIME,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="bwType != null" >
+        #{bwType,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=DATE},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 分页查询总数 --> 
+    <select id="findListPageCount" resultType="int" >
+	    select count(ID) from T_RISK_BLACK_WHITE
+	    <include refid="dynamicPageWhere" /> 
+  	</select>  
+  	
+  	<!-- 分页查询 -->
+	<select id="findListPage" resultMap="BaseResultMap" >
+		<choose>  
+            <when test=" pageVO.size&lt;0">  
+	    		<include refid="baseDynamicQuery" /> 
+            </when>  
+            <otherwise> 
+            	<include refid="baseDynamicQuery" />
+            	limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size, jdbcType=INTEGER}  
+            </otherwise>  
+        </choose>
+  	</select>
+  	
+  	<sql id="baseDynamicQuery">
+		select * from T_RISK_BLACK_WHITE
+		<include refid="dynamicPageWhere" /> 
+		order by CREATED_TIME desc
+	</sql>  	
+  	<sql id="dynamicPageWhere">
+  		<where>
+  			1=1  	
+	      <if test="blackWhite.custId != null and blackWhite.custId !=''" >
+	      	and CUST_ID = #{blackWhite.custId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="blackWhite.bwType != null and blackWhite.bwType !=''" >
+	      	and BW_TYPE = #{blackWhite.bwType,jdbcType=VARCHAR}
+	      </if>
+	      <if test="blackWhite.type != null and blackWhite.type !=''" >
+	      	and TYPE = #{blackWhite.type,jdbcType=VARCHAR}
+	      </if>
+  		</where>
+  	</sql>
+</mapper>

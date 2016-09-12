@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.WithDrawDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.WithDraw">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="AMT" property="amt" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+		<result column="WITHDRAW_TYPE" property="withdrawType"
+			jdbcType="CHAR" />
+		<result column="RESULT_INFO" property="resultInfo" jdbcType="VARCHAR" />
+		<result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+		<result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+		<result column="WITHDRAW_ID" property="withdrawId" jdbcType="VARCHAR" />
+		<result column="SETTLE_DATE" property="settleDate" jdbcType="CHAR" />
+		<result column="BANK_TYPE" property="bankType" jdbcType="VARCHAR" />
+		<result column="BANK_CARD_NO" property="bankCardNo" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="SerialFund" type="com.zlebank.model.SerialFund">
+		<id column="ID" property="orderId" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="tradeTime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="AMT" property="expend" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, AMT, STATUS, WITHDRAW_TYPE, RESULT_INFO, CUST_ID,
+		CUST_NAME,
+		WITHDRAW_ID, SETTLE_DATE,
+		BANK_TYPE, BANK_CARD_NO, REMARK,
+		CREATE_TIME, UPDATE_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_WITHDRAW
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="getWthdrOrderCount" resultType="java.lang.Integer">
+		select
+		count(*)
+		from T_WITHDRAW
+		<include refid="dynamicPageWhere" />
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		T_WITHDRAW
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.WithDraw">
+		insert into T_WITHDRAW (ID,
+		AMT, STATUS,
+		WITHDRAW_TYPE, RESULT_INFO, CUST_ID,
+		CUST_NAME,
+		WITHDRAW_ID, SETTLE_DATE,
+		BANK_TYPE, BANK_CARD_NO, REMARK,
+		CREATE_TIME,
+		UPDATE_TIME)
+		values (#{id,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL},
+		#{status,jdbcType=CHAR},
+		#{withdrawType,jdbcType=CHAR},
+		#{resultInfo,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR},
+		#{custName,jdbcType=VARCHAR}, #{withdrawId,jdbcType=VARCHAR},
+		#{settleDate,jdbcType=CHAR},
+		#{bankType,jdbcType=VARCHAR},
+		#{bankCardNo,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.WithDraw">
+		insert into T_WITHDRAW
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="amt != null">
+				AMT,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="withdrawType != null">
+				WITHDRAW_TYPE,
+			</if>
+			<if test="resultInfo != null">
+				RESULT_INFO,
+			</if>
+			<if test="custId != null">
+				CUST_ID,
+			</if>
+			<if test="custName != null">
+				CUST_NAME,
+			</if>
+			<if test="withdrawId != null">
+				WITHDRAW_ID,
+			</if>
+			<if test="settleDate != null">
+				SETTLE_DATE,
+			</if>
+			<if test="bankType != null">
+				BANK_TYPE,
+			</if>
+			<if test="bankCardNo != null">
+				BANK_CARD_NO,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="amt != null">
+				#{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="withdrawType != null">
+				#{withdrawType,jdbcType=CHAR},
+			</if>
+			<if test="resultInfo != null">
+				#{resultInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="custId != null">
+				#{custId,jdbcType=VARCHAR},
+			</if>
+			<if test="custName != null">
+				#{custName,jdbcType=VARCHAR},
+			</if>
+			<if test="withdrawId != null">
+				#{withdrawId,jdbcType=VARCHAR},
+			</if>
+			<if test="settleDate != null">
+				#{settleDate,jdbcType=CHAR},
+			</if>
+			<if test="bankType != null">
+				#{bankType,jdbcType=VARCHAR},
+			</if>
+			<if test="bankCardNo != null">
+				#{bankCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.WithDraw">
+		update T_WITHDRAW
+		<set>
+			<if test="amt != null">
+				AMT = #{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=CHAR},
+			</if>
+			<if test="withdrawType != null">
+				WITHDRAW_TYPE = #{withdrawType,jdbcType=CHAR},
+			</if>
+			<if test="resultInfo != null">
+				RESULT_INFO = #{resultInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="custId != null">
+				CUST_ID = #{custId,jdbcType=VARCHAR},
+			</if>
+			<if test="custName != null">
+				CUST_NAME = #{custName,jdbcType=VARCHAR},
+			</if>
+			<if test="withdrawId != null">
+				WITHDRAW_ID = #{withdrawId,jdbcType=VARCHAR},
+			</if>
+			<if test="settleDate != null">
+				SETTLE_DATE = #{settleDate,jdbcType=CHAR},
+			</if>
+			<if test="bankType != null">
+				BANK_TYPE = #{bankType,jdbcType=VARCHAR},
+			</if>
+			<if test="bankCardNo != null">
+				BANK_CARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.WithDraw">
+		update T_WITHDRAW
+		set AMT = #{amt,jdbcType=DECIMAL},
+		STATUS = #{status,jdbcType=CHAR},
+		WITHDRAW_TYPE = #{withdrawType,jdbcType=CHAR},
+		RESULT_INFO =
+		#{resultInfo,jdbcType=VARCHAR},
+		CUST_ID = #{custId,jdbcType=VARCHAR},
+		CUST_NAME = #{custName,jdbcType=VARCHAR},
+		WITHDRAW_ID =
+		#{withdrawId,jdbcType=VARCHAR},
+		SETTLE_DATE =
+		#{settleDate,jdbcType=CHAR},
+		BANK_TYPE = #{bankType,jdbcType=VARCHAR},
+		BANK_CARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+		REMARK =
+		#{remark,jdbcType=VARCHAR},
+		CREATE_TIME =
+		#{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByCustInfo" resultMap="BaseResultMap">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="baseDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="baseDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="baseDynamicQuery">
+		select * from T_WITHDRAW
+		<include refid="dynamicPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by ID desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectSerFndByCustInfo" resultMap="SerialFund">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="serFndDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="serFndDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="serFndDynamicQuery">
+		select CREATE_TIME, REMARK, ID , AMT , STATUS from T_WITHDRAW
+		<include refid="dynamicPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by CREATE_TIME desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+
+	<sql id="dynamicPageWhere">
+		<where>
+			1=1
+			<if test="withdrawVo.custId!=null and withdrawVo.custId!=''">
+			   <![CDATA[ and CUST_ID = #{withdrawVo.custId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="withdrawVo.beginDate!=null and withdrawVo.endDate!=null">
+			 <![CDATA[  and CREATE_TIME >=#{withdrawVo.beginDate,jdbcType=TIMESTAMP} and CREATE_TIME <=#{withdrawVo.endDate,jdbcType=TIMESTAMP}]]>
+			</if>
+			<if test="withdrawVo.status!=null and withdrawVo.status!=''">
+			   <![CDATA[ and STATUS = #{withdrawVo.status,jdbcType=VARCHAR}]]>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_WITHDRAW
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="findListPageCount" resultType="int">
+		select count(ID) from T_WITHDRAW
+		<include refid="dynamicPageNoWhere" />
+	</select>
+
+	<select id="findListPage" resultMap="BaseResultMap">
+		<choose>
+			<when test=" pageVO.size&lt;0">
+				<include refid="baseQueryPage" />
+			</when>
+			<otherwise>
+				<include refid="baseQueryPage" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="baseQueryPage">
+		select * from T_WITHDRAW
+		<include refid="dynamicPageNoWhere" />
+		order by UPDATE_TIME desc
+	</sql>
+	<sql id="dynamicPageNoWhere">
+		<where>
+			1=1
+			<if test="withdraw.id != null and withdraw.id !=''">
+				and ID = #{withdraw.id,jdbcType=VARCHAR}
+			</if>
+			<if test="withdraw.custId != null and withdraw.custId !=''">
+				and CUST_ID = #{withdraw.custId,jdbcType=VARCHAR}
+			</if>
+			<if test="withdraw.status != null and withdraw.status !=''">
+				and STATUS = #{withdraw.status,jdbcType=CHAR}
+			</if>
+			<if test="withdraw.withdrawType != null and withdraw.withdrawType !=''">
+				and WITHDRAW_TYPE = #{withdraw.withdrawType,jdbcType=CHAR}
+			</if>
+		</where>
+	</sql>
+	<select id="selectSerFndByCustInfo4Withdr" resultMap="SerialFund">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="serFndDynamicQuery2" />
+			</when>
+			<otherwise>
+				<include refid="serFndDynamicQuery2" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="serFndDynamicQuery2">
+		select CREATE_TIME, REMARK, ID , AMT , STATUS from T_WITHDRAW
+		<include refid="dynamicPageWhere2" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by CREATE_TIME desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+
+	<sql id="dynamicPageWhere2">
+		<where>
+			STATUS in ('00','01','03')
+			<if test="withdrawVo.custId!=null and withdrawVo.custId!=''">
+			   <![CDATA[ and CUST_ID = #{withdrawVo.custId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="withdrawVo.beginDate!=null and withdrawVo.endDate!=null">
+			 <![CDATA[  and CREATE_TIME >=#{withdrawVo.beginDate,jdbcType=TIMESTAMP} and CREATE_TIME <=#{withdrawVo.endDate,jdbcType=TIMESTAMP}]]>
+			</if>
+		</where>
+	</sql>
+	
+</mapper>

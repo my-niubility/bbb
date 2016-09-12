@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.PaymentDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.Payment">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="PAY_ID" property="payId" jdbcType="VARCHAR" />
+		<result column="TOTAL_ID" property="totalId" jdbcType="VARCHAR" />
+		<result column="BATCH_ID" property="batchId" jdbcType="VARCHAR" />
+		<result column="CONTRACT_ID" property="contractId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NANE" property="productNane" jdbcType="VARCHAR" />
+		<result column="FUNDS_TYPE" property="fundsType" jdbcType="CHAR" />
+		<result column="TRADE_AMT" property="tradeAmt" jdbcType="DECIMAL" />
+		<result column="MERCHANT_ID" property="merchantId" jdbcType="VARCHAR" />
+		<result column="PAY_CUST_ID" property="payCustId" jdbcType="VARCHAR" />
+		<result column="PAY_CUST_NAME" property="payCustName" jdbcType="VARCHAR" />
+		<result column="PAY_ACCOUNT" property="payAccount" jdbcType="VARCHAR" />
+		<result column="REC_CUST_ID" property="recCustId" jdbcType="VARCHAR" />
+		<result column="REC_CUST_NAME" property="recCustName" jdbcType="VARCHAR" />
+		<result column="REC_ACCOUNT" property="recAccount" jdbcType="VARCHAR" />
+		<result column="PAY_BANK_TYPE" property="payBankType" jdbcType="VARCHAR" />
+		<result column="PAY_BANK_CARD_NO" property="payBankCardNo"
+			jdbcType="VARCHAR" />
+		<result column="PAY_DATE" property="payDate" jdbcType="CHAR" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+		<result column="RESULT_INFO" property="resultInfo" jdbcType="VARCHAR" />
+		<result column="PAYMENT_TYPE" property="paymentType" jdbcType="CHAR" />
+		<result column="CHECK_STATUS" property="checkStatus" jdbcType="CHAR" />
+		<result column="UNBALANCE_REASON" property="unbalanceReason"
+			jdbcType="CHAR" />
+		<result column="RETREAT_SOURCE" property="retreatSource"
+			jdbcType="CHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="TRADE_TAL_AMT" property="tradeTalAmt" jdbcType="DECIMAL" />
+		<result column="RED_ENV_AMT" property="redEnvAmt" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PAY_ID, TOTAL_ID, BATCH_ID, CONTRACT_ID, PRODUCT_ID, PRODUCT_NANE,
+		FUNDS_TYPE,
+		TRADE_AMT, MERCHANT_ID, PAY_CUST_ID, PAY_CUST_NAME, PAY_ACCOUNT, REC_CUST_ID,
+		REC_CUST_NAME,
+		REC_ACCOUNT, PAY_BANK_TYPE, PAY_BANK_CARD_NO, PAY_DATE, STATUS, RESULT_INFO,
+		PAYMENT_TYPE,
+		CHECK_STATUS, UNBALANCE_REASON, RETREAT_SOURCE, REMARK, CREATE_TIME, UPDATE_TIME,
+		TRADE_TAL_AMT, RED_ENV_AMT
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_PAYMENT
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByPayId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_PAYMENT
+		where ID = #{payId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from T_PAYMENT
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.Payment">
+		insert into T_PAYMENT (ID, PAY_ID, TOTAL_ID,
+		BATCH_ID, CONTRACT_ID, PRODUCT_ID,
+		PRODUCT_NANE, FUNDS_TYPE, TRADE_AMT,
+		MERCHANT_ID, PAY_CUST_ID, PAY_CUST_NAME,
+		PAY_ACCOUNT, REC_CUST_ID, REC_CUST_NAME,
+		REC_ACCOUNT, PAY_BANK_TYPE, PAY_BANK_CARD_NO,
+		PAY_DATE, STATUS, RESULT_INFO,
+		PAYMENT_TYPE, CHECK_STATUS, UNBALANCE_REASON,
+		RETREAT_SOURCE, REMARK, CREATE_TIME,
+		UPDATE_TIME, TRADE_TAL_AMT, RED_ENV_AMT
+		)
+		values (#{id,jdbcType=VARCHAR}, #{payId,jdbcType=VARCHAR},
+		#{totalId,jdbcType=VARCHAR},
+		#{batchId,jdbcType=VARCHAR}, #{contractId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR},
+		#{productNane,jdbcType=VARCHAR}, #{fundsType,jdbcType=CHAR},
+		#{tradeAmt,jdbcType=DECIMAL},
+		#{merchantId,jdbcType=VARCHAR}, #{payCustId,jdbcType=VARCHAR}, #{payCustName,jdbcType=VARCHAR},
+		#{payAccount,jdbcType=VARCHAR}, #{recCustId,jdbcType=VARCHAR},
+		#{recCustName,jdbcType=VARCHAR},
+		#{recAccount,jdbcType=VARCHAR}, #{payBankType,jdbcType=VARCHAR}, #{payBankCardNo,jdbcType=VARCHAR},
+		#{payDate,jdbcType=CHAR}, #{status,jdbcType=CHAR},
+		#{resultInfo,jdbcType=VARCHAR},
+		#{paymentType,jdbcType=CHAR}, #{checkStatus,jdbcType=CHAR}, #{unbalanceReason,jdbcType=CHAR},
+		#{retreatSource,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}, #{tradeTalAmt,jdbcType=DECIMAL}, #{redEnvAmt,jdbcType=DECIMAL}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.Payment">
+		insert into T_PAYMENT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="payId != null">
+				PAY_ID,
+			</if>
+			<if test="totalId != null">
+				TOTAL_ID,
+			</if>
+			<if test="batchId != null">
+				BATCH_ID,
+			</if>
+			<if test="contractId != null">
+				CONTRACT_ID,
+			</if>
+			<if test="productId != null">
+				PRODUCT_ID,
+			</if>
+			<if test="productNane != null">
+				PRODUCT_NANE,
+			</if>
+			<if test="fundsType != null">
+				FUNDS_TYPE,
+			</if>
+			<if test="tradeAmt != null">
+				TRADE_AMT,
+			</if>
+			<if test="merchantId != null">
+				MERCHANT_ID,
+			</if>
+			<if test="payCustId != null">
+				PAY_CUST_ID,
+			</if>
+			<if test="payCustName != null">
+				PAY_CUST_NAME,
+			</if>
+			<if test="payAccount != null">
+				PAY_ACCOUNT,
+			</if>
+			<if test="recCustId != null">
+				REC_CUST_ID,
+			</if>
+			<if test="recCustName != null">
+				REC_CUST_NAME,
+			</if>
+			<if test="recAccount != null">
+				REC_ACCOUNT,
+			</if>
+			<if test="payBankType != null">
+				PAY_BANK_TYPE,
+			</if>
+			<if test="payBankCardNo != null">
+				PAY_BANK_CARD_NO,
+			</if>
+			<if test="payDate != null">
+				PAY_DATE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="resultInfo != null">
+				RESULT_INFO,
+			</if>
+			<if test="paymentType != null">
+				PAYMENT_TYPE,
+			</if>
+			<if test="checkStatus != null">
+				CHECK_STATUS,
+			</if>
+			<if test="unbalanceReason != null">
+				UNBALANCE_REASON,
+			</if>
+			<if test="retreatSource != null">
+				RETREAT_SOURCE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="tradeTalAmt != null">
+				TRADE_TAL_AMT,
+			</if>
+			<if test="redEnvAmt != null">
+				RED_ENV_AMT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="payId != null">
+				#{payId,jdbcType=VARCHAR},
+			</if>
+			<if test="totalId != null">
+				#{totalId,jdbcType=VARCHAR},
+			</if>
+			<if test="batchId != null">
+				#{batchId,jdbcType=VARCHAR},
+			</if>
+			<if test="contractId != null">
+				#{contractId,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="productNane != null">
+				#{productNane,jdbcType=VARCHAR},
+			</if>
+			<if test="fundsType != null">
+				#{fundsType,jdbcType=CHAR},
+			</if>
+			<if test="tradeAmt != null">
+				#{tradeAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="merchantId != null">
+				#{merchantId,jdbcType=VARCHAR},
+			</if>
+			<if test="payCustId != null">
+				#{payCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="payCustName != null">
+				#{payCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="payAccount != null">
+				#{payAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="recCustId != null">
+				#{recCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="recCustName != null">
+				#{recCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="recAccount != null">
+				#{recAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="payBankType != null">
+				#{payBankType,jdbcType=VARCHAR},
+			</if>
+			<if test="payBankCardNo != null">
+				#{payBankCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payDate != null">
+				#{payDate,jdbcType=CHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="resultInfo != null">
+				#{resultInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="paymentType != null">
+				#{paymentType,jdbcType=CHAR},
+			</if>
+			<if test="checkStatus != null">
+				#{checkStatus,jdbcType=CHAR},
+			</if>
+			<if test="unbalanceReason != null">
+				#{unbalanceReason,jdbcType=CHAR},
+			</if>
+			<if test="retreatSource != null">
+				#{retreatSource,jdbcType=CHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tradeTalAmt != null">
+				#{tradeTalAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="redEnvAmt != null">
+				#{redEnvAmt,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.Payment">
+		update T_PAYMENT
+		<set>
+			<if test="payId != null">
+				PAY_ID = #{payId,jdbcType=VARCHAR},
+			</if>
+			<if test="totalId != null">
+				TOTAL_ID = #{totalId,jdbcType=VARCHAR},
+			</if>
+			<if test="batchId != null">
+				BATCH_ID = #{batchId,jdbcType=VARCHAR},
+			</if>
+			<if test="contractId != null">
+				CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="productNane != null">
+				PRODUCT_NANE = #{productNane,jdbcType=VARCHAR},
+			</if>
+			<if test="fundsType != null">
+				FUNDS_TYPE = #{fundsType,jdbcType=CHAR},
+			</if>
+			<if test="tradeAmt != null">
+				TRADE_AMT = #{tradeAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="merchantId != null">
+				MERCHANT_ID = #{merchantId,jdbcType=VARCHAR},
+			</if>
+			<if test="payCustId != null">
+				PAY_CUST_ID = #{payCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="payCustName != null">
+				PAY_CUST_NAME = #{payCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="payAccount != null">
+				PAY_ACCOUNT = #{payAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="recCustId != null">
+				REC_CUST_ID = #{recCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="recCustName != null">
+				REC_CUST_NAME = #{recCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="recAccount != null">
+				REC_ACCOUNT = #{recAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="payBankType != null">
+				PAY_BANK_TYPE = #{payBankType,jdbcType=VARCHAR},
+			</if>
+			<if test="payBankCardNo != null">
+				PAY_BANK_CARD_NO = #{payBankCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="payDate != null">
+				PAY_DATE = #{payDate,jdbcType=CHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=CHAR},
+			</if>
+			<if test="resultInfo != null">
+				RESULT_INFO = #{resultInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="paymentType != null">
+				PAYMENT_TYPE = #{paymentType,jdbcType=CHAR},
+			</if>
+			<if test="checkStatus != null">
+				CHECK_STATUS = #{checkStatus,jdbcType=CHAR},
+			</if>
+			<if test="unbalanceReason != null">
+				UNBALANCE_REASON = #{unbalanceReason,jdbcType=CHAR},
+			</if>
+			<if test="retreatSource != null">
+				RETREAT_SOURCE = #{retreatSource,jdbcType=CHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tradeTalAmt != null">
+				TRADE_TAL_AMT = #{tradeTalAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="redEnvAmt != null">
+				RED_ENV_AMT = #{redEnvAmt,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.Payment">
+		update T_PAYMENT
+		set PAY_ID = #{payId,jdbcType=VARCHAR},
+		TOTAL_ID = #{totalId,jdbcType=VARCHAR},
+		BATCH_ID = #{batchId,jdbcType=VARCHAR},
+		CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
+		PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+		PRODUCT_NANE = #{productNane,jdbcType=VARCHAR},
+		FUNDS_TYPE = #{fundsType,jdbcType=CHAR},
+		TRADE_AMT = #{tradeAmt,jdbcType=DECIMAL},
+		MERCHANT_ID = #{merchantId,jdbcType=VARCHAR},
+		PAY_CUST_ID = #{payCustId,jdbcType=VARCHAR},
+		PAY_CUST_NAME = #{payCustName,jdbcType=VARCHAR},
+		PAY_ACCOUNT = #{payAccount,jdbcType=VARCHAR},
+		REC_CUST_ID = #{recCustId,jdbcType=VARCHAR},
+		REC_CUST_NAME = #{recCustName,jdbcType=VARCHAR},
+		REC_ACCOUNT = #{recAccount,jdbcType=VARCHAR},
+		PAY_BANK_TYPE = #{payBankType,jdbcType=VARCHAR},
+		PAY_BANK_CARD_NO = #{payBankCardNo,jdbcType=VARCHAR},
+		PAY_DATE = #{payDate,jdbcType=CHAR},
+		STATUS = #{status,jdbcType=CHAR},
+		RESULT_INFO = #{resultInfo,jdbcType=VARCHAR},
+		PAYMENT_TYPE = #{paymentType,jdbcType=CHAR},
+		CHECK_STATUS = #{checkStatus,jdbcType=CHAR},
+		UNBALANCE_REASON = #{unbalanceReason,jdbcType=CHAR},
+		RETREAT_SOURCE = #{retreatSource,jdbcType=CHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		TRADE_TAL_AMT = #{tradeTalAmt,jdbcType=DECIMAL},
+		RED_ENV_AMT = #{redEnvAmt,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByTradeOrderId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_PAYMENT
+		where TOTAL_ID = #{tradeOrderId,jdbcType=VARCHAR} order by UPDATE_TIME desc
+	</select>
+	
+	<select id="selectByProductId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_PAYMENT
+		where PRODUCT_ID = #{productId,jdbcType=VARCHAR} order by UPDATE_TIME desc
+	</select>
+</mapper>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.TradeBillDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.TradeBill">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="POSITION_ID" property="positionId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NANE" property="productNane" jdbcType="VARCHAR" />
+		<result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+		<result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+		<result column="PAYER_FLAG" property="payerFlag" jdbcType="CHAR" />
+		<result column="PORTION" property="portion" jdbcType="DECIMAL" />
+		<result column="POSSESS_PORTION" property="possessPortion"
+			jdbcType="DECIMAL" />
+		<result column="TRADE_ORDER_ID" property="tradeOrderId"
+			jdbcType="VARCHAR" />
+		<result column="BILL_TYPE" property="billType" jdbcType="CHAR" />
+		<result column="TRADE_DATE" property="tradeDate" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, POSITION_ID, PRODUCT_ID, PRODUCT_NANE, CUST_ID,
+		CUST_NAME,
+		PAYER_FLAG, PORTION,
+		POSSESS_PORTION, TRADE_ORDER_ID,
+		BILL_TYPE, TRADE_DATE, CREATE_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_TRADE_BILL
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		T_TRADE_BILL
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.TradeBill">
+		insert into T_TRADE_BILL (ID,
+		POSITION_ID, PRODUCT_ID,
+		PRODUCT_NANE, CUST_ID, CUST_NAME,
+		PAYER_FLAG,
+		PORTION, POSSESS_PORTION,
+		TRADE_ORDER_ID, BILL_TYPE, TRADE_DATE,
+		CREATE_TIME)
+		values (#{id,jdbcType=VARCHAR},
+		#{positionId,jdbcType=VARCHAR},
+		#{productId,jdbcType=VARCHAR},
+		#{productNane,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR},
+		#{custName,jdbcType=VARCHAR},
+		#{payerFlag,jdbcType=CHAR},
+		#{portion,jdbcType=DECIMAL},
+		#{possessPortion,jdbcType=DECIMAL},
+		#{tradeOrderId,jdbcType=VARCHAR}, #{billType,jdbcType=CHAR},
+		#{tradeDate,jdbcType=CHAR},
+		#{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.TradeBill">
+		insert into T_TRADE_BILL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="positionId != null">
+				POSITION_ID,
+			</if>
+			<if test="productId != null">
+				PRODUCT_ID,
+			</if>
+			<if test="productNane != null">
+				PRODUCT_NANE,
+			</if>
+			<if test="custId != null">
+				CUST_ID,
+			</if>
+			<if test="custName != null">
+				CUST_NAME,
+			</if>
+			<if test="payerFlag != null">
+				PAYER_FLAG,
+			</if>
+			<if test="portion != null">
+				PORTION,
+			</if>
+			<if test="possessPortion != null">
+				POSSESS_PORTION,
+			</if>
+			<if test="tradeOrderId != null">
+				TRADE_ORDER_ID,
+			</if>
+			<if test="billType != null">
+				BILL_TYPE,
+			</if>
+			<if test="tradeDate != null">
+				TRADE_DATE,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="positionId != null">
+				#{positionId,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="productNane != null">
+				#{productNane,jdbcType=VARCHAR},
+			</if>
+			<if test="custId != null">
+				#{custId,jdbcType=VARCHAR},
+			</if>
+			<if test="custName != null">
+				#{custName,jdbcType=VARCHAR},
+			</if>
+			<if test="payerFlag != null">
+				#{payerFlag,jdbcType=CHAR},
+			</if>
+			<if test="portion != null">
+				#{portion,jdbcType=DECIMAL},
+			</if>
+			<if test="possessPortion != null">
+				#{possessPortion,jdbcType=DECIMAL},
+			</if>
+			<if test="tradeOrderId != null">
+				#{tradeOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="billType != null">
+				#{billType,jdbcType=CHAR},
+			</if>
+			<if test="tradeDate != null">
+				#{tradeDate,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.TradeBill">
+		update T_TRADE_BILL
+		<set>
+			<if test="positionId != null">
+				POSITION_ID = #{positionId,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="productNane != null">
+				PRODUCT_NANE = #{productNane,jdbcType=VARCHAR},
+			</if>
+			<if test="custId != null">
+				CUST_ID = #{custId,jdbcType=VARCHAR},
+			</if>
+			<if test="custName != null">
+				CUST_NAME = #{custName,jdbcType=VARCHAR},
+			</if>
+			<if test="payerFlag != null">
+				PAYER_FLAG = #{payerFlag,jdbcType=CHAR},
+			</if>
+			<if test="portion != null">
+				PORTION = #{portion,jdbcType=DECIMAL},
+			</if>
+			<if test="possessPortion != null">
+				POSSESS_PORTION = #{possessPortion,jdbcType=DECIMAL},
+			</if>
+			<if test="tradeOrderId != null">
+				TRADE_ORDER_ID = #{tradeOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="billType != null">
+				BILL_TYPE = #{billType,jdbcType=CHAR},
+			</if>
+			<if test="tradeDate != null">
+				TRADE_DATE = #{tradeDate,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.TradeBill">
+		update
+		T_TRADE_BILL
+		set POSITION_ID = #{positionId,jdbcType=VARCHAR},
+		PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+		PRODUCT_NANE =
+		#{productNane,jdbcType=VARCHAR},
+		CUST_ID = #{custId,jdbcType=VARCHAR},
+		CUST_NAME = #{custName,jdbcType=VARCHAR},
+		PAYER_FLAG =
+		#{payerFlag,jdbcType=CHAR},
+		PORTION = #{portion,jdbcType=DECIMAL},
+		POSSESS_PORTION = #{possessPortion,jdbcType=DECIMAL},
+		TRADE_ORDER_ID =
+		#{tradeOrderId,jdbcType=VARCHAR},
+		BILL_TYPE =
+		#{billType,jdbcType=CHAR},
+		TRADE_DATE = #{tradeDate,jdbcType=CHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+		where ID =
+		#{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByGenCond" resultMap="BaseResultMap">
+		select * from T_TRADE_BILL
+		<include refid="dynamicPageNoWhere" />
+		order by CREATE_DATE desc
+	</select>
+
+	<sql id="dynamicPageNoWhere">
+		<where>
+			1=1
+			<if test="tb.positionId != null and tb.positionId !=''">
+				and POSITION_ID = #{tb.positionId,jdbcType=VARCHAR}
+			</if>
+			<if test="tb.custId != null and tb.custId !=''">
+				and CUST_ID = #{tb.custId,jdbcType=VARCHAR}
+			</if>
+			<if test="tb.payerFlag != null and tb.payerFlag !=''">
+				and PAYER_FLAG = #{tb.payerFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="tb.tradeOrderId != null and tb.tradeOrderId !=''">
+				and TRADE_ORDER_ID = #{tb.tradeOrderId,jdbcType=VARCHAR}
+			</if>
+			<if test="tb.billType != null and tb.billType !=''">
+				and BILL_TYPE = #{tb.billType,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+</mapper>

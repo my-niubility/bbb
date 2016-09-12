@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.UserMessageDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.UserMessage" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="REC_USER_ID" property="recUserId" jdbcType="VARCHAR" />
+    <result column="MESSAGE_ID" property="messageId" jdbcType="VARCHAR" />
+    <result column="ISREADSTATUS" property="isreadstatus" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, REC_USER_ID, MESSAGE_ID, ISREADSTATUS, STATUS, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_USER_MESSAGE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByMessageId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_USER_MESSAGE
+    where MESSAGE_ID = #{messageId,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_USER_MESSAGE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.UserMessage" >
+    insert into T_USER_MESSAGE (ID, REC_USER_ID, 
+      MESSAGE_ID, ISREADSTATUS, STATUS, 
+      CREATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{recUserId,jdbcType=VARCHAR},
+      #{messageId,jdbcType=VARCHAR}, #{isreadstatus,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.zlebank.model.UserMessage" >
+    insert into T_USER_MESSAGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="recUserId != null" >
+        REC_USER_ID,
+      </if>
+      <if test="messageId != null" >
+        MESSAGE_ID,
+      </if>
+      <if test="isreadstatus != null" >
+        ISREADSTATUS,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="recUserId != null" >
+        #{recUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="messageId != null" >
+        #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="isreadstatus != null" >
+        #{isreadstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.UserMessage" >
+    update T_USER_MESSAGE
+    <set >
+      <if test="recUserId != null" >
+        REC_USER_ID = #{recUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="messageId != null" >
+        MESSAGE_ID = #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="isreadstatus != null" >
+        ISREADSTATUS = #{isreadstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.UserMessage" >
+    update T_USER_MESSAGE
+    set REC_USER_ID = #{recUserId,jdbcType=VARCHAR},
+      MESSAGE_ID = #{messageId,jdbcType=VARCHAR},
+      ISREADSTATUS = #{isreadstatus,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <insert id="batchInsert" parameterType="java.util.List">  
+     insert into T_USER_MESSAGE (ID, REC_USER_ID, 
+      MESSAGE_ID, ISREADSTATUS, STATUS, 
+      CREATE_TIME) 
+    values   
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.id},#{item.recUserId},#{item.messageId},#{item.isreadstatus},
+        #{item.status},#{item.createTime})  
+    </foreach>  
+  </insert> 
+  
+  <update id="updateIsreadstatus" parameterType="com.zlebank.model.UserMessage" >
+    update T_USER_MESSAGE
+    <set >
+      <if test="isreadstatus != null" >
+        ISREADSTATUS = #{isreadstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where REC_USER_ID = #{recUserId,jdbcType=VARCHAR}
+    and MESSAGE_ID = #{messageId,jdbcType=VARCHAR}
+  </update>
+  <select id="getUnreadMessageCount" parameterType="com.zlebank.model.UserMessage" resultType="java.lang.Integer">
+	select
+	count(um.ID)
+	from T_USER_MESSAGE um
+	join T_MESSAGE me
+	on um.MESSAGE_ID=me.ID
+	<include refid="dynamicWhereCondition" />
+  </select>
+  
+  <sql id="dynamicWhereCondition">
+	<where>
+		um.STATUS=#{status,jdbcType=VARCHAR}
+		<if test="recUserId!=null and recUserId!=''">
+		   <![CDATA[ and REC_USER_ID = #{recUserId,jdbcType=VARCHAR}]]>
+		</if>
+		<if test="isreadstatus!=null and isreadstatus!=''">
+		   <![CDATA[ and ISREADSTATUS = #{isreadstatus,jdbcType=VARCHAR}]]>
+		</if>
+		<if test="messageType!=null and messageType!=''">
+		   <![CDATA[ and me.MESSAGE_TYPE = #{messageType,jdbcType=VARCHAR}]]>
+		</if>
+	</where>
+  </sql>
+  
+  <select id="getMessIdByrecUserId"  parameterType="java.lang.String" resultType="java.lang.String">
+    select 
+    MESSAGE_ID
+    from T_USER_MESSAGE
+    where STATUS='0'
+    and REC_USER_ID = #{recUserId,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="updateStatus" >
+    update T_USER_MESSAGE
+    set STATUS = #{userMessage.status,jdbcType=VARCHAR}
+    <include refid="dynamicWhereCondition2" />
+  </update>
+  
+  <sql id="dynamicWhereCondition2">
+	<where>
+		<if test="userMessage.recUserId != null and userMessage.recUserId !=''">
+		  REC_USER_ID = #{userMessage.recUserId,jdbcType=VARCHAR}
+		</if> 
+		<if test="messageIds != null and messageIds !=''">
+		  and MESSAGE_ID in 
+		  <foreach item="item" index="index" collection="messageIds" 
+                  open="(" separator="," close=")">
+                 #{item}
+          </foreach>
+		</if>
+	</where>
+  </sql>
+  <select id="getIsreadStatus" resultType="java.lang.String" >
+    select 
+    ISREADSTATUS
+    from T_USER_MESSAGE
+    where MESSAGE_ID = #{messageId,jdbcType=VARCHAR}
+    and REC_USER_ID = #{recUserId,jdbcType=VARCHAR}
+  </select>
+   <update id="updateReadStatus" >
+    update T_USER_MESSAGE
+    set ISREADSTATUS = #{userMessage.isreadstatus,jdbcType=VARCHAR}
+    <include refid="dynamicWhereCondition2" />
+  </update>
+</mapper>

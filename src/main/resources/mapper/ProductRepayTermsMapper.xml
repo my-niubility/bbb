@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.ProductRepayTermsDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.ProductRepayTerms">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+		<result column="REPAY_CUST_ID" property="repayCustId" jdbcType="VARCHAR" />
+		<result column="REPAY_CUST_NAME" property="repayCustName"
+			jdbcType="VARCHAR" />
+		<result column="REPAY_TERM" property="repayTerm" jdbcType="DECIMAL" />
+		<result column="REPAY_END_DATE" property="repayEndDate"
+			jdbcType="CHAR" />
+		<result column="REPAY_INTEREST" property="repayInterest"
+			jdbcType="DECIMAL" />
+		<result column="AMT" property="amt" jdbcType="DECIMAL" />
+		<result column="REPAY_AMT" property="repayAmt" jdbcType="DECIMAL" />
+		<result column="ENABLED" property="enabled" jdbcType="DECIMAL" />
+		<result column="IS_FINISH" property="isFinish" jdbcType="DECIMAL" />
+		<result column="REPAY_TYPE" property="repayType" jdbcType="CHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PRODUCT_ID, PRODUCT_NAME, REPAY_CUST_ID,
+		REPAY_CUST_NAME, REPAY_TERM,
+		REPAY_END_DATE,
+		REPAY_INTEREST, AMT,
+		REPAY_AMT, ENABLED, IS_FINISH, REPAY_TYPE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_PRODUCT_REPAY_TERMS
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		T_PRODUCT_REPAY_TERMS
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.ProductRepayTerms">
+		insert into
+		T_PRODUCT_REPAY_TERMS (ID, PRODUCT_ID, PRODUCT_NAME,
+		REPAY_CUST_ID,
+		REPAY_CUST_NAME, REPAY_TERM,
+		REPAY_END_DATE, REPAY_INTEREST, AMT,
+		REPAY_AMT, ENABLED, IS_FINISH,
+		REPAY_TYPE)
+		values
+		(#{id,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR},
+		#{productName,jdbcType=VARCHAR},
+		#{repayCustId,jdbcType=VARCHAR},
+		#{repayCustName,jdbcType=VARCHAR}, #{repayTerm,jdbcType=DECIMAL},
+		#{repayEndDate,jdbcType=CHAR}, #{repayInterest,jdbcType=DECIMAL},
+		#{amt,jdbcType=DECIMAL},
+		#{repayAmt,jdbcType=DECIMAL},
+		#{enabled,jdbcType=DECIMAL}, #{isFinish,jdbcType=DECIMAL},
+		#{repayType,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.ProductRepayTerms">
+		insert into T_PRODUCT_REPAY_TERMS
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="productId != null">
+				PRODUCT_ID,
+			</if>
+			<if test="productName != null">
+				PRODUCT_NAME,
+			</if>
+			<if test="repayCustId != null">
+				REPAY_CUST_ID,
+			</if>
+			<if test="repayCustName != null">
+				REPAY_CUST_NAME,
+			</if>
+			<if test="repayTerm != null">
+				REPAY_TERM,
+			</if>
+			<if test="repayEndDate != null">
+				REPAY_END_DATE,
+			</if>
+			<if test="repayInterest != null">
+				REPAY_INTEREST,
+			</if>
+			<if test="amt != null">
+				AMT,
+			</if>
+			<if test="repayAmt != null">
+				REPAY_AMT,
+			</if>
+			<if test="enabled != null">
+				ENABLED,
+			</if>
+			<if test="isFinish != null">
+				IS_FINISH,
+			</if>
+			<if test="repayType != null">
+				REPAY_TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="productName != null">
+				#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="repayCustId != null">
+				#{repayCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="repayCustName != null">
+				#{repayCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="repayTerm != null">
+				#{repayTerm,jdbcType=DECIMAL},
+			</if>
+			<if test="repayEndDate != null">
+				#{repayEndDate,jdbcType=CHAR},
+			</if>
+			<if test="repayInterest != null">
+				#{repayInterest,jdbcType=DECIMAL},
+			</if>
+			<if test="amt != null">
+				#{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="repayAmt != null">
+				#{repayAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="enabled != null">
+				#{enabled,jdbcType=DECIMAL},
+			</if>
+			<if test="isFinish != null">
+				#{isFinish,jdbcType=DECIMAL},
+			</if>
+			<if test="repayType != null">
+				#{repayType,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.ProductRepayTerms">
+		update T_PRODUCT_REPAY_TERMS
+		<set>
+			<if test="productId != null">
+				PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="productName != null">
+				PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="repayCustId != null">
+				REPAY_CUST_ID = #{repayCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="repayCustName != null">
+				REPAY_CUST_NAME = #{repayCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="repayTerm != null">
+				REPAY_TERM = #{repayTerm,jdbcType=DECIMAL},
+			</if>
+			<if test="repayEndDate != null">
+				REPAY_END_DATE = #{repayEndDate,jdbcType=CHAR},
+			</if>
+			<if test="repayInterest != null">
+				REPAY_INTEREST = #{repayInterest,jdbcType=DECIMAL},
+			</if>
+			<if test="amt != null">
+				AMT = #{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="repayAmt != null">
+				REPAY_AMT = #{repayAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="enabled != null">
+				ENABLED = #{enabled,jdbcType=DECIMAL},
+			</if>
+			<if test="isFinish != null">
+				IS_FINISH = #{isFinish,jdbcType=DECIMAL},
+			</if>
+			<if test="repayType != null">
+				REPAY_TYPE = #{repayType,jdbcType=CHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.ProductRepayTerms">
+		update
+		T_PRODUCT_REPAY_TERMS
+		set PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+		PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+		REPAY_CUST_ID =
+		#{repayCustId,jdbcType=VARCHAR},
+		REPAY_CUST_NAME =
+		#{repayCustName,jdbcType=VARCHAR},
+		REPAY_TERM =
+		#{repayTerm,jdbcType=DECIMAL},
+		REPAY_END_DATE =
+		#{repayEndDate,jdbcType=CHAR},
+		REPAY_INTEREST =
+		#{repayInterest,jdbcType=DECIMAL},
+		AMT = #{amt,jdbcType=DECIMAL},
+		REPAY_AMT = #{repayAmt,jdbcType=DECIMAL},
+		ENABLED =
+		#{enabled,jdbcType=DECIMAL},
+		IS_FINISH = #{isFinish,jdbcType=DECIMAL},
+		REPAY_TYPE = #{repayType,jdbcType=CHAR}
+		where ID =
+		#{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByCond" resultMap="BaseResultMap">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="prdRepayDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="prdRepayDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="prdRepayDynamicQuery">
+		select
+		<include refid="Base_Column_List" />
+		from T_PRODUCT_REPAY_TERMS
+		<include refid="dynamicPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by ID desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+
+	<sql id="dynamicPageWhere">
+		<where>
+			1=1
+			<if test="prtb.id!=null and prtb.id!=''">
+			   <![CDATA[ and ID = #{prtb.id,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="prtb.productId!=null and prtb.productId!=''">
+			   <![CDATA[ and PRODUCT_ID = #{prtb.productId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="prtb.productName!=null and prtb.productName!=''">
+			   <![CDATA[ and PRODUCT_NAME = #{prtb.productName,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="prtb.repayCustId!=null and prtb.repayCustId!=''">
+			   <![CDATA[ and REPAY_CUST_ID = #{prtb.repayCustId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="prtb.repayCustName!=null and prtb.repayCustName!=''">
+			   <![CDATA[ and REPAY_CUST_NAME = #{prtb.repayCustName,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="prtb.repayTerm!=null and prtb.repayTerm!=''">
+			   <![CDATA[ and REPAY_TERM = #{prtb.repayTerm,jdbcType=INTEGER}]]>
+			</if>
+			<if test="prtb.repayEndDate!=null and prtb.repayEndDate!=''">
+			   <![CDATA[ and REPAY_END_DATE = #{prtb.repayEndDate,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="prtb.repayEndDate!=null and prtb.repayEndDate!=''">
+			   <![CDATA[ and REPAY_END_DATE = #{prtb.repayEndDate,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="prtb.repayInterest!=null and prtb.repayInterest!=''">
+			   <![CDATA[ and REPAY_INTEREST = #{prtb.repayInterest,jdbcType=INTEGER}]]>
+			</if>
+			<if test="prtb.amt!=null and prtb.amt!=''">
+			   <![CDATA[ and AMT = #{prtb.amt,jdbcType=INTEGER}]]>
+			</if>
+			<if test="prtb.repayAmt!=null and prtb.repayAmt!=''">
+			   <![CDATA[ and REPAY_AMT = #{prtb.repayAmt,jdbcType=INTEGER}]]>
+			</if>
+			<if test="prtb.enabled!=null and prtb.enabled!=''">
+			   <![CDATA[ and ENABLED = #{prtb.enabled,jdbcType=CHAR}]]>
+			</if>
+			<if test="prtb.isFinish!=null and prtb.isFinish.size > 0">
+				and IS_FINISH in
+				<foreach collection="prtb.isFinish" item="isFinish" open="("
+					separator="," close=")">
+					#{isFinish}
+				</foreach>
+			</if>
+			<if test="prtb.repayType!=null and prtb.repayType!=''">
+			   <![CDATA[ and REPAY_TYPE = #{prtb.repayType,jdbcType=CHAR}]]>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectByCondCount" resultType="java.lang.Integer">
+		SELECT count(ID) FROM
+		T_PRODUCT_REPAY_TERMS
+		<include refid="dynamicPageWhere" />
+	</select>
+
+</mapper>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.GeneralParameterDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.GeneralParameter">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="CODE" property="code" jdbcType="VARCHAR" />
+		<result column="PAR_NAME" property="parName" jdbcType="VARCHAR" />
+		<result column="PAR_VALUE" property="parValue" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="RE_MARK" property="reMark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, CODE, PAR_NAME, PAR_VALUE, UPDATE_TIME, RE_MARK
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from T_GENERAL_PARAMETER
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="getParamValueByKey" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select PAR_VALUE
+		from T_GENERAL_PARAMETER
+		where CODE =
+		#{key,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		T_GENERAL_PARAMETER
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.GeneralParameter">
+		insert into
+		T_GENERAL_PARAMETER (ID, CODE, PAR_NAME,
+		PAR_VALUE, UPDATE_TIME,
+		RE_MARK
+		)
+		values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR},
+		#{parName,jdbcType=VARCHAR},
+		#{parValue,jdbcType=VARCHAR},
+		#{updateTime,jdbcType=TIMESTAMP}, #{reMark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.GeneralParameter">
+		insert into T_GENERAL_PARAMETER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="code != null">
+				CODE,
+			</if>
+			<if test="parName != null">
+				PAR_NAME,
+			</if>
+			<if test="parValue != null">
+				PAR_VALUE,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="reMark != null">
+				RE_MARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="parName != null">
+				#{parName,jdbcType=VARCHAR},
+			</if>
+			<if test="parValue != null">
+				#{parValue,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reMark != null">
+				#{reMark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.GeneralParameter">
+		update T_GENERAL_PARAMETER
+		<set>
+			<if test="code != null">
+				CODE = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="parName != null">
+				PAR_NAME = #{parName,jdbcType=VARCHAR},
+			</if>
+			<if test="parValue != null">
+				PAR_VALUE = #{parValue,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reMark != null">
+				RE_MARK = #{reMark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.GeneralParameter">
+		update
+		T_GENERAL_PARAMETER
+		set CODE = #{code,jdbcType=VARCHAR},
+		PAR_NAME =
+		#{parName,jdbcType=VARCHAR},
+		PAR_VALUE = #{parValue,jdbcType=VARCHAR},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		RE_MARK =
+		#{reMark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<update id="modifyParameter" >
+  	  update T_GENERAL_PARAMETER
+   		 set CODE = #{code,jdbcType=VARCHAR},
+   		 	PAR_NAME =	#{parName,jdbcType=VARCHAR},
+			PAR_VALUE = #{parValue,jdbcType=VARCHAR},
+			UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			RE_MARK = #{reMark,jdbcType=VARCHAR}
+    		where ID = #{id,jdbcType=INTEGER}
+  </update>
+	
+	<!-- 分页查询总数 --> 
+    <select id="findListPageCount" resultType="int" >
+	    select count(ID) from T_GENERAL_PARAMETER
+	    <include refid="dynamicPageWhere" /> 
+  	</select>  
+  	
+  	<!-- 分页查询 -->
+	<select id="findListPage" resultMap="BaseResultMap" >
+		<choose>  
+            <when test=" pageVO.size&lt;0">  
+	    		<include refid="baseDynamicQuery" /> 
+            </when>  
+            <otherwise> 
+            	<include refid="baseDynamicQuery" />
+            	limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size, jdbcType=INTEGER}  
+            </otherwise>  
+        </choose>
+  	</select>
+  	
+  	<sql id="baseDynamicQuery">
+		select * from T_GENERAL_PARAMETER
+		<include refid="dynamicPageWhere" /> 
+		order by UPDATE_TIME desc
+	</sql>  	
+  	<sql id="dynamicPageWhere">
+  		<where>
+  			1=1  	
+	      <if test="genParameter.code != null and genParameter.code !=''" >
+	      	and CODE = #{genParameter.code,jdbcType=VARCHAR}
+	      </if>
+	      <if test="genParameter.parName != null and genParameter.parName !=''" >
+	      	and PAR_NAME = #{genParameter.parName,jdbcType=VARCHAR}
+	      </if>
+  		</where>
+  	</sql>
+	
+</mapper>

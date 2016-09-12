@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.FinanceExtendsDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.FinanceExtends" >
+    <id column="EXTENDS_ID" property="extendsId" jdbcType="VARCHAR" />
+    <result column="FINANCE_ID" property="financeId" jdbcType="VARCHAR" />
+    <result column="FINANCE_NAME" property="financeName" jdbcType="VARCHAR" />
+    <result column="FINANCE_INTRO" property="financeIntro" jdbcType="VARCHAR" />
+    <result column="RENT_MESSAGE" property="rentMessage" jdbcType="VARCHAR" />
+    <result column="RENT_TOTAL" property="rentTotal" jdbcType="DECIMAL" />
+    <result column="RENT_TRANSFER" property="rentTransfer" jdbcType="VARCHAR" />
+    <result column="GUARANTEE_TYPE" property="guaranteeType" jdbcType="VARCHAR" />
+    <result column="OTHER_REMARK1" property="otherRemark1" jdbcType="VARCHAR" />
+    <result column="OTHER_REMARK2" property="otherRemark2" jdbcType="VARCHAR" />
+    <result column="OTHER_REMARK3" property="otherRemark3" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EXTENDS_ID, FINANCE_ID, FINANCE_NAME, FINANCE_INTRO, RENT_MESSAGE, RENT_TOTAL, RENT_TRANSFER, 
+    GUARANTEE_TYPE, OTHER_REMARK1, OTHER_REMARK2, OTHER_REMARK3, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_FINANCE_EXTENDS
+    where EXTENDS_ID = #{extendsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_FINANCE_EXTENDS
+    where EXTENDS_ID = #{extendsId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.FinanceExtends" >
+    insert into T_FINANCE_EXTENDS (EXTENDS_ID, FINANCE_ID, FINANCE_NAME, 
+      FINANCE_INTRO, RENT_MESSAGE, RENT_TOTAL, 
+      RENT_TRANSFER, GUARANTEE_TYPE, OTHER_REMARK1, 
+      OTHER_REMARK2, OTHER_REMARK3, CREATE_TIME
+      )
+    values (#{extendsId,jdbcType=VARCHAR}, #{financeId,jdbcType=VARCHAR}, #{financeName,jdbcType=VARCHAR}, 
+      #{financeIntro,jdbcType=VARCHAR}, #{rentMessage,jdbcType=VARCHAR}, #{rentTotal,jdbcType=DECIMAL}, 
+      #{rentTransfer,jdbcType=VARCHAR}, #{guaranteeType,jdbcType=VARCHAR}, #{otherRemark1,jdbcType=VARCHAR}, 
+      #{otherRemark2,jdbcType=VARCHAR}, #{otherRemark3,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.FinanceExtends" >
+    insert into T_FINANCE_EXTENDS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="extendsId != null" >
+        EXTENDS_ID,
+      </if>
+      <if test="financeId != null" >
+        FINANCE_ID,
+      </if>
+      <if test="financeName != null" >
+        FINANCE_NAME,
+      </if>
+      <if test="financeIntro != null" >
+        FINANCE_INTRO,
+      </if>
+      <if test="rentMessage != null" >
+        RENT_MESSAGE,
+      </if>
+      <if test="rentTotal != null" >
+        RENT_TOTAL,
+      </if>
+      <if test="rentTransfer != null" >
+        RENT_TRANSFER,
+      </if>
+      <if test="guaranteeType != null" >
+        GUARANTEE_TYPE,
+      </if>
+      <if test="otherRemark1 != null" >
+        OTHER_REMARK1,
+      </if>
+      <if test="otherRemark2 != null" >
+        OTHER_REMARK2,
+      </if>
+      <if test="otherRemark3 != null" >
+        OTHER_REMARK3,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="extendsId != null" >
+        #{extendsId,jdbcType=VARCHAR},
+      </if>
+      <if test="financeId != null" >
+        #{financeId,jdbcType=VARCHAR},
+      </if>
+      <if test="financeName != null" >
+        #{financeName,jdbcType=VARCHAR},
+      </if>
+      <if test="financeIntro != null" >
+        #{financeIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="rentMessage != null" >
+        #{rentMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="rentTotal != null" >
+        #{rentTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="rentTransfer != null" >
+        #{rentTransfer,jdbcType=VARCHAR},
+      </if>
+      <if test="guaranteeType != null" >
+        #{guaranteeType,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark1 != null" >
+        #{otherRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark2 != null" >
+        #{otherRemark2,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark3 != null" >
+        #{otherRemark3,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.FinanceExtends" >
+    update T_FINANCE_EXTENDS
+    <set >
+      <if test="financeId != null" >
+        FINANCE_ID = #{financeId,jdbcType=VARCHAR},
+      </if>
+      <if test="financeName != null" >
+        FINANCE_NAME = #{financeName,jdbcType=VARCHAR},
+      </if>
+      <if test="financeIntro != null" >
+        FINANCE_INTRO = #{financeIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="rentMessage != null" >
+        RENT_MESSAGE = #{rentMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="rentTotal != null" >
+        RENT_TOTAL = #{rentTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="rentTransfer != null" >
+        RENT_TRANSFER = #{rentTransfer,jdbcType=VARCHAR},
+      </if>
+      <if test="guaranteeType != null" >
+        GUARANTEE_TYPE = #{guaranteeType,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark1 != null" >
+        OTHER_REMARK1 = #{otherRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark2 != null" >
+        OTHER_REMARK2 = #{otherRemark2,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark3 != null" >
+        OTHER_REMARK3 = #{otherRemark3,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where EXTENDS_ID = #{extendsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.FinanceExtends" >
+    update T_FINANCE_EXTENDS
+    set FINANCE_ID = #{financeId,jdbcType=VARCHAR},
+      FINANCE_NAME = #{financeName,jdbcType=VARCHAR},
+      FINANCE_INTRO = #{financeIntro,jdbcType=VARCHAR},
+      RENT_MESSAGE = #{rentMessage,jdbcType=VARCHAR},
+      RENT_TOTAL = #{rentTotal,jdbcType=DECIMAL},
+      RENT_TRANSFER = #{rentTransfer,jdbcType=VARCHAR},
+      GUARANTEE_TYPE = #{guaranteeType,jdbcType=VARCHAR},
+      OTHER_REMARK1 = #{otherRemark1,jdbcType=VARCHAR},
+      OTHER_REMARK2 = #{otherRemark2,jdbcType=VARCHAR},
+      OTHER_REMARK3 = #{otherRemark3,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where EXTENDS_ID = #{extendsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

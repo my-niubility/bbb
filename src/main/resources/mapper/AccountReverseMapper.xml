@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.AccountReverseDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.AccountReverse" >
+    <id column="REVERSE_ID" property="reverseId" jdbcType="INTEGER" />
+    <result column="DR_SUBJECT_NO" property="drSubjectNo" jdbcType="VARCHAR" />
+    <result column="DR_CUST_ID" property="drCustId" jdbcType="VARCHAR" />
+    <result column="CR_SUBJECT_NO" property="crSubjectNo" jdbcType="VARCHAR" />
+    <result column="CR_CUST_ID" property="crCustId" jdbcType="VARCHAR" />
+    <result column="REVERSE_AMOUNT" property="reverseAmount" jdbcType="DECIMAL" />
+    <result column="REVERSE_DESC" property="reverseDesc" jdbcType="VARCHAR" />
+    <result column="REVERSE_ACCOUNT_DATE" property="reverseAccountDate" jdbcType="CHAR" />
+    <result column="REVERSE_TIME" property="reverseTime" jdbcType="TIMESTAMP" />
+    <result column="ORG_BOOK_ID" property="orgBookId" jdbcType="DECIMAL" />
+    <result column="ORG_PAY_ID" property="orgPayId" jdbcType="VARCHAR" />
+    <result column="ORG_AMOUNT" property="orgAmount" jdbcType="DECIMAL" />
+    <result column="ORG_ACCOUNT_DATE" property="orgAccountDate" jdbcType="CHAR" />
+    <result column="PAY_ID" property="payId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    REVERSE_ID, DR_SUBJECT_NO, DR_CUST_ID, CR_SUBJECT_NO, CR_CUST_ID, REVERSE_AMOUNT, 
+    REVERSE_DESC, REVERSE_ACCOUNT_DATE, REVERSE_TIME, ORG_BOOK_ID, ORG_PAY_ID, ORG_AMOUNT, 
+    ORG_ACCOUNT_DATE, PAY_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_ACCOUNT_REVERSE
+    where REVERSE_ID = #{reverseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_ACCOUNT_REVERSE
+    where REVERSE_ID = #{reverseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.AccountReverse" >
+    insert into T_ACCOUNT_REVERSE (REVERSE_ID, DR_SUBJECT_NO, DR_CUST_ID, 
+      CR_SUBJECT_NO, CR_CUST_ID, REVERSE_AMOUNT, 
+      REVERSE_DESC, REVERSE_ACCOUNT_DATE, REVERSE_TIME, 
+      ORG_BOOK_ID, ORG_PAY_ID, ORG_AMOUNT, 
+      ORG_ACCOUNT_DATE, PAY_ID)
+    values (#{reverseId,jdbcType=INTEGER}, #{drSubjectNo,jdbcType=VARCHAR}, #{drCustId,jdbcType=VARCHAR}, 
+      #{crSubjectNo,jdbcType=VARCHAR}, #{crCustId,jdbcType=VARCHAR}, #{reverseAmount,jdbcType=DECIMAL}, 
+      #{reverseDesc,jdbcType=VARCHAR}, #{reverseAccountDate,jdbcType=CHAR}, #{reverseTime,jdbcType=TIMESTAMP}, 
+      #{orgBookId,jdbcType=DECIMAL}, #{orgPayId,jdbcType=VARCHAR}, #{orgAmount,jdbcType=DECIMAL}, 
+      #{orgAccountDate,jdbcType=CHAR}, #{payId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.AccountReverse" >
+    insert into T_ACCOUNT_REVERSE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reverseId != null" >
+        REVERSE_ID,
+      </if>
+      <if test="drSubjectNo != null" >
+        DR_SUBJECT_NO,
+      </if>
+      <if test="drCustId != null" >
+        DR_CUST_ID,
+      </if>
+      <if test="crSubjectNo != null" >
+        CR_SUBJECT_NO,
+      </if>
+      <if test="crCustId != null" >
+        CR_CUST_ID,
+      </if>
+      <if test="reverseAmount != null" >
+        REVERSE_AMOUNT,
+      </if>
+      <if test="reverseDesc != null" >
+        REVERSE_DESC,
+      </if>
+      <if test="reverseAccountDate != null" >
+        REVERSE_ACCOUNT_DATE,
+      </if>
+      <if test="reverseTime != null" >
+        REVERSE_TIME,
+      </if>
+      <if test="orgBookId != null" >
+        ORG_BOOK_ID,
+      </if>
+      <if test="orgPayId != null" >
+        ORG_PAY_ID,
+      </if>
+      <if test="orgAmount != null" >
+        ORG_AMOUNT,
+      </if>
+      <if test="orgAccountDate != null" >
+        ORG_ACCOUNT_DATE,
+      </if>
+      <if test="payId != null" >
+        PAY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reverseId != null" >
+        #{reverseId,jdbcType=INTEGER},
+      </if>
+      <if test="drSubjectNo != null" >
+        #{drSubjectNo,jdbcType=VARCHAR},
+      </if>
+      <if test="drCustId != null" >
+        #{drCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="crSubjectNo != null" >
+        #{crSubjectNo,jdbcType=VARCHAR},
+      </if>
+      <if test="crCustId != null" >
+        #{crCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="reverseAmount != null" >
+        #{reverseAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="reverseDesc != null" >
+        #{reverseDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="reverseAccountDate != null" >
+        #{reverseAccountDate,jdbcType=CHAR},
+      </if>
+      <if test="reverseTime != null" >
+        #{reverseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgBookId != null" >
+        #{orgBookId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgPayId != null" >
+        #{orgPayId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAmount != null" >
+        #{orgAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orgAccountDate != null" >
+        #{orgAccountDate,jdbcType=CHAR},
+      </if>
+      <if test="payId != null" >
+        #{payId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.AccountReverse" >
+    update T_ACCOUNT_REVERSE
+    <set >
+      <if test="drSubjectNo != null" >
+        DR_SUBJECT_NO = #{drSubjectNo,jdbcType=VARCHAR},
+      </if>
+      <if test="drCustId != null" >
+        DR_CUST_ID = #{drCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="crSubjectNo != null" >
+        CR_SUBJECT_NO = #{crSubjectNo,jdbcType=VARCHAR},
+      </if>
+      <if test="crCustId != null" >
+        CR_CUST_ID = #{crCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="reverseAmount != null" >
+        REVERSE_AMOUNT = #{reverseAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="reverseDesc != null" >
+        REVERSE_DESC = #{reverseDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="reverseAccountDate != null" >
+        REVERSE_ACCOUNT_DATE = #{reverseAccountDate,jdbcType=CHAR},
+      </if>
+      <if test="reverseTime != null" >
+        REVERSE_TIME = #{reverseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgBookId != null" >
+        ORG_BOOK_ID = #{orgBookId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgPayId != null" >
+        ORG_PAY_ID = #{orgPayId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAmount != null" >
+        ORG_AMOUNT = #{orgAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orgAccountDate != null" >
+        ORG_ACCOUNT_DATE = #{orgAccountDate,jdbcType=CHAR},
+      </if>
+      <if test="payId != null" >
+        PAY_ID = #{payId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where REVERSE_ID = #{reverseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.AccountReverse" >
+    update T_ACCOUNT_REVERSE
+    set DR_SUBJECT_NO = #{drSubjectNo,jdbcType=VARCHAR},
+      DR_CUST_ID = #{drCustId,jdbcType=VARCHAR},
+      CR_SUBJECT_NO = #{crSubjectNo,jdbcType=VARCHAR},
+      CR_CUST_ID = #{crCustId,jdbcType=VARCHAR},
+      REVERSE_AMOUNT = #{reverseAmount,jdbcType=DECIMAL},
+      REVERSE_DESC = #{reverseDesc,jdbcType=VARCHAR},
+      REVERSE_ACCOUNT_DATE = #{reverseAccountDate,jdbcType=CHAR},
+      REVERSE_TIME = #{reverseTime,jdbcType=TIMESTAMP},
+      ORG_BOOK_ID = #{orgBookId,jdbcType=DECIMAL},
+      ORG_PAY_ID = #{orgPayId,jdbcType=VARCHAR},
+      ORG_AMOUNT = #{orgAmount,jdbcType=DECIMAL},
+      ORG_ACCOUNT_DATE = #{orgAccountDate,jdbcType=CHAR},
+      PAY_ID = #{payId,jdbcType=VARCHAR}
+    where REVERSE_ID = #{reverseId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 查询个人详情 -->
+  <select id="selectByReverseId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_ACCOUNT_REVERSE
+    where REVERSE_ID = #{reverseId,jdbcType=INTEGER}
+  </select>
+  <!-- 分页查询总数 --> 
+    <select id="findListPageCount" resultType="int" >
+	    select count(REVERSE_ID) from T_ACCOUNT_REVERSE
+	    <include refid="dynamicPageWhere" /> 
+  	</select>  
+  	
+  	<!-- 分页查询 -->
+	<select id="findListPage" resultMap="BaseResultMap" >
+		<choose>  
+            <when test=" pageVO.size&lt;0">  
+	    		<include refid="baseDynamicQuery" /> 
+            </when>  
+            <otherwise> 
+            	<include refid="baseDynamicQuery" />
+            	limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size, jdbcType=INTEGER}  
+            </otherwise>  
+        </choose>
+  	</select>
+  	
+  	<sql id="baseDynamicQuery">
+		select * from T_ACCOUNT_REVERSE
+		<include refid="dynamicPageWhere" /> 
+		order by REVERSE_TIME desc
+	</sql>  	
+  	<sql id="dynamicPageWhere">
+  		<where>
+  			1=1  	
+	      <if test="positive.reverseId != null and positive.reverseId !=''" >
+	      	and REVERSE_ID = #{positive.reverseId,jdbcType=INTEGER}
+	      </if>
+	      <if test="positive.orgBookId != null and positive.orgBookId !=''" >
+	      	and ORG_BOOK_ID = #{positive.orgBookId,jdbcType=DECIMAL}
+	      </if>
+	      <if test="positive.payId != null and positive.payId !=''" >
+	        and PAY_ID = #{positive.payId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="positive.drCustId != null and positive.drCustId !=''" >
+	      	and DR_CUST_ID = #{positive.drCustId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="positive.crCustId != null and positive.crCustId !=''" >
+	        and CR_CUST_ID = #{positive.crCustId,jdbcType=VARCHAR}
+	      </if>
+  		</where>
+  	</sql>
+  
+</mapper>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.BillBalanceDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.BillBalance" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="CAL_TIME" property="calTime" jdbcType="TIMESTAMP" />
+    <result column="ACCOUNT_DATE" property="accountDate" jdbcType="CHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="MERCHANT_ID" property="merchantId" jdbcType="VARCHAR" />
+    <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="DR_AMOUNT" property="drAmount" jdbcType="DECIMAL" />
+    <result column="CR_AMOUNT" property="crAmount" jdbcType="DECIMAL" />
+    <result column="ASSET_AMOUNT" property="assetAmount" jdbcType="DECIMAL" />
+    <result column="LIABILITY_AMOUNT" property="liabilityAmount" jdbcType="DECIMAL" />
+    <result column="CH_BALANCE_FLAG" property="chBalanceFlag" jdbcType="CHAR" />
+    <result column="LS_BALANCE_FLAG" property="lsBalanceFlag" jdbcType="CHAR" />
+    <result column="MSG" property="msg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CAL_TIME, ACCOUNT_DATE, CUST_ID, MERCHANT_ID, PROJECT_ID, DR_AMOUNT, CR_AMOUNT, 
+    ASSET_AMOUNT, LIABILITY_AMOUNT, CH_BALANCE_FLAG, LS_BALANCE_FLAG, MSG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_BILL_BALANCE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_BILL_BALANCE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.BillBalance" >
+    insert into T_BILL_BALANCE (ID, CAL_TIME, ACCOUNT_DATE, 
+      CUST_ID, MERCHANT_ID, PROJECT_ID, 
+      DR_AMOUNT, CR_AMOUNT, ASSET_AMOUNT, 
+      LIABILITY_AMOUNT, CH_BALANCE_FLAG, LS_BALANCE_FLAG, 
+      MSG)
+    values (#{id,jdbcType=INTEGER}, #{calTime,jdbcType=TIMESTAMP}, #{accountDate,jdbcType=CHAR}, 
+      #{custId,jdbcType=VARCHAR}, #{merchantId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, 
+      #{drAmount,jdbcType=DECIMAL}, #{crAmount,jdbcType=DECIMAL}, #{assetAmount,jdbcType=DECIMAL}, 
+      #{liabilityAmount,jdbcType=DECIMAL}, #{chBalanceFlag,jdbcType=CHAR}, #{lsBalanceFlag,jdbcType=CHAR}, 
+      #{msg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.BillBalance" >
+    insert into T_BILL_BALANCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="calTime != null" >
+        CAL_TIME,
+      </if>
+      <if test="accountDate != null" >
+        ACCOUNT_DATE,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="merchantId != null" >
+        MERCHANT_ID,
+      </if>
+      <if test="projectId != null" >
+        PROJECT_ID,
+      </if>
+      <if test="drAmount != null" >
+        DR_AMOUNT,
+      </if>
+      <if test="crAmount != null" >
+        CR_AMOUNT,
+      </if>
+      <if test="assetAmount != null" >
+        ASSET_AMOUNT,
+      </if>
+      <if test="liabilityAmount != null" >
+        LIABILITY_AMOUNT,
+      </if>
+      <if test="chBalanceFlag != null" >
+        CH_BALANCE_FLAG,
+      </if>
+      <if test="lsBalanceFlag != null" >
+        LS_BALANCE_FLAG,
+      </if>
+      <if test="msg != null" >
+        MSG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="calTime != null" >
+        #{calTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountDate != null" >
+        #{accountDate,jdbcType=CHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantId != null" >
+        #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="drAmount != null" >
+        #{drAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="crAmount != null" >
+        #{crAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="assetAmount != null" >
+        #{assetAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="liabilityAmount != null" >
+        #{liabilityAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="chBalanceFlag != null" >
+        #{chBalanceFlag,jdbcType=CHAR},
+      </if>
+      <if test="lsBalanceFlag != null" >
+        #{lsBalanceFlag,jdbcType=CHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.BillBalance" >
+    update T_BILL_BALANCE
+    <set >
+      <if test="calTime != null" >
+        CAL_TIME = #{calTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountDate != null" >
+        ACCOUNT_DATE = #{accountDate,jdbcType=CHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantId != null" >
+        MERCHANT_ID = #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="drAmount != null" >
+        DR_AMOUNT = #{drAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="crAmount != null" >
+        CR_AMOUNT = #{crAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="assetAmount != null" >
+        ASSET_AMOUNT = #{assetAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="liabilityAmount != null" >
+        LIABILITY_AMOUNT = #{liabilityAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="chBalanceFlag != null" >
+        CH_BALANCE_FLAG = #{chBalanceFlag,jdbcType=CHAR},
+      </if>
+      <if test="lsBalanceFlag != null" >
+        LS_BALANCE_FLAG = #{lsBalanceFlag,jdbcType=CHAR},
+      </if>
+      <if test="msg != null" >
+        MSG = #{msg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.BillBalance" >
+    update T_BILL_BALANCE
+    set CAL_TIME = #{calTime,jdbcType=TIMESTAMP},
+      ACCOUNT_DATE = #{accountDate,jdbcType=CHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR},
+      MERCHANT_ID = #{merchantId,jdbcType=VARCHAR},
+      PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      DR_AMOUNT = #{drAmount,jdbcType=DECIMAL},
+      CR_AMOUNT = #{crAmount,jdbcType=DECIMAL},
+      ASSET_AMOUNT = #{assetAmount,jdbcType=DECIMAL},
+      LIABILITY_AMOUNT = #{liabilityAmount,jdbcType=DECIMAL},
+      CH_BALANCE_FLAG = #{chBalanceFlag,jdbcType=CHAR},
+      LS_BALANCE_FLAG = #{lsBalanceFlag,jdbcType=CHAR},
+      MSG = #{msg,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 分页查询总数 --> 
+    <select id="findListPageCount" resultType="int" >
+	    select count(ID) from T_BILL_BALANCE
+	    <include refid="dynamicPageWhere" /> 
+  	</select>  
+  	
+  	<!-- 分页查询 -->
+	<select id="findListPage" resultMap="BaseResultMap" >
+		<choose>  
+            <when test=" pageVO.size&lt;0">  
+	    		<include refid="baseDynamicQuery" /> 
+            </when>  
+            <otherwise> 
+            	<include refid="baseDynamicQuery" />
+            	limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size, jdbcType=INTEGER}  
+            </otherwise>  
+        </choose>
+  	</select>
+  	
+  	<sql id="baseDynamicQuery">
+		select * from T_BILL_BALANCE
+		<include refid="dynamicPageWhere" /> 
+		order by CAL_TIME desc
+	</sql>  	
+  	<sql id="dynamicPageWhere">
+  		<where>
+  			1=1  	
+	      <if test="balance.custId != null and balance.custId !=''" >
+	      	and CUST_ID = #{balance.custId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="balance.merchantId != null and balance.merchantId !=''" >
+	      	and MERCHANT_ID = #{balance.merchantId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="balance.projectId != null and balance.projectId !=''" >
+	        and PROJECT_ID = #{balance.projectId,jdbcType=VARCHAR}
+	      </if>
+  		</where>
+  	</sql>
+</mapper>

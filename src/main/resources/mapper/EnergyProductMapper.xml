@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.EnergyProductDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.EnergyProduct" >
+    <id column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+    <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="PROJECT_STEP" property="projectStep" jdbcType="CHAR" />
+    <result column="PROJECT_SCALE" property="projectScale" jdbcType="VARCHAR" />
+    <result column="PROJECT_ADDR" property="projectAddr" jdbcType="VARCHAR" />
+    <result column="PRODUCT_SUB_CAND" property="productSubCand" jdbcType="VARCHAR" />
+    <result column="PRODUCT_SUB_NUM" property="productSubNum" jdbcType="VARCHAR" />
+    <result column="PRODUCT_SUB_TYPE" property="productSubType" jdbcType="VARCHAR" />
+    <result column="PROJECT_CARBON" property="projectCarbon" jdbcType="CHAR" />
+    <result column="PROJECT_NAME" property="projectName" jdbcType="VARCHAR" />
+    <result column="PROJECT_INTRO" property="projectIntro" jdbcType="VARCHAR" />
+    <result column="PROJECT_BENEFIT" property="projectBenefit" jdbcType="VARCHAR" />
+    <result column="PROJECT_ST_MES" property="projectStMes" jdbcType="VARCHAR" />
+    <result column="RENT_RIGHTS" property="rentRights" jdbcType="VARCHAR" />
+    <result column="RENT_TRACK" property="rentTrack" jdbcType="VARCHAR" />
+    <result column="RENT_OPERATE" property="rentOperate" jdbcType="VARCHAR" />
+    <result column="PROJECT_REMARK1" property="projectRemark1" jdbcType="VARCHAR" />
+    <result column="PROJECT_REMARK2" property="projectRemark2" jdbcType="VARCHAR" />
+    <result column="PROJECT_REMARK3" property="projectRemark3" jdbcType="VARCHAR" />
+    <result column="PROJECT_REMARK4" property="projectRemark4" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PRODUCT_ID, PROJECT_ID, PROJECT_STEP, PROJECT_SCALE, PROJECT_ADDR, PRODUCT_SUB_CAND, 
+    PRODUCT_SUB_NUM, PRODUCT_SUB_TYPE, PROJECT_CARBON, PROJECT_NAME, PROJECT_INTRO, PROJECT_BENEFIT, 
+    PROJECT_ST_MES, RENT_RIGHTS, RENT_TRACK, RENT_OPERATE, PROJECT_REMARK1, PROJECT_REMARK2, 
+    PROJECT_REMARK3, PROJECT_REMARK4, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_ENERGY_PRODUCT
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_PRODUCT_COMMON
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.EnergyProduct" >
+    insert into T_PRODUCT_COMMON (PRODUCT_ID, PROJECT_ID, PROJECT_STEP, 
+      PROJECT_SCALE, PROJECT_ADDR, PRODUCT_SUB_CAND, 
+      PRODUCT_SUB_NUM, PRODUCT_SUB_TYPE, PROJECT_CARBON, 
+      PROJECT_NAME, PROJECT_INTRO, PROJECT_BENEFIT, 
+      PROJECT_ST_MES, RENT_RIGHTS, RENT_TRACK, 
+      RENT_OPERATE, PROJECT_REMARK1, PROJECT_REMARK2, 
+      PROJECT_REMARK3, PROJECT_REMARK4, CREATE_TIME
+      )
+    values (#{productId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{projectStep,jdbcType=CHAR}, 
+      #{projectScale,jdbcType=VARCHAR}, #{projectAddr,jdbcType=VARCHAR}, #{productSubCand,jdbcType=VARCHAR}, 
+      #{productSubNum,jdbcType=VARCHAR}, #{productSubType,jdbcType=VARCHAR}, #{projectCarbon,jdbcType=CHAR}, 
+      #{projectName,jdbcType=VARCHAR}, #{projectIntro,jdbcType=VARCHAR}, #{projectBenefit,jdbcType=VARCHAR}, 
+      #{projectStMes,jdbcType=VARCHAR}, #{rentRights,jdbcType=VARCHAR}, #{rentTrack,jdbcType=VARCHAR}, 
+      #{rentOperate,jdbcType=VARCHAR}, #{projectRemark1,jdbcType=VARCHAR}, #{projectRemark2,jdbcType=VARCHAR}, 
+      #{projectRemark3,jdbcType=VARCHAR}, #{projectRemark4,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.EnergyProduct" >
+    insert into T_PRODUCT_COMMON
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="projectId != null" >
+        PROJECT_ID,
+      </if>
+      <if test="projectStep != null" >
+        PROJECT_STEP,
+      </if>
+      <if test="projectScale != null" >
+        PROJECT_SCALE,
+      </if>
+      <if test="projectAddr != null" >
+        PROJECT_ADDR,
+      </if>
+      <if test="productSubCand != null" >
+        PRODUCT_SUB_CAND,
+      </if>
+      <if test="productSubNum != null" >
+        PRODUCT_SUB_NUM,
+      </if>
+      <if test="productSubType != null" >
+        PRODUCT_SUB_TYPE,
+      </if>
+      <if test="projectCarbon != null" >
+        PROJECT_CARBON,
+      </if>
+      <if test="projectName != null" >
+        PROJECT_NAME,
+      </if>
+      <if test="projectIntro != null" >
+        PROJECT_INTRO,
+      </if>
+      <if test="projectBenefit != null" >
+        PROJECT_BENEFIT,
+      </if>
+      <if test="projectStMes != null" >
+        PROJECT_ST_MES,
+      </if>
+      <if test="rentRights != null" >
+        RENT_RIGHTS,
+      </if>
+      <if test="rentTrack != null" >
+        RENT_TRACK,
+      </if>
+      <if test="rentOperate != null" >
+        RENT_OPERATE,
+      </if>
+      <if test="projectRemark1 != null" >
+        PROJECT_REMARK1,
+      </if>
+      <if test="projectRemark2 != null" >
+        PROJECT_REMARK2,
+      </if>
+      <if test="projectRemark3 != null" >
+        PROJECT_REMARK3,
+      </if>
+      <if test="projectRemark4 != null" >
+        PROJECT_REMARK4,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectStep != null" >
+        #{projectStep,jdbcType=CHAR},
+      </if>
+      <if test="projectScale != null" >
+        #{projectScale,jdbcType=VARCHAR},
+      </if>
+      <if test="projectAddr != null" >
+        #{projectAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="productSubCand != null" >
+        #{productSubCand,jdbcType=VARCHAR},
+      </if>
+      <if test="productSubNum != null" >
+        #{productSubNum,jdbcType=VARCHAR},
+      </if>
+      <if test="productSubType != null" >
+        #{productSubType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCarbon != null" >
+        #{projectCarbon,jdbcType=CHAR},
+      </if>
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectIntro != null" >
+        #{projectIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="projectBenefit != null" >
+        #{projectBenefit,jdbcType=VARCHAR},
+      </if>
+      <if test="projectStMes != null" >
+        #{projectStMes,jdbcType=VARCHAR},
+      </if>
+      <if test="rentRights != null" >
+        #{rentRights,jdbcType=VARCHAR},
+      </if>
+      <if test="rentTrack != null" >
+        #{rentTrack,jdbcType=VARCHAR},
+      </if>
+      <if test="rentOperate != null" >
+        #{rentOperate,jdbcType=VARCHAR},
+      </if>
+      <if test="projectRemark1 != null" >
+        #{projectRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="projectRemark2 != null" >
+        #{projectRemark2,jdbcType=VARCHAR},
+      </if>
+      <if test="projectRemark3 != null" >
+        #{projectRemark3,jdbcType=VARCHAR},
+      </if>
+      <if test="projectRemark4 != null" >
+        #{projectRemark4,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.EnergyProduct" >
+    update T_PRODUCT_COMMON
+    <set >
+      <if test="projectId != null" >
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectStep != null" >
+        PROJECT_STEP = #{projectStep,jdbcType=CHAR},
+      </if>
+      <if test="projectScale != null" >
+        PROJECT_SCALE = #{projectScale,jdbcType=VARCHAR},
+      </if>
+      <if test="projectAddr != null" >
+        PROJECT_ADDR = #{projectAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="productSubCand != null" >
+        PRODUCT_SUB_CAND = #{productSubCand,jdbcType=VARCHAR},
+      </if>
+      <if test="productSubNum != null" >
+        PRODUCT_SUB_NUM = #{productSubNum,jdbcType=VARCHAR},
+      </if>
+      <if test="productSubType != null" >
+        PRODUCT_SUB_TYPE = #{productSubType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCarbon != null" >
+        PROJECT_CARBON = #{projectCarbon,jdbcType=CHAR},
+      </if>
+      <if test="projectName != null" >
+        PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectIntro != null" >
+        PROJECT_INTRO = #{projectIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="projectBenefit != null" >
+        PROJECT_BENEFIT = #{projectBenefit,jdbcType=VARCHAR},
+      </if>
+      <if test="projectStMes != null" >
+        PROJECT_ST_MES = #{projectStMes,jdbcType=VARCHAR},
+      </if>
+      <if test="rentRights != null" >
+        RENT_RIGHTS = #{rentRights,jdbcType=VARCHAR},
+      </if>
+      <if test="rentTrack != null" >
+        RENT_TRACK = #{rentTrack,jdbcType=VARCHAR},
+      </if>
+      <if test="rentOperate != null" >
+        RENT_OPERATE = #{rentOperate,jdbcType=VARCHAR},
+      </if>
+      <if test="projectRemark1 != null" >
+        PROJECT_REMARK1 = #{projectRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="projectRemark2 != null" >
+        PROJECT_REMARK2 = #{projectRemark2,jdbcType=VARCHAR},
+      </if>
+      <if test="projectRemark3 != null" >
+        PROJECT_REMARK3 = #{projectRemark3,jdbcType=VARCHAR},
+      </if>
+      <if test="projectRemark4 != null" >
+        PROJECT_REMARK4 = #{projectRemark4,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.EnergyProduct" >
+    update T_PRODUCT_COMMON
+    set PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      PROJECT_STEP = #{projectStep,jdbcType=CHAR},
+      PROJECT_SCALE = #{projectScale,jdbcType=VARCHAR},
+      PROJECT_ADDR = #{projectAddr,jdbcType=VARCHAR},
+      PRODUCT_SUB_CAND = #{productSubCand,jdbcType=VARCHAR},
+      PRODUCT_SUB_NUM = #{productSubNum,jdbcType=VARCHAR},
+      PRODUCT_SUB_TYPE = #{productSubType,jdbcType=VARCHAR},
+      PROJECT_CARBON = #{projectCarbon,jdbcType=CHAR},
+      PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+      PROJECT_INTRO = #{projectIntro,jdbcType=VARCHAR},
+      PROJECT_BENEFIT = #{projectBenefit,jdbcType=VARCHAR},
+      PROJECT_ST_MES = #{projectStMes,jdbcType=VARCHAR},
+      RENT_RIGHTS = #{rentRights,jdbcType=VARCHAR},
+      RENT_TRACK = #{rentTrack,jdbcType=VARCHAR},
+      RENT_OPERATE = #{rentOperate,jdbcType=VARCHAR},
+      PROJECT_REMARK1 = #{projectRemark1,jdbcType=VARCHAR},
+      PROJECT_REMARK2 = #{projectRemark2,jdbcType=VARCHAR},
+      PROJECT_REMARK3 = #{projectRemark3,jdbcType=VARCHAR},
+      PROJECT_REMARK4 = #{projectRemark4,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </update>
+</mapper>

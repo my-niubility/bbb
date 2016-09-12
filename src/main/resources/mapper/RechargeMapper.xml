@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.RechargeDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.Recharge">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="AMT" property="amt" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+		<result column="RESULT_INFO" property="resultInfo" jdbcType="VARCHAR" />
+		<result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+		<result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="RECHARGE_ID" property="rechargeId" jdbcType="VARCHAR" />
+		<result column="SETTLE_DATE" property="settleDate" jdbcType="TIMESTAMP" />
+		<result column="BINGING_CARD_TYPE" property="bingingCardType"
+			jdbcType="CHAR" />
+		<result column="BANK_TYPE" property="bankType" jdbcType="VARCHAR" />
+		<result column="BANK_CARD_NO" property="bankCardNo" jdbcType="VARCHAR" />
+		<result column="RECHARGE_TYPE" property="rechargeType"
+			jdbcType="CHAR" />
+		<result column="RECHARGE_CODE" property="rechargeCode"
+			jdbcType="VARCHAR" />
+		<result column="REC_BANK_TYPE" property="recBankType" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="RechargeInSerFnd" type="com.zlebank.model.SerialFund">
+		<id column="ID" property="orderId" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="tradeTime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="AMT" property="benefit" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, AMT, STATUS, RESULT_INFO, CUST_ID, CUST_NAME,
+		CREATE_TIME,
+		RECHARGE_ID, SETTLE_DATE,
+		BINGING_CARD_TYPE, BANK_TYPE,
+		BANK_CARD_NO, RECHARGE_TYPE, RECHARGE_CODE, REC_BANK_TYPE,
+		REMARK,
+		UPDATE_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_RECHARGE
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="getRchgOrderCount" resultType="java.lang.Integer">
+		select
+		count(*)
+		from T_RECHARGE
+		<include refid="dynamicPageWhere" />
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		T_RECHARGE
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.Recharge">
+		insert into T_RECHARGE (ID,
+		AMT, STATUS,
+		RESULT_INFO, CUST_ID, CUST_NAME,
+		CREATE_TIME, RECHARGE_ID,
+		SETTLE_DATE,
+		BINGING_CARD_TYPE, BANK_TYPE, BANK_CARD_NO,
+		RECHARGE_TYPE,
+		RECHARGE_CODE, REC_BANK_TYPE,
+		REMARK, UPDATE_TIME)
+		values
+		(#{id,jdbcType=VARCHAR}, #{amt,jdbcType=DECIMAL},
+		#{status,jdbcType=CHAR},
+		#{resultInfo,jdbcType=VARCHAR},
+		#{custId,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{rechargeId,jdbcType=VARCHAR},
+		#{settleDate,jdbcType=TIMESTAMP},
+		#{bingingCardType,jdbcType=CHAR},
+		#{bankType,jdbcType=VARCHAR}, #{bankCardNo,jdbcType=VARCHAR},
+		#{rechargeType,jdbcType=CHAR}, #{rechargeCode,jdbcType=VARCHAR},
+		#{recBankType,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.Recharge">
+		insert into T_RECHARGE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="amt != null">
+				AMT,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="resultInfo != null">
+				RESULT_INFO,
+			</if>
+			<if test="custId != null">
+				CUST_ID,
+			</if>
+			<if test="custName != null">
+				CUST_NAME,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="rechargeId != null">
+				RECHARGE_ID,
+			</if>
+			<if test="settleDate != null">
+				SETTLE_DATE,
+			</if>
+			<if test="bingingCardType != null">
+				BINGING_CARD_TYPE,
+			</if>
+			<if test="bankType != null">
+				BANK_TYPE,
+			</if>
+			<if test="bankCardNo != null">
+				BANK_CARD_NO,
+			</if>
+			<if test="rechargeType != null">
+				RECHARGE_TYPE,
+			</if>
+			<if test="rechargeCode != null">
+				RECHARGE_CODE,
+			</if>
+			<if test="recBankType != null">
+				REC_BANK_TYPE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="amt != null">
+				#{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="resultInfo != null">
+				#{resultInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="custId != null">
+				#{custId,jdbcType=VARCHAR},
+			</if>
+			<if test="custName != null">
+				#{custName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="rechargeId != null">
+				#{rechargeId,jdbcType=VARCHAR},
+			</if>
+			<if test="settleDate != null">
+				#{settleDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bingingCardType != null">
+				#{bingingCardType,jdbcType=CHAR},
+			</if>
+			<if test="bankType != null">
+				#{bankType,jdbcType=VARCHAR},
+			</if>
+			<if test="bankCardNo != null">
+				#{bankCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="rechargeType != null">
+				#{rechargeType,jdbcType=CHAR},
+			</if>
+			<if test="rechargeCode != null">
+				#{rechargeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="recBankType != null">
+				#{recBankType,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.Recharge">
+		update T_RECHARGE
+		<set>
+			<if test="amt != null">
+				AMT = #{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=CHAR},
+			</if>
+			<if test="resultInfo != null">
+				RESULT_INFO = #{resultInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="custId != null">
+				CUST_ID = #{custId,jdbcType=VARCHAR},
+			</if>
+			<if test="custName != null">
+				CUST_NAME = #{custName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="rechargeId != null">
+				RECHARGE_ID = #{rechargeId,jdbcType=VARCHAR},
+			</if>
+			<if test="settleDate != null">
+				SETTLE_DATE = #{settleDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bingingCardType != null">
+				BINGING_CARD_TYPE = #{bingingCardType,jdbcType=CHAR},
+			</if>
+			<if test="bankType != null">
+				BANK_TYPE = #{bankType,jdbcType=VARCHAR},
+			</if>
+			<if test="bankCardNo != null">
+				BANK_CARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="rechargeType != null">
+				RECHARGE_TYPE = #{rechargeType,jdbcType=CHAR},
+			</if>
+			<if test="rechargeCode != null">
+				RECHARGE_CODE = #{rechargeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="recBankType != null">
+				REC_BANK_TYPE = #{recBankType,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.Recharge">
+		update T_RECHARGE
+		set AMT = #{amt,jdbcType=DECIMAL},
+		STATUS = #{status,jdbcType=CHAR},
+		RESULT_INFO = #{resultInfo,jdbcType=VARCHAR},
+		CUST_ID =
+		#{custId,jdbcType=VARCHAR},
+		CUST_NAME = #{custName,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		RECHARGE_ID =
+		#{rechargeId,jdbcType=VARCHAR},
+		SETTLE_DATE =
+		#{settleDate,jdbcType=TIMESTAMP},
+		BINGING_CARD_TYPE =
+		#{bingingCardType,jdbcType=CHAR},
+		BANK_TYPE =
+		#{bankType,jdbcType=VARCHAR},
+		BANK_CARD_NO =
+		#{bankCardNo,jdbcType=VARCHAR},
+		RECHARGE_TYPE =
+		#{rechargeType,jdbcType=CHAR},
+		RECHARGE_CODE =
+		#{rechargeCode,jdbcType=VARCHAR},
+		REC_BANK_TYPE =
+		#{recBankType,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+		where ID =
+		#{id,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByRechargeIdSelective" parameterType="com.zlebank.model.Recharge">
+		update T_RECHARGE
+		<set>
+			<if test="amt != null">
+				AMT = #{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=CHAR},
+			</if>
+			<if test="resultInfo != null">
+				RESULT_INFO = #{resultInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="custId != null">
+				CUST_ID = #{custId,jdbcType=VARCHAR},
+			</if>
+			<if test="custName != null">
+				CUST_NAME = #{custName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="settleDate != null">
+				SETTLE_DATE = #{settleDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bingingCardType != null">
+				BINGING_CARD_TYPE = #{bingingCardType,jdbcType=CHAR},
+			</if>
+			<if test="bankType != null">
+				BANK_TYPE = #{bankType,jdbcType=VARCHAR},
+			</if>
+			<if test="bankCardNo != null">
+				BANK_CARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="rechargeType != null">
+				RECHARGE_TYPE = #{rechargeType,jdbcType=CHAR},
+			</if>
+			<if test="rechargeCode != null">
+				RECHARGE_CODE = #{rechargeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="recBankType != null">
+				REC_BANK_TYPE = #{recBankType,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE ID IN(SELECT temp.ID FROM (SELECT ID FROM T_RECHARGE WHERE
+		RECHARGE_ID = #{rechargeId,jdbcType=VARCHAR}) temp)
+	</update>
+
+	<select id="selectByCustInfo" resultMap="BaseResultMap">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="baseDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="baseDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="baseDynamicQuery">
+		select * from T_RECHARGE
+		<include refid="dynamicPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by ID desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+
+	<select id="selectSerFndByCustInfo" resultMap="RechargeInSerFnd">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="serFndDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="serFndDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="serFndDynamicQuery">
+		select CREATE_TIME, REMARK, ID , AMT , STATUS
+		from T_RECHARGE
+		<include refid="dynamicPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by CREATE_TIME desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+
+	<sql id="dynamicPageWhere">
+		<where>
+			1=1
+			<if test="rechargeVo.custId!=null and rechargeVo.custId!=''">
+			   <![CDATA[ and CUST_ID = #{rechargeVo.custId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="rechargeVo.beginDate!=null and rechargeVo.endDate!=null">
+			 <![CDATA[  and CREATE_TIME >=#{rechargeVo.beginDate,jdbcType=TIMESTAMP} and CREATE_TIME <=#{rechargeVo.endDate,jdbcType=TIMESTAMP}]]>
+			</if>
+			<if test="rechargeVo.status!=null and rechargeVo.status!=''">
+			   <![CDATA[ and STATUS = #{rechargeVo.status,jdbcType=VARCHAR}]]>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_RECHARGE
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="findListPageCount" resultType="int">
+		select count(ID) from T_RECHARGE
+		<include refid="dynamicPageNoWhere" />
+	</select>
+
+	<select id="findListPage" resultMap="BaseResultMap">
+		<choose>
+			<when test=" pageVO.size&lt;0">
+				<include refid="baseQueryPage" />
+			</when>
+			<otherwise>
+				<include refid="baseQueryPage" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="baseQueryPage">
+		select * from T_RECHARGE
+		<include refid="dynamicPageNoWhere" />
+		order by UPDATE_TIME desc
+	</sql>
+	<sql id="dynamicPageNoWhere">
+		<where>
+			1=1
+			<if test="recharge.id != null and recharge.id !=''">
+				and ID = #{recharge.id,jdbcType=VARCHAR}
+			</if>
+			<if test="recharge.custId != null and recharge.custId !=''">
+				and CUST_ID = #{recharge.custId,jdbcType=VARCHAR}
+			</if>
+			<if test="recharge.status != null and recharge.status !=''">
+				and STATUS = #{recharge.status,jdbcType=CHAR}
+			</if>
+			<if test="recharge.rechargeType != null and recharge.rechargeType !=''">
+				and RECHARGE_TYPE = #{recharge.rechargeType,jdbcType=CHAR}
+			</if>
+		</where>
+	</sql>
+</mapper>

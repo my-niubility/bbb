@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.CheckMsgBeforehandDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.CheckMsgBeforehand" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="HT_SEQID" property="htSeqid" jdbcType="VARCHAR" />
+    <result column="ZL_SEQID" property="zlSeqid" jdbcType="VARCHAR" />
+    <result column="ENTRUST_DATE" property="entrustDate" jdbcType="CHAR" />
+    <result column="LIQ_DATE" property="liqDate" jdbcType="CHAR" />
+    <result column="CHECK_DATE" property="checkDate" jdbcType="CHAR" />
+    <result column="MERCHANT_ID" property="merchantId" jdbcType="VARCHAR" />
+    <result column="HT_TRANS_AMT" property="htTransAmt" jdbcType="DECIMAL" />
+    <result column="ZL_TRANS_AMT" property="zlTransAmt" jdbcType="DECIMAL" />
+    <result column="HT_STATUS" property="htStatus" jdbcType="CHAR" />
+    <result column="ZL_STATUS" property="zlStatus" jdbcType="CHAR" />
+    <result column="BUSI_TYPE" property="busiType" jdbcType="CHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="CHECK_STATUS" property="checkStatus" jdbcType="CHAR" />
+    <result column="MSG_TYPE" property="msgType" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, HT_SEQID, ZL_SEQID, ENTRUST_DATE, LIQ_DATE, CHECK_DATE, MERCHANT_ID, HT_TRANS_AMT, 
+    ZL_TRANS_AMT, HT_STATUS, ZL_STATUS, BUSI_TYPE, CUST_ID, CUST_NAME, ORDER_ID, CHECK_STATUS, 
+    MSG_TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CHECK_MSG_BEFOREHAND
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_CHECK_MSG_BEFOREHAND
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.CheckMsgBeforehand" >
+    insert into T_CHECK_MSG_BEFOREHAND (ID, HT_SEQID, ZL_SEQID, 
+      ENTRUST_DATE, LIQ_DATE, CHECK_DATE, 
+      MERCHANT_ID, HT_TRANS_AMT, ZL_TRANS_AMT, 
+      HT_STATUS, ZL_STATUS, BUSI_TYPE, 
+      CUST_ID, CUST_NAME, ORDER_ID, 
+      CHECK_STATUS, MSG_TYPE)
+    values (#{id,jdbcType=VARCHAR}, #{htSeqid,jdbcType=VARCHAR}, #{zlSeqid,jdbcType=VARCHAR}, 
+      #{entrustDate,jdbcType=CHAR}, #{liqDate,jdbcType=CHAR}, #{checkDate,jdbcType=CHAR}, 
+      #{merchantId,jdbcType=VARCHAR}, #{htTransAmt,jdbcType=DECIMAL}, #{zlTransAmt,jdbcType=DECIMAL}, 
+      #{htStatus,jdbcType=CHAR}, #{zlStatus,jdbcType=CHAR}, #{busiType,jdbcType=CHAR}, 
+      #{custId,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{checkStatus,jdbcType=CHAR}, #{msgType,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.CheckMsgBeforehand" >
+    insert into T_CHECK_MSG_BEFOREHAND
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="htSeqid != null" >
+        HT_SEQID,
+      </if>
+      <if test="zlSeqid != null" >
+        ZL_SEQID,
+      </if>
+      <if test="entrustDate != null" >
+        ENTRUST_DATE,
+      </if>
+      <if test="liqDate != null" >
+        LIQ_DATE,
+      </if>
+      <if test="checkDate != null" >
+        CHECK_DATE,
+      </if>
+      <if test="merchantId != null" >
+        MERCHANT_ID,
+      </if>
+      <if test="htTransAmt != null" >
+        HT_TRANS_AMT,
+      </if>
+      <if test="zlTransAmt != null" >
+        ZL_TRANS_AMT,
+      </if>
+      <if test="htStatus != null" >
+        HT_STATUS,
+      </if>
+      <if test="zlStatus != null" >
+        ZL_STATUS,
+      </if>
+      <if test="busiType != null" >
+        BUSI_TYPE,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="custName != null" >
+        CUST_NAME,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="checkStatus != null" >
+        CHECK_STATUS,
+      </if>
+      <if test="msgType != null" >
+        MSG_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="htSeqid != null" >
+        #{htSeqid,jdbcType=VARCHAR},
+      </if>
+      <if test="zlSeqid != null" >
+        #{zlSeqid,jdbcType=VARCHAR},
+      </if>
+      <if test="entrustDate != null" >
+        #{entrustDate,jdbcType=CHAR},
+      </if>
+      <if test="liqDate != null" >
+        #{liqDate,jdbcType=CHAR},
+      </if>
+      <if test="checkDate != null" >
+        #{checkDate,jdbcType=CHAR},
+      </if>
+      <if test="merchantId != null" >
+        #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="htTransAmt != null" >
+        #{htTransAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="zlTransAmt != null" >
+        #{zlTransAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="htStatus != null" >
+        #{htStatus,jdbcType=CHAR},
+      </if>
+      <if test="zlStatus != null" >
+        #{zlStatus,jdbcType=CHAR},
+      </if>
+      <if test="busiType != null" >
+        #{busiType,jdbcType=CHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=CHAR},
+      </if>
+      <if test="msgType != null" >
+        #{msgType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.CheckMsgBeforehand" >
+    update T_CHECK_MSG_BEFOREHAND
+    <set >
+      <if test="htSeqid != null" >
+        HT_SEQID = #{htSeqid,jdbcType=VARCHAR},
+      </if>
+      <if test="zlSeqid != null" >
+        ZL_SEQID = #{zlSeqid,jdbcType=VARCHAR},
+      </if>
+      <if test="entrustDate != null" >
+        ENTRUST_DATE = #{entrustDate,jdbcType=CHAR},
+      </if>
+      <if test="liqDate != null" >
+        LIQ_DATE = #{liqDate,jdbcType=CHAR},
+      </if>
+      <if test="checkDate != null" >
+        CHECK_DATE = #{checkDate,jdbcType=CHAR},
+      </if>
+      <if test="merchantId != null" >
+        MERCHANT_ID = #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="htTransAmt != null" >
+        HT_TRANS_AMT = #{htTransAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="zlTransAmt != null" >
+        ZL_TRANS_AMT = #{zlTransAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="htStatus != null" >
+        HT_STATUS = #{htStatus,jdbcType=CHAR},
+      </if>
+      <if test="zlStatus != null" >
+        ZL_STATUS = #{zlStatus,jdbcType=CHAR},
+      </if>
+      <if test="busiType != null" >
+        BUSI_TYPE = #{busiType,jdbcType=CHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        CUST_NAME = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkStatus != null" >
+        CHECK_STATUS = #{checkStatus,jdbcType=CHAR},
+      </if>
+      <if test="msgType != null" >
+        MSG_TYPE = #{msgType,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.CheckMsgBeforehand" >
+    update T_CHECK_MSG_BEFOREHAND
+    set HT_SEQID = #{htSeqid,jdbcType=VARCHAR},
+      ZL_SEQID = #{zlSeqid,jdbcType=VARCHAR},
+      ENTRUST_DATE = #{entrustDate,jdbcType=CHAR},
+      LIQ_DATE = #{liqDate,jdbcType=CHAR},
+      CHECK_DATE = #{checkDate,jdbcType=CHAR},
+      MERCHANT_ID = #{merchantId,jdbcType=VARCHAR},
+      HT_TRANS_AMT = #{htTransAmt,jdbcType=DECIMAL},
+      ZL_TRANS_AMT = #{zlTransAmt,jdbcType=DECIMAL},
+      HT_STATUS = #{htStatus,jdbcType=CHAR},
+      ZL_STATUS = #{zlStatus,jdbcType=CHAR},
+      BUSI_TYPE = #{busiType,jdbcType=CHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR},
+      CUST_NAME = #{custName,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      CHECK_STATUS = #{checkStatus,jdbcType=CHAR},
+      MSG_TYPE = #{msgType,jdbcType=CHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

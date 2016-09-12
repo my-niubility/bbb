@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.PositionDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.Position" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CONTRACT_ID" property="contractId" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NANE" property="productNane" jdbcType="VARCHAR" />
+    <result column="POSITION_CUST_TYPE" property="positionCustType" jdbcType="CHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="SUBJECT_NO" property="subjectNo" jdbcType="VARCHAR" />
+    <result column="SUBJECT_TYPE" property="subjectType" jdbcType="CHAR" />
+    <result column="POSSESS_PORTION" property="possessPortion" jdbcType="DECIMAL" />
+    <result column="INITIAL_PORTION" property="initialPortion" jdbcType="DECIMAL" />
+    <result column="UNIT_COST" property="unitCost" jdbcType="DECIMAL" />
+    <result column="INVENST_AMT" property="invenstAmt" jdbcType="DECIMAL" />
+    <result column="REMAIN_CAPITAL" property="remainCapital" jdbcType="DECIMAL" />
+    <result column="TRANSFER_OUT_AMT" property="transferOutAmt" jdbcType="DECIMAL" />
+    <result column="REC_AMT" property="recAmt" jdbcType="DECIMAL" />
+    <result column="EARNING_AMT" property="earningAmt" jdbcType="DECIMAL" />
+    <result column="EXPECT_EARNING" property="expectEarning" jdbcType="DECIMAL" />
+    <result column="HOLD_STATUS" property="holdStatus" jdbcType="CHAR" />
+    <result column="REMAIN_TERMS" property="remainTerms" jdbcType="DECIMAL" />
+    <result column="EXPIRE_DATE" property="expireDate" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="INVEST_TYPE" property="investType" jdbcType="CHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CONTRACT_ID, CUST_ID, CUST_NAME, PRODUCT_ID, PRODUCT_NANE, POSITION_CUST_TYPE, 
+    ORDER_ID, SUBJECT_NO, SUBJECT_TYPE, POSSESS_PORTION, INITIAL_PORTION, UNIT_COST, 
+    INVENST_AMT, REMAIN_CAPITAL, TRANSFER_OUT_AMT, REC_AMT, EARNING_AMT, EXPECT_EARNING, 
+    HOLD_STATUS, REMAIN_TERMS, EXPIRE_DATE, REMARK, INVEST_TYPE, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_POSITION
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+   <select id="selectByBusUniqCond" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_POSITION
+    where CUST_ID = #{custId,jdbcType=VARCHAR} 
+    and PRODUCT_ID = #{productId,jdbcType=VARCHAR} 
+    and POSITION_CUST_TYPE = #{positionCustType,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_POSITION
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.Position" >
+    insert into T_POSITION (ID, CONTRACT_ID, CUST_ID, 
+      CUST_NAME, PRODUCT_ID, PRODUCT_NANE, 
+      POSITION_CUST_TYPE, ORDER_ID, SUBJECT_NO, 
+      SUBJECT_TYPE, POSSESS_PORTION, INITIAL_PORTION, 
+      UNIT_COST, INVENST_AMT, REMAIN_CAPITAL, 
+      TRANSFER_OUT_AMT, REC_AMT, EARNING_AMT, 
+      EXPECT_EARNING, HOLD_STATUS, REMAIN_TERMS, 
+      EXPIRE_DATE, REMARK, INVEST_TYPE, 
+      CREATE_TIME, UPDATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{contractId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, 
+      #{custName,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{productNane,jdbcType=VARCHAR}, 
+      #{positionCustType,jdbcType=CHAR}, #{orderId,jdbcType=VARCHAR}, #{subjectNo,jdbcType=VARCHAR}, 
+      #{subjectType,jdbcType=CHAR}, #{possessPortion,jdbcType=DECIMAL}, #{initialPortion,jdbcType=DECIMAL}, 
+      #{unitCost,jdbcType=DECIMAL}, #{invenstAmt,jdbcType=DECIMAL}, #{remainCapital,jdbcType=DECIMAL}, 
+      #{transferOutAmt,jdbcType=DECIMAL}, #{recAmt,jdbcType=DECIMAL}, #{earningAmt,jdbcType=DECIMAL}, 
+      #{expectEarning,jdbcType=DECIMAL}, #{holdStatus,jdbcType=CHAR}, #{remainTerms,jdbcType=DECIMAL}, 
+      #{expireDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{investType,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+    <select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_POSITION
+    where ID = #{id,jdbcType=VARCHAR} for update
+  </select>
+  <select id="selectByProductId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_POSITION
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectInvenstAmtSum" resultType="long" parameterType="java.lang.String" >
+    select 
+    IFNULL(sum(INVENST_AMT),0)
+    from T_POSITION
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and POSITION_CUST_TYPE='03' 
+  </select>
+
+  <select id="selectFinanceAmtSum" resultType="long" parameterType="java.lang.String" >
+    select 
+    IFNULL(sum(INVENST_AMT),0)
+    from T_POSITION
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and (POSITION_CUST_TYPE='03' or POSITION_CUST_TYPE='02')
+  </select>
+ 
+  <select id="selectExpectEarning" resultType="float" parameterType="java.lang.String" >
+    select 
+    EXPECT_EARNING
+    from T_POSITION
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and POSITION_CUST_TYPE='03' 
+  </select>
+  
+  <select id="selectforUpdate" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_POSITION 
+    where  
+   	CUST_ID = #{custId,jdbcType=VARCHAR} and PRODUCT_ID = #{productId,jdbcType=VARCHAR} 
+   	and POSITION_CUST_TYPE = #{positionCustType,jdbcType=CHAR} for update
+  </select>
+
+  <select id="selectByParameters" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_POSITION
+    where  
+   	CUST_ID = #{custId,jdbcType=VARCHAR} and PRODUCT_ID = #{productId,jdbcType=VARCHAR} and POSITION_CUST_TYPE = #{positionCustType,jdbcType=CHAR}
+  </select>
+  
+     <update id="updateHoldStatusByProductId" parameterType="java.lang.String" >
+    update T_POSITION
+    set HOLD_STATUS = #{holdStatus,jdbcType=CHAR}
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and POSITION_CUST_TYPE='03' 
+  </update>
+  
+  <update id="updateHoldStatusAndPossPortion" parameterType="com.zlebank.model.Position">
+    update T_POSITION
+       set HOLD_STATUS = #{holdStatus,jdbcType=CHAR},
+           POSSESS_PORTION = #{possessPortion,jdbcType=DECIMAL},
+           UPDATE_TIME =  #{updateTime,jdbcType=TIMESTAMP}
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and POSITION_CUST_TYPE=#{positionCustType,jdbcType=CHAR} 
+  </update>
+  
+  <update id="updateHoldStatus" parameterType="map">
+    update T_POSITION
+       set HOLD_STATUS = #{newHoldStatus,jdbcType=CHAR},
+           UPDATE_TIME =  #{updateTime,jdbcType=TIMESTAMP}
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and HOLD_STATUS=#{oldHoldStatus,jdbcType=CHAR} 
+  </update>
+  
+  <update id="updateAssetPossPortion" parameterType="com.zlebank.model.Position">
+    update T_POSITION
+       set POSSESS_PORTION = POSSESS_PORTION + #{possessPortion,jdbcType=DECIMAL},
+           UPDATE_TIME =  #{updateTime,jdbcType=TIMESTAMP}
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and POSITION_CUST_TYPE=#{positionCustType,jdbcType=CHAR} 
+  </update>
+  
+  <select id="findPositionList" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_POSITION
+    <include refid="dynamicPageWhere" />
+    order by CREATE_TIME desc
+  </select>
+  
+  <select id="findListPage" resultMap="BaseResultMap" >
+	
+		<choose>  
+            <when test=" pageVO.size&lt;0">  
+	    		<include refid="baseDynamicQuery" /> 
+            </when>  
+            <otherwise> 
+            	<include refid="baseDynamicQuery" />
+            	limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size, jdbcType=INTEGER}
+            </otherwise>  
+        </choose> 
+
+  </select>	  	
+  
+  <select id="getPositionCount" resultType="int" >
+    select count(*)
+    from T_POSITION
+    <include refid="dynamicPageWhere" />
+  </select>
+  
+  <select id="getTotalEarnings" resultType="long" >
+    select sum(EARNING_AMT)
+    from T_POSITION
+    <include refid="dynamicPageWhere" />
+  </select>
+  
+  <select id="getTotaInvest" resultType="long" >
+    select IFNULL(sum(INITIAL_PORTION*UNIT_COST),0)
+    from T_POSITION
+    <include refid="dynamicPageWhere" />
+  </select>
+  
+  <select id="getInvestRsCount" resultType="int" >
+    select COUNT(DISTINCT(CUST_ID)) 
+    from T_POSITION 
+    WHERE PRODUCT_ID = #{positionVo.productId,jdbcType=VARCHAR} 
+     and POSITION_CUST_TYPE= #{positionVo.positionCustType,jdbcType=VARCHAR} 
+  </select>
+  
+  <sql id="dynamicPageWhere">
+		<where>
+			1=1
+			<if test="positionVo.id!=null and positionVo.id!=''">
+			   <![CDATA[ and ID = #{positionVo.id,jdbcType=VARCHAR}]]>
+			</if>
+			
+			<if test="positionVo.custId!=null and positionVo.custId!=''">
+			   <![CDATA[ and CUST_ID = #{positionVo.custId,jdbcType=VARCHAR}]]>
+			</if>
+			
+			<if test="positionVo.custName!=null and positionVo.custName!=''">
+			   <![CDATA[ and CUST_NAME = #{positionVo.custName,jdbcType=VARCHAR}]]>
+			</if>
+			
+			<if test="positionVo.contractId!=null and positionVo.contractId!=''">
+			   <![CDATA[ and CONTRACT_ID = #{positionVo.contractId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="positionVo.productId!=null and positionVo.productId!=''">
+			   <![CDATA[ and PRODUCT_ID = #{positionVo.productId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="positionVo.productNane!=null and positionVo.productNane!=''">
+			   <![CDATA[ and PRODUCT_NANE like '%'||#{positionVo.productNane,jdbcType=VARCHAR}||'%']]>
+			</if>
+			<if test="positionVo.positionCustType!=null and positionVo.positionCustType!=''">
+			   <![CDATA[ and POSITION_CUST_TYPE = #{positionVo.positionCustType,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="positionVo.orderId!=null and positionVo.orderId!=''">
+			   <![CDATA[ and ORDER_ID = #{positionVo.orderId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="positionVo.investType!=null and positionVo.investType!=''">
+			   <![CDATA[ and INVEST_TYPE = #{positionVo.investType,jdbcType=CHAR}]]>
+			</if>
+
+			<if test="positionVo.holdStatus!=null and positionVo.holdStatus.size > 0">
+				and HOLD_STATUS in
+				<foreach collection="positionVo.holdStatus" item="holdStatus"  open="(" separator="," close=")">  
+	        		#{holdStatus}  
+	     		</foreach>  
+	     	</if>
+		</where>
+	</sql>
+  	<sql id="baseDynamicQuery">
+		select * from T_POSITION
+		<include refid="dynamicPageWhere" /> 
+		<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+			order by CREATE_TIME desc
+		</if> 
+		<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+			order by ${pageVO.orderBy}
+		</if>	 
+	</sql>
+  
+  <select id="lockPositionTable" resultType="int">
+    select 1 from T_POSITION  d for update
+  </select>
+  
+  <update id="updateAccountAmt" parameterType="com.zlebank.model.Position">
+		<![CDATA[
+			update T_POSITION set POSSESS_PORTION = #{possessPortion},INITIAL_PORTION = #{initialPortion}, 
+			EXPECT_EARNING = #{expectEarning} ,
+			UPDATE_TIME = #{updateTime} 
+			where ID = #{id}
+		]]>
+  </update>
+  
+  
+  
+  
+  
+  <select id="selectByProductIdAndHold" resultMap="BaseResultMap" >
+  	select
+  	<include refid="Base_Column_List" />
+    from T_POSITION
+    WHERE PRODUCT_ID = #{productId,jdbcType=VARCHAR} 
+    and POSITION_CUST_TYPE= #{positionCustType,jdbcType=VARCHAR} 
+  </select>
+  
+  <insert id="insertSelective" parameterType="com.zlebank.model.Position" >
+    insert into T_POSITION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="contractId != null" >
+        CONTRACT_ID,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="custName != null" >
+        CUST_NAME,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="productNane != null" >
+        PRODUCT_NANE,
+      </if>
+      <if test="positionCustType != null" >
+        POSITION_CUST_TYPE,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="subjectNo != null" >
+        SUBJECT_NO,
+      </if>
+      <if test="subjectType != null" >
+        SUBJECT_TYPE,
+      </if>
+      <if test="possessPortion != null" >
+        POSSESS_PORTION,
+      </if>
+      <if test="initialPortion != null" >
+        INITIAL_PORTION,
+      </if>
+      <if test="unitCost != null" >
+        UNIT_COST,
+      </if>
+      <if test="invenstAmt != null" >
+        INVENST_AMT,
+      </if>
+      <if test="remainCapital != null" >
+        REMAIN_CAPITAL,
+      </if>
+      <if test="transferOutAmt != null" >
+        TRANSFER_OUT_AMT,
+      </if>
+      <if test="recAmt != null" >
+        REC_AMT,
+      </if>
+      <if test="earningAmt != null" >
+        EARNING_AMT,
+      </if>
+      <if test="expectEarning != null" >
+        EXPECT_EARNING,
+      </if>
+      <if test="holdStatus != null" >
+        HOLD_STATUS,
+      </if>
+      <if test="remainTerms != null" >
+        REMAIN_TERMS,
+      </if>
+      <if test="expireDate != null" >
+        EXPIRE_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="investType != null" >
+        INVEST_TYPE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productNane != null" >
+        #{productNane,jdbcType=VARCHAR},
+      </if>
+      <if test="positionCustType != null" >
+        #{positionCustType,jdbcType=CHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectNo != null" >
+        #{subjectNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectType != null" >
+        #{subjectType,jdbcType=CHAR},
+      </if>
+      <if test="possessPortion != null" >
+        #{possessPortion,jdbcType=DECIMAL},
+      </if>
+      <if test="initialPortion != null" >
+        #{initialPortion,jdbcType=DECIMAL},
+      </if>
+      <if test="unitCost != null" >
+        #{unitCost,jdbcType=DECIMAL},
+      </if>
+      <if test="invenstAmt != null" >
+        #{invenstAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainCapital != null" >
+        #{remainCapital,jdbcType=DECIMAL},
+      </if>
+      <if test="transferOutAmt != null" >
+        #{transferOutAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="recAmt != null" >
+        #{recAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="earningAmt != null" >
+        #{earningAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="expectEarning != null" >
+        #{expectEarning,jdbcType=DECIMAL},
+      </if>
+      <if test="holdStatus != null" >
+        #{holdStatus,jdbcType=CHAR},
+      </if>
+      <if test="remainTerms != null" >
+        #{remainTerms,jdbcType=DECIMAL},
+      </if>
+      <if test="expireDate != null" >
+        #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="investType != null" >
+        #{investType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.Position" >
+    update T_POSITION
+    <set >
+      <if test="contractId != null" >
+        CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        CUST_NAME = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productNane != null" >
+        PRODUCT_NANE = #{productNane,jdbcType=VARCHAR},
+      </if>
+      <if test="positionCustType != null" >
+        POSITION_CUST_TYPE = #{positionCustType,jdbcType=CHAR},
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectNo != null" >
+        SUBJECT_NO = #{subjectNo,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectType != null" >
+        SUBJECT_TYPE = #{subjectType,jdbcType=CHAR},
+      </if>
+      <if test="possessPortion != null" >
+        POSSESS_PORTION = #{possessPortion,jdbcType=DECIMAL},
+      </if>
+      <if test="initialPortion != null" >
+        INITIAL_PORTION = #{initialPortion,jdbcType=DECIMAL},
+      </if>
+      <if test="unitCost != null" >
+        UNIT_COST = #{unitCost,jdbcType=DECIMAL},
+      </if>
+      <if test="invenstAmt != null" >
+        INVENST_AMT = #{invenstAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainCapital != null" >
+        REMAIN_CAPITAL = #{remainCapital,jdbcType=DECIMAL},
+      </if>
+      <if test="transferOutAmt != null" >
+        TRANSFER_OUT_AMT = #{transferOutAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="recAmt != null" >
+        REC_AMT = #{recAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="earningAmt != null" >
+        EARNING_AMT = #{earningAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="expectEarning != null" >
+        EXPECT_EARNING = #{expectEarning,jdbcType=DECIMAL},
+      </if>
+      <if test="holdStatus != null" >
+        HOLD_STATUS = #{holdStatus,jdbcType=CHAR},
+      </if>
+      <if test="remainTerms != null" >
+        REMAIN_TERMS = #{remainTerms,jdbcType=DECIMAL},
+      </if>
+      <if test="expireDate != null" >
+        EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="investType != null" >
+        INVEST_TYPE = #{investType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.Position" >
+    update T_POSITION
+    set CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR},
+      CUST_NAME = #{custName,jdbcType=VARCHAR},
+      PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      PRODUCT_NANE = #{productNane,jdbcType=VARCHAR},
+      POSITION_CUST_TYPE = #{positionCustType,jdbcType=CHAR},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      SUBJECT_NO = #{subjectNo,jdbcType=VARCHAR},
+      SUBJECT_TYPE = #{subjectType,jdbcType=CHAR},
+      POSSESS_PORTION = #{possessPortion,jdbcType=DECIMAL},
+      INITIAL_PORTION = #{initialPortion,jdbcType=DECIMAL},
+      UNIT_COST = #{unitCost,jdbcType=DECIMAL},
+      INVENST_AMT = #{invenstAmt,jdbcType=DECIMAL},
+      REMAIN_CAPITAL = #{remainCapital,jdbcType=DECIMAL},
+      TRANSFER_OUT_AMT = #{transferOutAmt,jdbcType=DECIMAL},
+      REC_AMT = #{recAmt,jdbcType=DECIMAL},
+      EARNING_AMT = #{earningAmt,jdbcType=DECIMAL},
+      EXPECT_EARNING = #{expectEarning,jdbcType=DECIMAL},
+      HOLD_STATUS = #{holdStatus,jdbcType=CHAR},
+      REMAIN_TERMS = #{remainTerms,jdbcType=DECIMAL},
+      EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      INVEST_TYPE = #{investType,jdbcType=CHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_POSITION
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+    <select id="findListPageCountTable" resultType="int" >
+	    select count(ID) from T_POSITION
+	    <include refid="dynamicPageNoWhere" /> 
+  	</select>  
+  	
+	<select id="findListPageTable" resultMap="BaseResultMap" >
+		<choose>  
+            <when test=" pageVO.size&lt;0">  
+	    		<include refid="baseQueryPage" /> 
+            </when>  
+            <otherwise> 
+            	<include refid="baseQueryPage" />
+            	limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size, jdbcType=INTEGER}  
+            </otherwise>  
+        </choose>
+  	</select>
+  	
+  	<sql id="baseQueryPage">
+		select * from T_POSITION
+		<include refid="dynamicPageNoWhere" /> 
+		order by UPDATE_TIME desc
+	</sql>  	
+  	<sql id="dynamicPageNoWhere">
+  		<where>
+  			1=1
+  		  <if test="position.orderId != null and position.orderId !=''" >
+	      	and ORDER_ID = #{position.orderId,jdbcType=VARCHAR}
+	      </if>  	
+	      <if test="position.productId != null and position.productId !=''" >
+	      	and PRODUCT_ID = #{position.productId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="position.custId != null and position.custId !=''" >
+	      	and CUST_ID = #{position.custId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="position.subjectType != null and position.subjectType !=''" >
+	        and SUBJECT_TYPE = #{position.subjectType,jdbcType=CHAR}
+	      </if>
+	      <if test="position.positionCustType != null and position.positionCustType !=''" >
+	      	and POSITION_CUST_TYPE = #{position.positionCustType,jdbcType=CHAR}
+	      </if>
+	      <if test="position.holdStatus != null and position.holdStatus !=''" >
+	        and HOLD_STATUS = #{position.holdStatus,jdbcType=CHAR}
+	      </if>
+  		</where>
+  	</sql>
+</mapper>

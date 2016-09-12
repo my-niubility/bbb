@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.AccountBookDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.AccountBook">
+		<id column="BOOK_ID" property="bookId" jdbcType="INTEGER" />
+		<result column="ACCOUNT_DATE" property="accountDate" jdbcType="CHAR" />
+		<result column="RULE_ID" property="ruleId" jdbcType="CHAR" />
+		<result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+		<result column="PAY_ID" property="payId" jdbcType="VARCHAR" />
+		<result column="OPT_CODE" property="optCode" jdbcType="CHAR" />
+		<result column="DR_SUBJECT_NO" property="drSubjectNo" jdbcType="VARCHAR" />
+		<result column="DR_CUST_ID" property="drCustId" jdbcType="VARCHAR" />
+		<result column="CR_SUBJECT_NO" property="crSubjectNo" jdbcType="VARCHAR" />
+		<result column="CR_CUST_ID" property="crCustId" jdbcType="VARCHAR" />
+		<result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+		<result column="BOOK_TIME" property="bookTime" jdbcType="TIMESTAMP" />
+		<result column="BOOK_STATE" property="bookState" jdbcType="CHAR" />
+		<result column="PAYER_FLAG" property="payerFlag" jdbcType="CHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		BOOK_ID, ACCOUNT_DATE, RULE_ID, ORDER_ID, PAY_ID, OPT_CODE,
+		DR_SUBJECT_NO,
+		DR_CUST_ID, CR_SUBJECT_NO, CR_CUST_ID, AMOUNT,
+		BOOK_TIME, BOOK_STATE,
+		PAYER_FLAG
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from T_ACCOUNT_BOOK
+		where BOOK_ID = #{bookId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		T_ACCOUNT_BOOK
+		where BOOK_ID = #{bookId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.AccountBook">
+		insert into T_ACCOUNT_BOOK
+		(BOOK_ID, ACCOUNT_DATE, RULE_ID,
+		ORDER_ID, PAY_ID, OPT_CODE,
+		DR_SUBJECT_NO, DR_CUST_ID,
+		CR_SUBJECT_NO, CR_CUST_ID, AMOUNT,
+		BOOK_TIME, BOOK_STATE, PAYER_FLAG
+		)
+		values (#{bookId,jdbcType=INTEGER},
+		#{accountDate,jdbcType=CHAR},
+		#{ruleId,jdbcType=CHAR},
+		#{orderId,jdbcType=VARCHAR}, #{payId,jdbcType=VARCHAR},
+		#{optCode,jdbcType=CHAR},
+		#{drSubjectNo,jdbcType=VARCHAR},
+		#{drCustId,jdbcType=VARCHAR},
+		#{crSubjectNo,jdbcType=VARCHAR},
+		#{crCustId,jdbcType=VARCHAR},
+		#{amount,jdbcType=DECIMAL},
+		#{bookTime,jdbcType=TIMESTAMP}, #{bookState,jdbcType=CHAR},
+		#{payerFlag,jdbcType=CHAR}
+		)
+	</insert>
+	<select id="findAccountBookByPayId" parameterType="String"
+		resultMap="BaseResultMap"> 
+		<![CDATA[ select * from T_ACCOUNT_BOOK where PAY_ID = #{payId} ORDER BY BOOK_TIME 
+		DESC ]]>
+	</select>
+
+	<update id="updateAccountBookState" parameterType="com.zlebank.model.AccountBook">
+	<![CDATA[
+		update T_ACCOUNT_BOOK set BOOK_STATE = #{bookState} where BOOK_ID = #{bookId}
+	]]>
+	</update>
+
+
+	<insert id="insertSelective" parameterType="com.zlebank.model.AccountBook">
+		insert into T_ACCOUNT_BOOK
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="bookId != null">
+				BOOK_ID,
+			</if>
+			<if test="accountDate != null">
+				ACCOUNT_DATE,
+			</if>
+			<if test="ruleId != null">
+				RULE_ID,
+			</if>
+			<if test="orderId != null">
+				ORDER_ID,
+			</if>
+			<if test="payId != null">
+				PAY_ID,
+			</if>
+			<if test="optCode != null">
+				OPT_CODE,
+			</if>
+			<if test="drSubjectNo != null">
+				DR_SUBJECT_NO,
+			</if>
+			<if test="drCustId != null">
+				DR_CUST_ID,
+			</if>
+			<if test="crSubjectNo != null">
+				CR_SUBJECT_NO,
+			</if>
+			<if test="crCustId != null">
+				CR_CUST_ID,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="bookTime != null">
+				BOOK_TIME,
+			</if>
+			<if test="bookState != null">
+				BOOK_STATE,
+			</if>
+			<if test="payerFlag != null">
+				PAYER_FLAG,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="bookId != null">
+				#{bookId,jdbcType=INTEGER},
+			</if>
+			<if test="accountDate != null">
+				#{accountDate,jdbcType=CHAR},
+			</if>
+			<if test="ruleId != null">
+				#{ruleId,jdbcType=CHAR},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="payId != null">
+				#{payId,jdbcType=VARCHAR},
+			</if>
+			<if test="optCode != null">
+				#{optCode,jdbcType=CHAR},
+			</if>
+			<if test="drSubjectNo != null">
+				#{drSubjectNo,jdbcType=VARCHAR},
+			</if>
+			<if test="drCustId != null">
+				#{drCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="crSubjectNo != null">
+				#{crSubjectNo,jdbcType=VARCHAR},
+			</if>
+			<if test="crCustId != null">
+				#{crCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="bookTime != null">
+				#{bookTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bookState != null">
+				#{bookState,jdbcType=CHAR},
+			</if>
+			<if test="payerFlag != null">
+				#{payerFlag,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.AccountBook">
+		update T_ACCOUNT_BOOK
+		<set>
+			<if test="accountDate != null">
+				ACCOUNT_DATE = #{accountDate,jdbcType=CHAR},
+			</if>
+			<if test="ruleId != null">
+				RULE_ID = #{ruleId,jdbcType=CHAR},
+			</if>
+			<if test="orderId != null">
+				ORDER_ID = #{orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="payId != null">
+				PAY_ID = #{payId,jdbcType=VARCHAR},
+			</if>
+			<if test="optCode != null">
+				OPT_CODE = #{optCode,jdbcType=CHAR},
+			</if>
+			<if test="drSubjectNo != null">
+				DR_SUBJECT_NO = #{drSubjectNo,jdbcType=VARCHAR},
+			</if>
+			<if test="drCustId != null">
+				DR_CUST_ID = #{drCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="crSubjectNo != null">
+				CR_SUBJECT_NO = #{crSubjectNo,jdbcType=VARCHAR},
+			</if>
+			<if test="crCustId != null">
+				CR_CUST_ID = #{crCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="bookTime != null">
+				BOOK_TIME = #{bookTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="bookState != null">
+				BOOK_STATE = #{bookState,jdbcType=CHAR},
+			</if>
+			<if test="payerFlag != null">
+				PAYER_FLAG = #{payerFlag,jdbcType=CHAR},
+			</if>
+		</set>
+		where BOOK_ID = #{bookId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.AccountBook">
+		update
+		T_ACCOUNT_BOOK
+		set ACCOUNT_DATE = #{accountDate,jdbcType=CHAR},
+		RULE_ID
+		= #{ruleId,jdbcType=CHAR},
+		ORDER_ID = #{orderId,jdbcType=VARCHAR},
+		PAY_ID = #{payId,jdbcType=VARCHAR},
+		OPT_CODE =
+		#{optCode,jdbcType=CHAR},
+		DR_SUBJECT_NO =
+		#{drSubjectNo,jdbcType=VARCHAR},
+		DR_CUST_ID =
+		#{drCustId,jdbcType=VARCHAR},
+		CR_SUBJECT_NO =
+		#{crSubjectNo,jdbcType=VARCHAR},
+		CR_CUST_ID =
+		#{crCustId,jdbcType=VARCHAR},
+		AMOUNT = #{amount,jdbcType=DECIMAL},
+		BOOK_TIME = #{bookTime,jdbcType=TIMESTAMP},
+		BOOK_STATE =
+		#{bookState,jdbcType=CHAR},
+		PAYER_FLAG = #{payerFlag,jdbcType=CHAR}
+		where BOOK_ID = #{bookId,jdbcType=INTEGER}
+	</update>
+
+	<!-- 分页查询总数 -->
+	<select id="findListPageCount" resultType="int">
+		select count(BOOK_ID) from T_ACCOUNT_BOOK
+		<include refid="dynamicPageWhere" />
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="findListPage" resultMap="BaseResultMap">
+		<choose>
+			<when test=" pageVO.size&lt;0">
+				<include refid="baseDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="baseDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="baseDynamicQuery">
+		select * from T_ACCOUNT_BOOK
+		<include refid="dynamicPageWhere" />
+		order by ACCOUNT_DATE desc,BOOK_ID desc
+	</sql>
+	<sql id="dynamicPageWhere">
+		<where>
+			1=1
+			<if test="accountBookVO.bookId != null and accountBookVO.bookId != ''">
+				and BOOK_ID = #{accountBookVO.bookId,jdbcType=DECIMAL}
+			</if>
+			<if test="accountBookVO.orderId != null and accountBookVO.orderId != ''">
+				and ORDER_ID = #{accountBookVO.orderId,jdbcType=VARCHAR}
+			</if>
+			<if test="accountBookVO.payId != null and accountBookVO.payId != ''">
+				and PAY_ID = #{accountBookVO.payId,jdbcType=VARCHAR}
+			</if>
+			<if
+				test="accountBookVO.accountDateS != null and accountBookVO.accountDateS != '' ">
+        <![CDATA[ and ACCOUNT_DATE >= #{accountBookVO.accountDateS,jdbcType=CHAR}]]>
+			</if>
+			<if
+				test="accountBookVO.accountDateE != null and accountBookVO.accountDateE != '' ">
+        <![CDATA[ and ACCOUNT_DATE <= #{accountBookVO.accountDateE,jdbcType=CHAR}]]>
+			</if>
+			<if test="accountBookVO.optCode != null and accountBookVO.optCode != ''">
+				and OPT_CODE = #{accountBookVO.optCode,jdbcType=CHAR}
+			</if>
+			<if
+				test="accountBookVO.drSubjectNo != null and accountBookVO.drSubjectNo != ''">
+				and DR_SUBJECT_NO =
+				#{accountBookVO.drSubjectNo,jdbcType=VARCHAR}
+			</if>
+			<if test="accountBookVO.drCustId != null and accountBookVO.drCustId != ''">
+				and DR_CUST_ID =
+				#{accountBookVO.drCustId,jdbcType=VARCHAR}
+			</if>
+			<if
+				test="accountBookVO.crSubjectNo != null and accountBookVO.crSubjectNo != ''">
+				and CR_SUBJECT_NO =
+				#{accountBookVO.crSubjectNo,jdbcType=VARCHAR}
+			</if>
+			<if test="accountBookVO.crCustId != null and accountBookVO.crCustId != ''">
+				and CR_CUST_ID =
+				#{accountBookVO.crCustId,jdbcType=VARCHAR}
+			</if>
+			<if test="accountBookVO.amount != null and accountBookVO.amount != ''">
+				and AMOUNT = #{accountBookVO.amount,jdbcType=DECIMAL}
+			</if>
+			<if test="accountBookVO.bookTime != null and accountBookVO.bookTime != ''">
+				and trunc(BOOK_TIME) =
+				#{accountBookVO.bookTime,jdbcType=DATE}
+			</if>
+			<if test="accountBookVO.ruleId != null and accountBookVO.ruleId != ''">
+				and RULE_ID = #{accountBookVO.ruleId,jdbcType=CHAR}
+			</if>
+			<if
+				test="accountBookVO.bookState != null and accountBookVO.bookState != ''">
+				and BOOK_STATE = #{accountBookVO.bookState,jdbcType=CHAR}
+			</if>
+		</where>
+	</sql>
+
+
+
+</mapper>

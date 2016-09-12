@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.RentRegisterDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.RentRegister" >
+    <id column="RENT_ID" property="rentId" jdbcType="VARCHAR" />
+    <result column="RENT_NAME" property="rentName" jdbcType="VARCHAR" />
+    <result column="EXTENDS_ID" property="extendsId" jdbcType="VARCHAR" />
+    <result column="PROJECT_INTRO" property="projectIntro" jdbcType="VARCHAR" />
+    <result column="RENT_MESSAGE" property="rentMessage" jdbcType="VARCHAR" />
+    <result column="RENT_PRODUCE" property="rentProduce" jdbcType="VARCHAR" />
+    <result column="PRODUCE_INTR" property="produceIntr" jdbcType="VARCHAR" />
+    <result column="OTHER_REMARK1" property="otherRemark1" jdbcType="VARCHAR" />
+    <result column="OTHER_REMARK2" property="otherRemark2" jdbcType="VARCHAR" />
+    <result column="OTHER_REMARK3" property="otherRemark3" jdbcType="VARCHAR" />
+    <result column="OTHER_REMARK4" property="otherRemark4" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RENT_ID, RENT_NAME, EXTENDS_ID, PROJECT_INTRO, RENT_MESSAGE, RENT_PRODUCE, PRODUCE_INTR, 
+    OTHER_REMARK1, OTHER_REMARK2, OTHER_REMARK3, OTHER_REMARK4, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_RENT_REGISTER
+    where RENT_ID = #{rentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_RENT_REGISTER
+    where RENT_ID = #{rentId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.RentRegister" >
+    insert into T_RENT_REGISTER (RENT_ID, RENT_NAME, EXTENDS_ID, 
+      PROJECT_INTRO, RENT_MESSAGE, RENT_PRODUCE, 
+      PRODUCE_INTR, OTHER_REMARK1, OTHER_REMARK2, 
+      OTHER_REMARK3, OTHER_REMARK4, CREATE_TIME
+      )
+    values (#{rentId,jdbcType=VARCHAR}, #{rentName,jdbcType=VARCHAR}, #{extendsId,jdbcType=VARCHAR}, 
+      #{projectIntro,jdbcType=VARCHAR}, #{rentMessage,jdbcType=VARCHAR}, #{rentProduce,jdbcType=VARCHAR}, 
+      #{produceIntr,jdbcType=VARCHAR}, #{otherRemark1,jdbcType=VARCHAR}, #{otherRemark2,jdbcType=VARCHAR}, 
+      #{otherRemark3,jdbcType=VARCHAR}, #{otherRemark4,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.RentRegister" >
+    insert into T_RENT_REGISTER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rentId != null" >
+        RENT_ID,
+      </if>
+      <if test="rentName != null" >
+        RENT_NAME,
+      </if>
+      <if test="extendsId != null" >
+        EXTENDS_ID,
+      </if>
+      <if test="projectIntro != null" >
+        PROJECT_INTRO,
+      </if>
+      <if test="rentMessage != null" >
+        RENT_MESSAGE,
+      </if>
+      <if test="rentProduce != null" >
+        RENT_PRODUCE,
+      </if>
+      <if test="produceIntr != null" >
+        PRODUCE_INTR,
+      </if>
+      <if test="otherRemark1 != null" >
+        OTHER_REMARK1,
+      </if>
+      <if test="otherRemark2 != null" >
+        OTHER_REMARK2,
+      </if>
+      <if test="otherRemark3 != null" >
+        OTHER_REMARK3,
+      </if>
+      <if test="otherRemark4 != null" >
+        OTHER_REMARK4,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rentId != null" >
+        #{rentId,jdbcType=VARCHAR},
+      </if>
+      <if test="rentName != null" >
+        #{rentName,jdbcType=VARCHAR},
+      </if>
+      <if test="extendsId != null" >
+        #{extendsId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectIntro != null" >
+        #{projectIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="rentMessage != null" >
+        #{rentMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="rentProduce != null" >
+        #{rentProduce,jdbcType=VARCHAR},
+      </if>
+      <if test="produceIntr != null" >
+        #{produceIntr,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark1 != null" >
+        #{otherRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark2 != null" >
+        #{otherRemark2,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark3 != null" >
+        #{otherRemark3,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark4 != null" >
+        #{otherRemark4,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.RentRegister" >
+    update T_RENT_REGISTER
+    <set >
+      <if test="rentName != null" >
+        RENT_NAME = #{rentName,jdbcType=VARCHAR},
+      </if>
+      <if test="extendsId != null" >
+        EXTENDS_ID = #{extendsId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectIntro != null" >
+        PROJECT_INTRO = #{projectIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="rentMessage != null" >
+        RENT_MESSAGE = #{rentMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="rentProduce != null" >
+        RENT_PRODUCE = #{rentProduce,jdbcType=VARCHAR},
+      </if>
+      <if test="produceIntr != null" >
+        PRODUCE_INTR = #{produceIntr,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark1 != null" >
+        OTHER_REMARK1 = #{otherRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark2 != null" >
+        OTHER_REMARK2 = #{otherRemark2,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark3 != null" >
+        OTHER_REMARK3 = #{otherRemark3,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRemark4 != null" >
+        OTHER_REMARK4 = #{otherRemark4,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RENT_ID = #{rentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.RentRegister" >
+    update T_RENT_REGISTER
+    set RENT_NAME = #{rentName,jdbcType=VARCHAR},
+      EXTENDS_ID = #{extendsId,jdbcType=VARCHAR},
+      PROJECT_INTRO = #{projectIntro,jdbcType=VARCHAR},
+      RENT_MESSAGE = #{rentMessage,jdbcType=VARCHAR},
+      RENT_PRODUCE = #{rentProduce,jdbcType=VARCHAR},
+      PRODUCE_INTR = #{produceIntr,jdbcType=VARCHAR},
+      OTHER_REMARK1 = #{otherRemark1,jdbcType=VARCHAR},
+      OTHER_REMARK2 = #{otherRemark2,jdbcType=VARCHAR},
+      OTHER_REMARK3 = #{otherRemark3,jdbcType=VARCHAR},
+      OTHER_REMARK4 = #{otherRemark4,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where RENT_ID = #{rentId,jdbcType=VARCHAR}
+  </update>
+</mapper>

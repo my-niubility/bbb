@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.TWorkDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.TWork" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="LAST_DATE" property="lastDate" jdbcType="CHAR" />
+    <result column="CUR_DATE" property="curDate" jdbcType="CHAR" />
+    <result column="NEXT_DATE" property="nextDate" jdbcType="CHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, LAST_DATE, CUR_DATE, NEXT_DATE, STATUS, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_WORK
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getWork" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_WORK
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_WORK
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.TWork" >
+    insert into T_WORK (ID, LAST_DATE, CUR_DATE, 
+      NEXT_DATE, STATUS, CREATE_TIME, 
+      UPDATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{lastDate,jdbcType=CHAR}, #{curDate,jdbcType=CHAR}, 
+      #{nextDate,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.TWork" >
+    insert into T_WORK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="lastDate != null" >
+        LAST_DATE,
+      </if>
+      <if test="curDate != null" >
+        CUR_DATE,
+      </if>
+      <if test="nextDate != null" >
+        NEXT_DATE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null" >
+        #{lastDate,jdbcType=CHAR},
+      </if>
+      <if test="curDate != null" >
+        #{curDate,jdbcType=CHAR},
+      </if>
+      <if test="nextDate != null" >
+        #{nextDate,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.TWork" >
+    update T_WORK
+    <set >
+      <if test="lastDate != null" >
+        LAST_DATE = #{lastDate,jdbcType=CHAR},
+      </if>
+      <if test="curDate != null" >
+        CUR_DATE = #{curDate,jdbcType=CHAR},
+      </if>
+      <if test="nextDate != null" >
+        NEXT_DATE = #{nextDate,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.TWork" >
+    update T_WORK
+    set LAST_DATE = #{lastDate,jdbcType=CHAR},
+      CUR_DATE = #{curDate,jdbcType=CHAR},
+      NEXT_DATE = #{nextDate,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

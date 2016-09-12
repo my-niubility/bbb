@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.ProductTransferDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.ProductTransfer" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CONTRACT_ID" property="contractId" jdbcType="VARCHAR" />
+    <result column="POSITION_ID" property="positionId" jdbcType="VARCHAR" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NANE" property="productNane" jdbcType="VARCHAR" />
+    <result column="TRANSFER_CUST_ID" property="transferCustId" jdbcType="VARCHAR" />
+    <result column="TRANSFER_CUST_NAME" property="transferCustName" jdbcType="VARCHAR" />
+    <result column="TRANSFER_AMT" property="transferAmt" jdbcType="DECIMAL" />
+    <result column="TRANSFEREE_PURCHASE_ID" property="transfereePurchaseId" jdbcType="VARCHAR" />
+    <result column="TRANSFEREE_CUST_ID" property="transfereeCustId" jdbcType="VARCHAR" />
+    <result column="TRANSFEREE_CUST_NAME" property="transfereeCustName" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="REMAIN_TERMS" property="remainTerms" jdbcType="DECIMAL" />
+    <result column="POSITION_EARNING" property="positionEarning" jdbcType="DECIMAL" />
+    <result column="EXPECT_EARNING" property="expectEarning" jdbcType="DECIMAL" />
+    <result column="TRANSFER_TIME" property="transferTime" jdbcType="TIMESTAMP" />
+    <result column="SETTLE_TIME" property="settleTime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CONTRACT_ID, POSITION_ID, PRODUCT_ID, PRODUCT_NANE, TRANSFER_CUST_ID, TRANSFER_CUST_NAME, 
+    TRANSFER_AMT, TRANSFEREE_PURCHASE_ID, TRANSFEREE_CUST_ID, TRANSFEREE_CUST_NAME, STATUS, 
+    REMAIN_TERMS, POSITION_EARNING, EXPECT_EARNING, TRANSFER_TIME, SETTLE_TIME, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_PRODUCT_TRANSFER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_PRODUCT_TRANSFER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.ProductTransfer" >
+    insert into T_PRODUCT_TRANSFER (ID, CONTRACT_ID, POSITION_ID, 
+      PRODUCT_ID, PRODUCT_NANE, TRANSFER_CUST_ID, 
+      TRANSFER_CUST_NAME, TRANSFER_AMT, TRANSFEREE_PURCHASE_ID, 
+      TRANSFEREE_CUST_ID, TRANSFEREE_CUST_NAME, STATUS, 
+      REMAIN_TERMS, POSITION_EARNING, EXPECT_EARNING, 
+      TRANSFER_TIME, SETTLE_TIME, REMARK
+      )
+    values (#{id,jdbcType=VARCHAR}, #{contractId,jdbcType=VARCHAR}, #{positionId,jdbcType=VARCHAR}, 
+      #{productId,jdbcType=VARCHAR}, #{productNane,jdbcType=VARCHAR}, #{transferCustId,jdbcType=VARCHAR}, 
+      #{transferCustName,jdbcType=VARCHAR}, #{transferAmt,jdbcType=DECIMAL}, #{transfereePurchaseId,jdbcType=VARCHAR}, 
+      #{transfereeCustId,jdbcType=VARCHAR}, #{transfereeCustName,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{remainTerms,jdbcType=DECIMAL}, #{positionEarning,jdbcType=DECIMAL}, #{expectEarning,jdbcType=DECIMAL}, 
+      #{transferTime,jdbcType=TIMESTAMP}, #{settleTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.ProductTransfer" >
+    insert into T_PRODUCT_TRANSFER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="contractId != null" >
+        CONTRACT_ID,
+      </if>
+      <if test="positionId != null" >
+        POSITION_ID,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="productNane != null" >
+        PRODUCT_NANE,
+      </if>
+      <if test="transferCustId != null" >
+        TRANSFER_CUST_ID,
+      </if>
+      <if test="transferCustName != null" >
+        TRANSFER_CUST_NAME,
+      </if>
+      <if test="transferAmt != null" >
+        TRANSFER_AMT,
+      </if>
+      <if test="transfereePurchaseId != null" >
+        TRANSFEREE_PURCHASE_ID,
+      </if>
+      <if test="transfereeCustId != null" >
+        TRANSFEREE_CUST_ID,
+      </if>
+      <if test="transfereeCustName != null" >
+        TRANSFEREE_CUST_NAME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="remainTerms != null" >
+        REMAIN_TERMS,
+      </if>
+      <if test="positionEarning != null" >
+        POSITION_EARNING,
+      </if>
+      <if test="expectEarning != null" >
+        EXPECT_EARNING,
+      </if>
+      <if test="transferTime != null" >
+        TRANSFER_TIME,
+      </if>
+      <if test="settleTime != null" >
+        SETTLE_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null" >
+        #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productNane != null" >
+        #{productNane,jdbcType=VARCHAR},
+      </if>
+      <if test="transferCustId != null" >
+        #{transferCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="transferCustName != null" >
+        #{transferCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="transferAmt != null" >
+        #{transferAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="transfereePurchaseId != null" >
+        #{transfereePurchaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="transfereeCustId != null" >
+        #{transfereeCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="transfereeCustName != null" >
+        #{transfereeCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="remainTerms != null" >
+        #{remainTerms,jdbcType=DECIMAL},
+      </if>
+      <if test="positionEarning != null" >
+        #{positionEarning,jdbcType=DECIMAL},
+      </if>
+      <if test="expectEarning != null" >
+        #{expectEarning,jdbcType=DECIMAL},
+      </if>
+      <if test="transferTime != null" >
+        #{transferTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settleTime != null" >
+        #{settleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.ProductTransfer" >
+    update T_PRODUCT_TRANSFER
+    <set >
+      <if test="contractId != null" >
+        CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null" >
+        POSITION_ID = #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productNane != null" >
+        PRODUCT_NANE = #{productNane,jdbcType=VARCHAR},
+      </if>
+      <if test="transferCustId != null" >
+        TRANSFER_CUST_ID = #{transferCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="transferCustName != null" >
+        TRANSFER_CUST_NAME = #{transferCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="transferAmt != null" >
+        TRANSFER_AMT = #{transferAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="transfereePurchaseId != null" >
+        TRANSFEREE_PURCHASE_ID = #{transfereePurchaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="transfereeCustId != null" >
+        TRANSFEREE_CUST_ID = #{transfereeCustId,jdbcType=VARCHAR},
+      </if>
+      <if test="transfereeCustName != null" >
+        TRANSFEREE_CUST_NAME = #{transfereeCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="remainTerms != null" >
+        REMAIN_TERMS = #{remainTerms,jdbcType=DECIMAL},
+      </if>
+      <if test="positionEarning != null" >
+        POSITION_EARNING = #{positionEarning,jdbcType=DECIMAL},
+      </if>
+      <if test="expectEarning != null" >
+        EXPECT_EARNING = #{expectEarning,jdbcType=DECIMAL},
+      </if>
+      <if test="transferTime != null" >
+        TRANSFER_TIME = #{transferTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settleTime != null" >
+        SETTLE_TIME = #{settleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.ProductTransfer" >
+    update T_PRODUCT_TRANSFER
+    set CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
+      POSITION_ID = #{positionId,jdbcType=VARCHAR},
+      PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      PRODUCT_NANE = #{productNane,jdbcType=VARCHAR},
+      TRANSFER_CUST_ID = #{transferCustId,jdbcType=VARCHAR},
+      TRANSFER_CUST_NAME = #{transferCustName,jdbcType=VARCHAR},
+      TRANSFER_AMT = #{transferAmt,jdbcType=DECIMAL},
+      TRANSFEREE_PURCHASE_ID = #{transfereePurchaseId,jdbcType=VARCHAR},
+      TRANSFEREE_CUST_ID = #{transfereeCustId,jdbcType=VARCHAR},
+      TRANSFEREE_CUST_NAME = #{transfereeCustName,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      REMAIN_TERMS = #{remainTerms,jdbcType=DECIMAL},
+      POSITION_EARNING = #{positionEarning,jdbcType=DECIMAL},
+      EXPECT_EARNING = #{expectEarning,jdbcType=DECIMAL},
+      TRANSFER_TIME = #{transferTime,jdbcType=TIMESTAMP},
+      SETTLE_TIME = #{settleTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

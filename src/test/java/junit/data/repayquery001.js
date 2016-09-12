@@ -1,0 +1,15 @@
+{
+"id":null,
+"productId":null,
+"productName":null,
+"repayCustId":null,
+"repayCustName":null,
+"repayTerm":1,
+"repayEndDate":null,
+"repayInterest":null,
+"amt":null,
+"repayAmt":null,
+"enabled":null,
+"isFinish":["0","2"],
+"repayType":null
+}

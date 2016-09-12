@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.DealTypeDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.DealType" >
+    <id column="OPT_CODE" property="optCode" jdbcType="CHAR" />
+    <id column="STEP_KEY" property="stepKey" jdbcType="VARCHAR" />
+    <result column="RULE_ID" property="ruleId" jdbcType="CHAR" />
+    <result column="DEAL_NAME" property="dealName" jdbcType="VARCHAR" />
+    <result column="SHOW_NAME" property="showName" jdbcType="VARCHAR" />
+    <result column="CHOICE_CODE" property="choiceCode" jdbcType="CHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    OPT_CODE, STEP_KEY, RULE_ID, DEAL_NAME, SHOW_NAME, CHOICE_CODE, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zlebank.model.DealTypeKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_DEAL_TYPE
+    where OPT_CODE = #{optCode,jdbcType=CHAR}
+      and STEP_KEY = #{stepKey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zlebank.model.DealTypeKey" >
+    delete from T_DEAL_TYPE
+    where OPT_CODE = #{optCode,jdbcType=CHAR}
+      and STEP_KEY = #{stepKey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.DealType" >
+    insert into T_DEAL_TYPE (OPT_CODE, STEP_KEY, RULE_ID, 
+      DEAL_NAME, SHOW_NAME, CHOICE_CODE, 
+      CREATE_DATE, UPDATE_DATE)
+    values (#{optCode,jdbcType=CHAR}, #{stepKey,jdbcType=VARCHAR}, #{ruleId,jdbcType=CHAR}, 
+      #{dealName,jdbcType=VARCHAR}, #{showName,jdbcType=VARCHAR}, #{choiceCode,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.DealType" >
+    insert into T_DEAL_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="optCode != null" >
+        OPT_CODE,
+      </if>
+      <if test="stepKey != null" >
+        STEP_KEY,
+      </if>
+      <if test="ruleId != null" >
+        RULE_ID,
+      </if>
+      <if test="dealName != null" >
+        DEAL_NAME,
+      </if>
+      <if test="showName != null" >
+        SHOW_NAME,
+      </if>
+      <if test="choiceCode != null" >
+        CHOICE_CODE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="optCode != null" >
+        #{optCode,jdbcType=CHAR},
+      </if>
+      <if test="stepKey != null" >
+        #{stepKey,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleId != null" >
+        #{ruleId,jdbcType=CHAR},
+      </if>
+      <if test="dealName != null" >
+        #{dealName,jdbcType=VARCHAR},
+      </if>
+      <if test="showName != null" >
+        #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceCode != null" >
+        #{choiceCode,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.DealType" >
+    update T_DEAL_TYPE
+    <set >
+      <if test="ruleId != null" >
+        RULE_ID = #{ruleId,jdbcType=CHAR},
+      </if>
+      <if test="dealName != null" >
+        DEAL_NAME = #{dealName,jdbcType=VARCHAR},
+      </if>
+      <if test="showName != null" >
+        SHOW_NAME = #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceCode != null" >
+        CHOICE_CODE = #{choiceCode,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where OPT_CODE = #{optCode,jdbcType=CHAR}
+      and STEP_KEY = #{stepKey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.DealType" >
+    update T_DEAL_TYPE
+    set RULE_ID = #{ruleId,jdbcType=CHAR},
+      DEAL_NAME = #{dealName,jdbcType=VARCHAR},
+      SHOW_NAME = #{showName,jdbcType=VARCHAR},
+      CHOICE_CODE = #{choiceCode,jdbcType=CHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where OPT_CODE = #{optCode,jdbcType=CHAR}
+      and STEP_KEY = #{stepKey,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 分页查询总数 --> 
+    <select id="findListPageCount" resultType="int" >
+	    select count(OPT_CODE) from T_DEAL_TYPE
+	    <include refid="dynamicPageWhere" /> 
+  	</select>  
+  	
+  	<!-- 分页查询 -->
+	<select id="findListPage" resultMap="BaseResultMap" >
+		<choose>  
+            <when test=" pageVO.size&lt;0">  
+	    		<include refid="baseDynamicQuery" /> 
+            </when>  
+            <otherwise> 
+            	<include refid="baseDynamicQuery" />
+            	limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size, jdbcType=INTEGER}  
+            </otherwise>  
+        </choose>
+  	</select>
+  	
+  	<sql id="baseDynamicQuery">
+		select * from T_DEAL_TYPE
+		<include refid="dynamicPageWhere" /> 
+		order by UPDATE_DATE desc
+	</sql>  	
+  	<sql id="dynamicPageWhere">
+  		<where>
+  			1=1  	
+	      <if test="deal.optCode != null and deal.optCode !=''" >
+	      	and OPT_CODE = #{deal.optCode,jdbcType=CHAR}
+	      </if>
+	      <if test="deal.dealName != null and deal.dealName !=''" >
+	      	and DEAL_NAME = #{deal.dealName,jdbcType=VARCHAR}
+	      </if>
+  		</where>
+  	</sql>
+</mapper>

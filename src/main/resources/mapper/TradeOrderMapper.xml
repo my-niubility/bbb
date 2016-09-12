@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.TradeOrderDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.TradeOrder">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="CONTRACT_ID" property="contractId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NANE" property="productNane" jdbcType="VARCHAR" />
+		<result column="ASSET_CUST_ID" property="assetCustId" jdbcType="VARCHAR" />
+		<result column="ASSET_CUST_NAME" property="assetCustName"
+			jdbcType="VARCHAR" />
+		<result column="PURCHASE_CUST_ID" property="purchaseCustId"
+			jdbcType="VARCHAR" />
+		<result column="PURCHASE_CUST_NAME" property="purchaseCustName"
+			jdbcType="VARCHAR" />
+		<result column="TRANSFER_CUST_ID" property="transferCustId"
+			jdbcType="VARCHAR" />
+		<result column="TRANSFER_CUST_NAME" property="transferCustName"
+			jdbcType="VARCHAR" />
+		<result column="INVENST_TYPE" property="invenstType" jdbcType="DECIMAL" />
+		<result column="AMT" property="amt" jdbcType="DECIMAL" />
+		<result column="TRADE_TAL_AMT" property="tradeTalAmt" jdbcType="DECIMAL" />
+		<result column="RED_ENV_AMT" property="redEnvAmt" jdbcType="DECIMAL" />
+		<result column="INTEREST" property="interest" jdbcType="DECIMAL" />
+		<result column="PRINCIPAL" property="principal" jdbcType="DECIMAL" />
+		<result column="PURCHASE_PORTION" property="purchasePortion"
+			jdbcType="DECIMAL" />
+		<result column="REPAY_TERM" property="repayTerm" jdbcType="DECIMAL" />
+		<result column="PAY_ORDER_NO" property="payOrderNo" jdbcType="VARCHAR" />
+		<result column="TRADE_DATE" property="tradeDate" jdbcType="CHAR" />
+		<result column="ORDER_STATUS" property="orderStatus" jdbcType="CHAR" />
+		<result column="TRANSFER_ID" property="transferId" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="TradeOrderInSerFnd" type="com.zlebank.model.SerialFund">
+		<id column="ID" property="orderId" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="tradeTime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="AMT" property="expend" jdbcType="DECIMAL" />
+		<result column="ORDER_STATUS" property="status" jdbcType="CHAR" />
+	</resultMap>
+
+	<resultMap id="PrdTrdHisMap" type="com.zlebank.model.PrdTrdHis">
+		<id column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_TYPE" property="productType" jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="UNIT_COST" property="unitCost" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap id="CustInvHisMap" type="com.zlebank.model.CustInvHis">
+		<id column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PURCHASE_PORTION" property="purchasePortion"
+			jdbcType="DECIMAL" />
+		<result column="TRADE_TAL_AMT" property="tradeTalAmt" jdbcType="DECIMAL" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="DECIMAL" />
+		<result column="REPAY_MODE" property="repayMode"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, CONTRACT_ID, PRODUCT_ID, PRODUCT_NANE, ASSET_CUST_ID,
+		ASSET_CUST_NAME, PURCHASE_CUST_ID,
+		PURCHASE_CUST_NAME,
+		TRANSFER_CUST_ID, TRANSFER_CUST_NAME, INVENST_TYPE,
+		AMT,TRADE_TAL_AMT,RED_ENV_AMT, INTEREST,
+		PRINCIPAL, PURCHASE_PORTION,
+		REPAY_TERM, PAY_ORDER_NO, TRADE_DATE, ORDER_STATUS,
+		TRANSFER_ID,
+		REMARK, CREATE_TIME, UPDATE_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_TRADE_ORDER
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		T_TRADE_ORDER
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.TradeOrder">
+		insert into T_TRADE_ORDER (ID,
+		CONTRACT_ID, PRODUCT_ID,
+		PRODUCT_NANE, ASSET_CUST_ID, ASSET_CUST_NAME,
+		PURCHASE_CUST_ID, PURCHASE_CUST_NAME, TRANSFER_CUST_ID,
+		TRANSFER_CUST_NAME, INVENST_TYPE, AMT,TRADE_TAL_AMT, RED_ENV_AMT,
+		INTEREST, PRINCIPAL, PURCHASE_PORTION,
+		REPAY_TERM, PAY_ORDER_NO,
+		TRADE_DATE,
+		ORDER_STATUS, TRANSFER_ID, REMARK,
+		CREATE_TIME, UPDATE_TIME)
+		values (#{id,jdbcType=VARCHAR}, #{contractId,jdbcType=VARCHAR},
+		#{productId,jdbcType=VARCHAR},
+		#{productNane,jdbcType=VARCHAR},
+		#{assetCustId,jdbcType=VARCHAR}, #{assetCustName,jdbcType=VARCHAR},
+		#{purchaseCustId,jdbcType=VARCHAR},
+		#{purchaseCustName,jdbcType=VARCHAR},
+		#{transferCustId,jdbcType=VARCHAR},
+		#{transferCustName,jdbcType=VARCHAR}, #{invenstType,jdbcType=DECIMAL},
+		#{amt,jdbcType=DECIMAL},#{tradeTalAmt,jdbcType=DECIMAL},
+		#{redEnvAmt,jdbcType=DECIMAL},
+		#{interest,jdbcType=DECIMAL},
+		#{principal,jdbcType=DECIMAL}, #{purchasePortion,jdbcType=DECIMAL},
+		#{repayTerm,jdbcType=DECIMAL}, #{payOrderNo,jdbcType=VARCHAR},
+		#{tradeDate,jdbcType=CHAR},
+		#{orderStatus,jdbcType=CHAR},
+		#{transferId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.TradeOrder">
+		insert into T_TRADE_ORDER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="contractId != null">
+				CONTRACT_ID,
+			</if>
+			<if test="productId != null">
+				PRODUCT_ID,
+			</if>
+			<if test="productNane != null">
+				PRODUCT_NANE,
+			</if>
+			<if test="assetCustId != null">
+				ASSET_CUST_ID,
+			</if>
+			<if test="assetCustName != null">
+				ASSET_CUST_NAME,
+			</if>
+			<if test="purchaseCustId != null">
+				PURCHASE_CUST_ID,
+			</if>
+			<if test="purchaseCustName != null">
+				PURCHASE_CUST_NAME,
+			</if>
+			<if test="transferCustId != null">
+				TRANSFER_CUST_ID,
+			</if>
+			<if test="transferCustName != null">
+				TRANSFER_CUST_NAME,
+			</if>
+			<if test="invenstType != null">
+				INVENST_TYPE,
+			</if>
+			<if test="amt != null">
+				AMT,
+			</if>
+			<if test="tradeTalAmt != null">
+				TRADE_TAL_AMT,
+			</if>
+			<if test="redEnvAmt != null">
+				RED_ENV_AMT,
+			</if>
+			<if test="interest != null">
+				INTEREST,
+			</if>
+			<if test="principal != null">
+				PRINCIPAL,
+			</if>
+			<if test="purchasePortion != null">
+				PURCHASE_PORTION,
+			</if>
+			<if test="repayTerm != null">
+				REPAY_TERM,
+			</if>
+			<if test="payOrderNo != null">
+				PAY_ORDER_NO,
+			</if>
+			<if test="tradeDate != null">
+				TRADE_DATE,
+			</if>
+			<if test="orderStatus != null">
+				ORDER_STATUS,
+			</if>
+			<if test="transferId != null">
+				TRANSFER_ID,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="contractId != null">
+				#{contractId,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="productNane != null">
+				#{productNane,jdbcType=VARCHAR},
+			</if>
+			<if test="assetCustId != null">
+				#{assetCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="assetCustName != null">
+				#{assetCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="purchaseCustId != null">
+				#{purchaseCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="purchaseCustName != null">
+				#{purchaseCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="transferCustId != null">
+				#{transferCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="transferCustName != null">
+				#{transferCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="invenstType != null">
+				#{invenstType,jdbcType=DECIMAL},
+			</if>
+			<if test="amt != null">
+				#{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="tradeTalAmt != null">
+				#{tradeTalAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="redEnvAmt != null">
+				#{redEnvAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="interest != null">
+				#{interest,jdbcType=DECIMAL},
+			</if>
+			<if test="principal != null">
+				#{principal,jdbcType=DECIMAL},
+			</if>
+			<if test="purchasePortion != null">
+				#{purchasePortion,jdbcType=DECIMAL},
+			</if>
+			<if test="repayTerm != null">
+				#{repayTerm,jdbcType=DECIMAL},
+			</if>
+			<if test="payOrderNo != null">
+				#{payOrderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeDate != null">
+				#{tradeDate,jdbcType=CHAR},
+			</if>
+			<if test="orderStatus != null">
+				#{orderStatus,jdbcType=CHAR},
+			</if>
+			<if test="transferId != null">
+				#{transferId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.TradeOrder">
+		update T_TRADE_ORDER
+		<set>
+			<if test="contractId != null">
+				CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="productNane != null">
+				PRODUCT_NANE = #{productNane,jdbcType=VARCHAR},
+			</if>
+			<if test="assetCustId != null">
+				ASSET_CUST_ID = #{assetCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="assetCustName != null">
+				ASSET_CUST_NAME = #{assetCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="purchaseCustId != null">
+				PURCHASE_CUST_ID = #{purchaseCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="purchaseCustName != null">
+				PURCHASE_CUST_NAME =
+				#{purchaseCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="transferCustId != null">
+				TRANSFER_CUST_ID = #{transferCustId,jdbcType=VARCHAR},
+			</if>
+			<if test="transferCustName != null">
+				TRANSFER_CUST_NAME =
+				#{transferCustName,jdbcType=VARCHAR},
+			</if>
+			<if test="invenstType != null">
+				INVENST_TYPE = #{invenstType,jdbcType=DECIMAL},
+			</if>
+			<if test="amt != null">
+				AMT = #{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="tradeTalAmt != null">
+				TRADE_TAL_AMT = #{tradeTalAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="redEnvAmt != null">
+				RED_ENV_AMT = #{redEnvAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="interest != null">
+				INTEREST = #{interest,jdbcType=DECIMAL},
+			</if>
+			<if test="principal != null">
+				PRINCIPAL = #{principal,jdbcType=DECIMAL},
+			</if>
+			<if test="purchasePortion != null">
+				PURCHASE_PORTION = #{purchasePortion,jdbcType=DECIMAL},
+			</if>
+			<if test="repayTerm != null">
+				REPAY_TERM = #{repayTerm,jdbcType=DECIMAL},
+			</if>
+			<if test="payOrderNo != null">
+				PAY_ORDER_NO = #{payOrderNo,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeDate != null">
+				TRADE_DATE = #{tradeDate,jdbcType=CHAR},
+			</if>
+			<if test="orderStatus != null">
+				ORDER_STATUS = #{orderStatus,jdbcType=CHAR},
+			</if>
+			<if test="transferId != null">
+				TRANSFER_ID = #{transferId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.TradeOrder">
+		update
+		T_TRADE_ORDER
+		set CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
+		PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+		PRODUCT_NANE =
+		#{productNane,jdbcType=VARCHAR},
+		ASSET_CUST_ID =
+		#{assetCustId,jdbcType=VARCHAR},
+		ASSET_CUST_NAME =
+		#{assetCustName,jdbcType=VARCHAR},
+		PURCHASE_CUST_ID =
+		#{purchaseCustId,jdbcType=VARCHAR},
+		PURCHASE_CUST_NAME =
+		#{purchaseCustName,jdbcType=VARCHAR},
+		TRANSFER_CUST_ID =
+		#{transferCustId,jdbcType=VARCHAR},
+		TRANSFER_CUST_NAME =
+		#{transferCustName,jdbcType=VARCHAR},
+		INVENST_TYPE =
+		#{invenstType,jdbcType=DECIMAL},
+		AMT = #{amt,jdbcType=DECIMAL},
+		TRADE_TAL_AMT = #{tradeTalAmt,jdbcType=DECIMAL},
+		RED_ENV_AMT =
+		#{redEnvAmt,jdbcType=DECIMAL},
+		INTEREST = #{interest,jdbcType=DECIMAL},
+		PRINCIPAL = #{principal,jdbcType=DECIMAL},
+		PURCHASE_PORTION =
+		#{purchasePortion,jdbcType=DECIMAL},
+		REPAY_TERM =
+		#{repayTerm,jdbcType=DECIMAL},
+		PAY_ORDER_NO =
+		#{payOrderNo,jdbcType=VARCHAR},
+		TRADE_DATE =
+		#{tradeDate,jdbcType=CHAR},
+		ORDER_STATUS =
+		#{orderStatus,jdbcType=CHAR},
+		TRANSFER_ID =
+		#{transferId,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateOrderStatusById" parameterType="java.lang.String">
+		UPDATE
+		T_TRADE_ORDER
+		SET
+		ORDER_STATUS=#{status,jdbcType=VARCHAR}
+		WHERE
+		ID=#{id,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateOrderStatusByUpdateTime">
+		UPDATE
+		T_TRADE_ORDER
+		SET
+		ORDER_STATUS =
+		#{newStatus,jdbcType=VARCHAR}
+		WHERE
+		ORDER_STATUS =
+		#{orgStatus,jdbcType=VARCHAR} and
+		UPDATE_TIME&lt;=#{time,jdbcType=TIMESTAMP}
+	</update>
+
+	<select id="selectByCustInfo" resultMap="BaseResultMap">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="baseDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="baseDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="baseDynamicQuery">
+		select * from T_TRADE_ORDER
+		<include refid="dynamicPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by ID desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+
+	<select id="selectSerFndByCustInfo" resultMap="TradeOrderInSerFnd">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="serFndDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="serFndDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="serFndDynamicQuery">
+		select CREATE_TIME, REMARK, ID , AMT , ORDER_STATUS from T_TRADE_ORDER
+		<include refid="dynamicPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by CREATE_TIME desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+
+	<sql id="dynamicPageWhere">
+		<where>
+			1=1
+			<if test="trdOrdVo.custId!=null and trdOrdVo.custId!=''">
+			   <![CDATA[ and PURCHASE_CUST_ID = #{trdOrdVo.custId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="trdOrdVo.beginDate!=null and trdOrdVo.endDate!=null">
+			 <![CDATA[  and CREATE_TIME >=#{trdOrdVo.beginDate,jdbcType=TIMESTAMP} and CREATE_TIME <=#{trdOrdVo.endDate,jdbcType=TIMESTAMP}]]>
+			</if>
+			<if test="trdOrdVo.status!=null and trdOrdVo.status!=''">
+			   <![CDATA[ and ORDER_STATUS = #{trdOrdVo.status,jdbcType=VARCHAR}]]>
+			</if>
+		</where>
+	</sql>
+
+	<select id="getTrdOrdCount" resultType="java.lang.Integer">
+		SELECT count(ID) FROM
+		T_TRADE_ORDER
+	</select>
+
+	<select id="getTrdOrdCountByCondition" resultType="java.lang.Integer">
+		SELECT count(*) FROM
+		T_TRADE_ORDER
+		<include refid="dynamicPageWhere" />
+	</select>
+
+	<select id="getTrdOrdCountByDate" parameterType="java.util.Date"
+		resultType="java.lang.Integer">
+		SELECT count(ID) FROM T_TRADE_ORDER where
+		UPDATE_TIME&gt;=#{updateDateStart,jdbcType=TIMESTAMP} and
+		UPDATE_TIME&lt;=#{updateDateEnd,jdbcType=TIMESTAMP}
+	</select>
+
+	<select id="getTrdOrdCountByStatus" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		SELECT sum(AMT) FROM T_TRADE_ORDER where
+		ORDER_STATUS=#{status,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getTrdOrdAndPrdIdx" resultMap="PrdTrdHisMap">
+		SELECT
+		p.PRODUCT_TYPE,
+		p.PRODUCT_ID,
+		t.UPDATE_TIME,
+		p.UNIT_COST
+		FROM
+		T_TRADE_ORDER t
+		INNER JOIN
+		T_PRODUCT_COMMON p
+		ON
+		t.PRODUCT_ID = p.PRODUCT_ID
+		ORDER BY
+		t.UPDATE_TIME
+		DESC limit 0,20
+	</select>
+
+	<select id="getCustInvHis" resultMap="CustInvHisMap">
+		SELECT
+		t.PRODUCT_ID,
+		t.PURCHASE_PORTION,
+		t.TRADE_TAL_AMT,
+		t.UPDATE_TIME,
+		p.REPAY_MODE
+		FROM
+		T_TRADE_ORDER t
+		INNER JOIN
+		T_PRODUCT_COMMON p
+		ON
+		t.PRODUCT_ID =
+		p.PRODUCT_ID
+		WHERE
+		t.ORDER_STATUS=#{status,jdbcType=VARCHAR} and
+		t.PURCHASE_CUST_ID=#{custId,jdbcType=VARCHAR}
+		ORDER BY
+		t.UPDATE_TIME
+		DESC limit 0,10
+	</select>
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_TRADE_ORDER
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="findListPageCount" resultType="int">
+		select count(ID) from T_TRADE_ORDER
+		<include refid="dynamicPageNoWhere" />
+	</select>
+
+	<select id="findListPage" resultMap="BaseResultMap">
+		<choose>
+			<when test=" pageVO.size&lt;0">
+				<include refid="baseQueryPage" />
+			</when>
+			<otherwise>
+				<include refid="baseQueryPage" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="baseQueryPage">
+		select * from T_TRADE_ORDER
+		<include refid="dynamicPageNoWhere" />
+		order by UPDATE_TIME desc
+	</sql>
+	<sql id="dynamicPageNoWhere">
+		<where>
+			1=1
+			<if test="tradeOrder.id != null and tradeOrder.id !=''">
+				and ID = #{tradeOrder.id,jdbcType=VARCHAR}
+			</if>
+			<if test="tradeOrder.productId != null and tradeOrder.productId !=''">
+				and PRODUCT_ID = #{tradeOrder.productId,jdbcType=VARCHAR}
+			</if>
+			<if test="tradeOrder.payOrderNo != null and tradeOrder.payOrderNo !=''">
+				and PAY_ORDER_NO =
+				#{tradeOrder.payOrderNo,jdbcType=VARCHAR}
+			</if>
+			<if test="tradeOrder.invenstType != null and tradeOrder.invenstType !=''">
+				and INVENST_TYPE =
+				#{tradeOrder.invenstType,jdbcType=DECIMAL}
+			</if>
+			<if test="tradeOrder.orderStatus != null and tradeOrder.orderStatus !=''">
+				and ORDER_STATUS =
+				#{tradeOrder.orderStatus,jdbcType=CHAR}
+			</if>
+			<if
+				test="tradeOrder.purchaseCustId != null and tradeOrder.purchaseCustId !=''">
+				and PURCHASE_CUST_ID =
+				#{tradeOrder.purchaseCustId,jdbcType=CHAR}
+			</if>
+			<if
+				test="tradeOrder.minTradeTalAmt != null and tradeOrder.minTradeTalAmt !=''">
+				and TRADE_TAL_AMT &gt;=
+				#{tradeOrder.minTradeTalAmt,jdbcType=DECIMAL}
+			</if>
+			<if
+				test="tradeOrder.maxTradeTalAmt != null and tradeOrder.maxTradeTalAmt !=''">
+				and TRADE_TAL_AMT &lt;
+				#{tradeOrder.maxTradeTalAmt,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</sql>
+
+
+	<select id="selectTrdOrdAndPrd" resultMap="TrdSumInfoMap">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="prdDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="prdDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="prdDynamicQuery">
+		select
+		<include refid="Prd_Column_List" />
+		from T_TRADE_ORDER trd INNER JOIN
+		T_PRODUCT_COMMON prd
+		ON
+		trd.product_Id=prd.product_Id
+		<include refid="prdPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by ID desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+	<resultMap id="TrdSumInfoMap" type="com.zlebank.model.TrdSumInfo">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NANE" property="productNane" jdbcType="VARCHAR" />
+		<result column="TRADE_TAL_AMT" property="tradeTalAmt" jdbcType="DECIMAL" />
+		<result column="PURCHASE_PORTION" property="purchasePortion"
+			jdbcType="DECIMAL" />
+		<result column="ORDER_STATUS" property="orderStatus" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="EXPECT_EARN_RATE" property="expectEarnRate"
+			jdbcType="DECIMAL" />
+		<result column="UNIT_COST" property="unitCost" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<sql id="Prd_Column_List">
+		trd.ID ID, trd.PRODUCT_ID PRODUCT_ID, trd.PRODUCT_NANE
+		PRODUCT_NANE, trd.TRADE_TAL_AMT TRADE_TAL_AMT,trd.PURCHASE_PORTION PURCHASE_PORTION,
+		trd.ORDER_STATUS ORDER_STATUS,trd.CREATE_TIME CREATE_TIME,
+		prd.EXPECT_EARN_RATE EXPECT_EARN_RATE,prd.UNIT_COST UNIT_COST
+	</sql>
+	
+	<sql id="prdPageWhere">
+		<where>
+			1=1
+			<if test="trdOrdVo.custId!=null and trdOrdVo.custId!=''">
+			   <![CDATA[ and trd.PURCHASE_CUST_ID = #{trdOrdVo.custId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="trdOrdVo.beginDate!=null and trdOrdVo.endDate!=null">
+			 <![CDATA[  and trd.CREATE_TIME >=#{trdOrdVo.beginDate,jdbcType=TIMESTAMP} and trd.CREATE_TIME <=#{trdOrdVo.endDate,jdbcType=TIMESTAMP}]]>
+			</if>
+			<if test="trdOrdVo.status!=null and trdOrdVo.status!=''">
+			   <![CDATA[ and trd.ORDER_STATUS = #{trdOrdVo.status,jdbcType=VARCHAR}]]>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectCancelOrder" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_TRADE_ORDER
+		where ORDER_STATUS =
+		#{orgStatus,jdbcType=VARCHAR} and
+		UPDATE_TIME&lt;=#{time,jdbcType=TIMESTAMP}
+	</select>
+	<resultMap id="TradeOrderInSerFndWithPayTyep" type="com.zlebank.model.SerialFund">
+		<id column="ID" property="orderId" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="tradeTime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="TRADE_AMT" property="expend" jdbcType="DECIMAL" />
+		<result column="ORDER_STATUS" property="status" jdbcType="CHAR" />
+	</resultMap>
+	<select id="selectSerFndByCustInfoWithPayType" resultMap="TradeOrderInSerFndWithPayTyep">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="serFndDynamicQueryWithPayType" />
+			</when>
+			<otherwise>
+				<include refid="serFndDynamicQueryWithPayType" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+	<sql id="serFndDynamicQueryWithPayType">
+		select o.CREATE_TIME, o.REMARK, o.ID, o.ORDER_STATUS, p.TRADE_AMT  
+		from T_PAYMENT p join T_TRADE_ORDER o
+		on o.ID=p.TOTAL_ID and p.STATUS='01'
+		<include refid="dynamicPageWhere2" />
+		order by o.CREATE_TIME desc
+	</sql>
+	<sql id="dynamicPageWhere2">
+		<where>
+			p.PAYMENT_TYPE = #{paymentType,jdbcType=VARCHAR}
+			<if test="trdOrdVo.custId!=null and trdOrdVo.custId!=''">
+			   <![CDATA[ and o.PURCHASE_CUST_ID = #{trdOrdVo.custId,jdbcType=VARCHAR}]]>
+			</if>
+		</where>
+	</sql>
+	<select id="getStatus" resultType="java.lang.String"  parameterType="java.lang.String" >
+		select ORDER_STATUS from
+		T_TRADE_ORDER
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+</mapper>

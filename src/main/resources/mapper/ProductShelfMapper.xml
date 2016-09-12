@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.ProductShelfDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.ProductShelf">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="EXH_TYPE" property="exhType" jdbcType="CHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+		<result column="EFFECTIVE_DATE" property="effectiveDate"
+			jdbcType="TIMESTAMP" />
+		<result column="EXPIRY_DATE" property="expiryDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, EXH_TYPE, PRODUCT_ID, STATUS, CREATE_DATE, UPDATE_DATE,
+		EFFECTIVE_DATE, EXPIRY_DATE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from T_PRODUCT_SHELF
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from T_PRODUCT_SHELF
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.ProductShelf">
+		insert into T_PRODUCT_SHELF (ID, EXH_TYPE, PRODUCT_ID,
+		STATUS, CREATE_DATE, UPDATE_DATE,
+		EFFECTIVE_DATE, EXPIRY_DATE)
+		values (#{id,jdbcType=DECIMAL}, #{exhType,jdbcType=CHAR},
+		#{productId,jdbcType=VARCHAR},
+		#{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
+		#{effectiveDate,jdbcType=TIMESTAMP}, #{expiryDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.ProductShelf">
+		insert into T_PRODUCT_SHELF
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="exhType != null">
+				EXH_TYPE,
+			</if>
+			<if test="productId != null">
+				PRODUCT_ID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE,
+			</if>
+			<if test="effectiveDate != null">
+				EFFECTIVE_DATE,
+			</if>
+			<if test="expiryDate != null">
+				EXPIRY_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="exhType != null">
+				#{exhType,jdbcType=CHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="effectiveDate != null">
+				#{effectiveDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expiryDate != null">
+				#{expiryDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.ProductShelf">
+		update T_PRODUCT_SHELF
+		<set>
+			<if test="exhType != null">
+				EXH_TYPE = #{exhType,jdbcType=CHAR},
+			</if>
+			<if test="productId != null">
+				PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=CHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="effectiveDate != null">
+				EFFECTIVE_DATE = #{effectiveDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expiryDate != null">
+				EXPIRY_DATE = #{expiryDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.ProductShelf">
+		update T_PRODUCT_SHELF
+		set EXH_TYPE = #{exhType,jdbcType=CHAR},
+		PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+		STATUS = #{status,jdbcType=CHAR},
+		CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+		UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+		EFFECTIVE_DATE = #{effectiveDate,jdbcType=TIMESTAMP},
+		EXPIRY_DATE = #{expiryDate,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	
+	
+	<resultMap id="ShelfProduct" type="com.zlebank.model.vo.ProductShelfVo">
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+		<result column="EXH_TYPE" property="shelfNum" jdbcType="CHAR" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+	</resultMap>
+	
+	<select id="getAllUpShelfProduct" resultMap="ShelfProduct">
+		SELECT s.PRODUCT_ID,p.PRODUCT_NAME,s.EXH_TYPE,s.STATUS from T_PRODUCT_SHELF s,T_PRODUCT_COMMON p
+		WHERE s.STATUS='1' AND  s.PRODUCT_ID = p.PRODUCT_ID;
+	</select>
+	
+	<select id="getShelfProductByProductId" resultMap="ShelfProduct" parameterType="java.lang.String">
+		SELECT PRODUCT_ID,EXH_TYPE,STATUS from T_PRODUCT_SHELF WHERE PRODUCT_ID = #{productId,jdbcType=VARCHAR};
+	</select>
+
+	<insert id="batchInsertShelf" useGeneratedKeys="true" parameterType="java.util.List">
+	    <selectKey resultType="java.lang.Integer"  order="AFTER" keyProperty="id" >   
+	      SELECT LAST_INSERT_ID() AS ID   
+	    </selectKey>  
+		insert into T_PRODUCT_SHELF (EXH_TYPE, PRODUCT_ID,
+		STATUS, CREATE_DATE, UPDATE_DATE,
+		EFFECTIVE_DATE, EXPIRY_DATE)
+		values 
+		<foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.exhType},#{item.productId},#{item.status},#{item.createDate},#{item.updateDate},#{item.effectiveDate},#{item.expiryDate})  
+    	</foreach>  
+	</insert>
+	
+	<update id="batchUpdateShelf" parameterType="com.zlebank.model.ProductShelf">
+		update T_PRODUCT_SHELF set STATUS = '0' where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and EXH_TYPE = #{exhType,jdbcType=CHAR};
+	</update>
+	
+	
+</mapper>

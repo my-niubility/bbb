@@ -1,0 +1,1088 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.ProductCommonDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.ProductCommon">
+		<id column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+		<result column="ASSET_ID" property="assetId" jdbcType="VARCHAR" />
+		<result column="ASSET_NAME" property="assetName" jdbcType="VARCHAR" />
+		<result column="PRODUCT_TYPE" property="productType" jdbcType="CHAR" />
+		<result column="SELL_TYPE" property="sellType" jdbcType="CHAR" />
+		<result column="SELL_RATE" property="sellRate" jdbcType="DECIMAL" />
+		<result column="TRANSFER_FLAG" property="transferFlag"
+			jdbcType="CHAR" />
+		<result column="SUBSIDY_DAY" property="subsidyDay" jdbcType="CHAR" />
+		<result column="IS_ESTABLISH" property="isEstablish" jdbcType="CHAR" />
+		<result column="ASSET_REPAY_STATUS" property="assetRepayStatus"
+			jdbcType="CHAR" />
+		<result column="REPAY_MODE" property="repayMode" jdbcType="DECIMAL" />
+		<result column="COLLECT_START_DT" property="collectStartDt"
+			jdbcType="CHAR" />
+		<result column="COLLECT_END_DT" property="collectEndDt"
+			jdbcType="CHAR" />
+		<result column="HOLD_PERIOD" property="holdPeriod" jdbcType="CHAR" />
+		<result column="RENT_TYPE" property="rentType" jdbcType="CHAR" />
+		<result column="REPAY_RENT_TYPE" property="repayRentType"
+			jdbcType="CHAR" />
+		<result column="REPAY_RENT_DT" property="repayRentDt" jdbcType="CHAR" />
+		<result column="B_LOCK_PERIOD" property="bLockPeriod" jdbcType="CHAR" />
+		<result column="T_LOCK_PERIOD" property="tLockPeriod" jdbcType="CHAR" />
+		<result column="NONM_BACK_DT" property="nonmBackDt" jdbcType="CHAR" />
+		<result column="CONTRACT_DT" property="contractDt" jdbcType="CHAR" />
+		<result column="BRE_BACK_CHECK" property="breBackCheck"
+			jdbcType="VARCHAR" />
+		<result column="BRE_BACK_DT" property="breBackDt" jdbcType="CHAR" />
+		<result column="TRANSFERS" property="transfers" jdbcType="VARCHAR" />
+		<result column="FINANCE_PORTION" property="financePortion"
+			jdbcType="DECIMAL" />
+		<result column="FINANCE_SCALE" property="financeScale"
+			jdbcType="DECIMAL" />
+		<result column="UNIT_COST" property="unitCost" jdbcType="DECIMAL" />
+		<result column="LOCK_SCALE" property="lockScale" jdbcType="DECIMAL" />
+		<result column="DAY_FINANCE_AMT" property="dayFinanceAmt"
+			jdbcType="DECIMAL" />
+		<result column="CONF_FINANCE_AMT" property="confFinanceAmt"
+			jdbcType="DECIMAL" />
+		<result column="REAL_FINANCE_AMT" property="realFinanceAmt"
+			jdbcType="DECIMAL" />
+		<result column="ESTABLISH_CONDITION" property="establishCondition"
+			jdbcType="CHAR" />
+		<result column="ESTABLISH_RATIO" property="establishRatio"
+			jdbcType="DECIMAL" />
+		<result column="ESTABLISH_MINIMUM" property="establishMinimum"
+			jdbcType="DECIMAL" />
+		<result column="ESTABLISH_DATE" property="establishDate"
+			jdbcType="CHAR" />
+		<result column="EXPECT_EARN_RATE" property="expectEarnRate"
+			jdbcType="DECIMAL" />
+		<result column="ACT_EARN_RATE" property="actEarnRate" jdbcType="DECIMAL" />
+		<result column="REMAIN_TERMS" property="remainTerms" jdbcType="DECIMAL" />
+		<result column="RED_TYPE" property="redType" jdbcType="CHAR" />
+		<result column="SUBSIDY_SUM_AMT" property="subsidySumAmt"
+			jdbcType="DECIMAL" />
+		<result column="SUBSIDY_RATE" property="subsidyRate" jdbcType="DECIMAL" />
+		<result column="INVEST_MAX" property="investMax" jdbcType="DECIMAL" />
+		<result column="FINANCE_ID" property="financeId" jdbcType="VARCHAR" />
+		<result column="FINANCE_NAME" property="financeName" jdbcType="VARCHAR" />
+		<result column="FINANCE_INTRO" property="financeIntro"
+			jdbcType="VARCHAR" />
+		<result column="PRODUCT_STATUS" property="productStatus"
+			jdbcType="CHAR" />
+		<result column="CONTRACT_ID" property="contractId" jdbcType="VARCHAR" />
+		<result column="REMARK1" property="remark1" jdbcType="VARCHAR" />
+		<result column="REMARK2" property="remark2" jdbcType="VARCHAR" />
+		<result column="CHECK_INFO" property="checkInfo" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="COLLECT_START_TIME" property="collectStartTime"
+			jdbcType="TIMESTAMP" />
+		<result column="INVEST_MIN" property="investMin" jdbcType="DECIMAL" />
+		<result column="PRODUCT_LITTLE_TYPE" property="productLittleType"
+			jdbcType="CHAR" />
+		<result column="COLLECT_END_TIME" property="collectEndTime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		PRODUCT_ID, PRODUCT_NAME, ASSET_ID, ASSET_NAME, PRODUCT_TYPE, SELL_TYPE,
+		SELL_RATE,
+		TRANSFER_FLAG, SUBSIDY_DAY, IS_ESTABLISH, ASSET_REPAY_STATUS, REPAY_MODE,
+		COLLECT_START_DT,
+		COLLECT_END_DT, HOLD_PERIOD, RENT_TYPE, REPAY_RENT_TYPE, REPAY_RENT_DT,
+		B_LOCK_PERIOD,
+		T_LOCK_PERIOD, NONM_BACK_DT, CONTRACT_DT, BRE_BACK_CHECK, BRE_BACK_DT, TRANSFERS,
+		FINANCE_PORTION, FINANCE_SCALE, UNIT_COST, LOCK_SCALE,
+		DAY_FINANCE_AMT, CONF_FINANCE_AMT,
+		REAL_FINANCE_AMT, ESTABLISH_CONDITION, ESTABLISH_RATIO, ESTABLISH_MINIMUM,
+		ESTABLISH_DATE,
+		EXPECT_EARN_RATE, ACT_EARN_RATE, REMAIN_TERMS, RED_TYPE, SUBSIDY_SUM_AMT, SUBSIDY_RATE,
+		INVEST_MAX, FINANCE_ID, FINANCE_NAME, FINANCE_INTRO, PRODUCT_STATUS,
+		CONTRACT_ID,
+		REMARK1, REMARK2, CHECK_INFO, CREATE_TIME, COLLECT_START_TIME, INVEST_MIN,
+		PRODUCT_LITTLE_TYPE,
+		COLLECT_END_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_PRODUCT_COMMON
+		where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from T_PRODUCT_COMMON
+		where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.ProductCommon">
+		insert into T_PRODUCT_COMMON (PRODUCT_ID, PRODUCT_NAME, ASSET_ID,
+		ASSET_NAME, PRODUCT_TYPE, SELL_TYPE,
+		SELL_RATE, TRANSFER_FLAG, SUBSIDY_DAY,
+		IS_ESTABLISH, ASSET_REPAY_STATUS, REPAY_MODE,
+		COLLECT_START_DT, COLLECT_END_DT, HOLD_PERIOD,
+		RENT_TYPE, REPAY_RENT_TYPE, REPAY_RENT_DT,
+		B_LOCK_PERIOD, T_LOCK_PERIOD, NONM_BACK_DT,
+		CONTRACT_DT, BRE_BACK_CHECK, BRE_BACK_DT,
+		TRANSFERS, FINANCE_PORTION, FINANCE_SCALE,
+		UNIT_COST, LOCK_SCALE, DAY_FINANCE_AMT,
+		CONF_FINANCE_AMT, REAL_FINANCE_AMT, ESTABLISH_CONDITION,
+		ESTABLISH_RATIO, ESTABLISH_MINIMUM, ESTABLISH_DATE,
+		EXPECT_EARN_RATE, ACT_EARN_RATE, REMAIN_TERMS,
+		RED_TYPE, SUBSIDY_SUM_AMT, SUBSIDY_RATE,
+		INVEST_MAX, FINANCE_ID, FINANCE_NAME,
+		FINANCE_INTRO, PRODUCT_STATUS, CONTRACT_ID,
+		REMARK1, REMARK2, CHECK_INFO,
+		CREATE_TIME, COLLECT_START_TIME, INVEST_MIN,
+		PRODUCT_LITTLE_TYPE, COLLECT_END_TIME)
+		values (#{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR},
+		#{assetId,jdbcType=VARCHAR},
+		#{assetName,jdbcType=VARCHAR}, #{productType,jdbcType=CHAR}, #{sellType,jdbcType=CHAR},
+		#{sellRate,jdbcType=DECIMAL}, #{transferFlag,jdbcType=CHAR},
+		#{subsidyDay,jdbcType=CHAR},
+		#{isEstablish,jdbcType=CHAR}, #{assetRepayStatus,jdbcType=CHAR}, #{repayMode,jdbcType=DECIMAL},
+		#{collectStartDt,jdbcType=CHAR}, #{collectEndDt,jdbcType=CHAR},
+		#{holdPeriod,jdbcType=CHAR},
+		#{rentType,jdbcType=CHAR}, #{repayRentType,jdbcType=CHAR}, #{repayRentDt,jdbcType=CHAR},
+		#{bLockPeriod,jdbcType=CHAR}, #{tLockPeriod,jdbcType=CHAR},
+		#{nonmBackDt,jdbcType=CHAR},
+		#{contractDt,jdbcType=CHAR}, #{breBackCheck,jdbcType=VARCHAR}, #{breBackDt,jdbcType=CHAR},
+		#{transfers,jdbcType=VARCHAR}, #{financePortion,jdbcType=DECIMAL},
+		#{financeScale,jdbcType=DECIMAL},
+		#{unitCost,jdbcType=DECIMAL}, #{lockScale,jdbcType=DECIMAL}, #{dayFinanceAmt,jdbcType=DECIMAL},
+		#{confFinanceAmt,jdbcType=DECIMAL},
+		#{realFinanceAmt,jdbcType=DECIMAL},
+		#{establishCondition,jdbcType=CHAR},
+		#{establishRatio,jdbcType=DECIMAL},
+		#{establishMinimum,jdbcType=DECIMAL}, #{establishDate,jdbcType=CHAR},
+		#{expectEarnRate,jdbcType=DECIMAL}, #{actEarnRate,jdbcType=DECIMAL},
+		#{remainTerms,jdbcType=DECIMAL},
+		#{redType,jdbcType=CHAR}, #{subsidySumAmt,jdbcType=DECIMAL}, #{subsidyRate,jdbcType=DECIMAL},
+		#{investMax,jdbcType=DECIMAL}, #{financeId,jdbcType=VARCHAR},
+		#{financeName,jdbcType=VARCHAR},
+		#{financeIntro,jdbcType=VARCHAR}, #{productStatus,jdbcType=CHAR}, #{contractId,jdbcType=VARCHAR},
+		#{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR},
+		#{checkInfo,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{collectStartTime,jdbcType=TIMESTAMP},
+		#{investMin,jdbcType=DECIMAL},
+		#{productLittleType,jdbcType=CHAR}, #{collectEndTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.ProductCommon">
+		insert into T_PRODUCT_COMMON
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="productId != null">
+				PRODUCT_ID,
+			</if>
+			<if test="productName != null">
+				PRODUCT_NAME,
+			</if>
+			<if test="assetId != null">
+				ASSET_ID,
+			</if>
+			<if test="assetName != null">
+				ASSET_NAME,
+			</if>
+			<if test="productType != null">
+				PRODUCT_TYPE,
+			</if>
+			<if test="sellType != null">
+				SELL_TYPE,
+			</if>
+			<if test="sellRate != null">
+				SELL_RATE,
+			</if>
+			<if test="transferFlag != null">
+				TRANSFER_FLAG,
+			</if>
+			<if test="subsidyDay != null">
+				SUBSIDY_DAY,
+			</if>
+			<if test="isEstablish != null">
+				IS_ESTABLISH,
+			</if>
+			<if test="assetRepayStatus != null">
+				ASSET_REPAY_STATUS,
+			</if>
+			<if test="repayMode != null">
+				REPAY_MODE,
+			</if>
+			<if test="collectStartDt != null">
+				COLLECT_START_DT,
+			</if>
+			<if test="collectEndDt != null">
+				COLLECT_END_DT,
+			</if>
+			<if test="holdPeriod != null">
+				HOLD_PERIOD,
+			</if>
+			<if test="rentType != null">
+				RENT_TYPE,
+			</if>
+			<if test="repayRentType != null">
+				REPAY_RENT_TYPE,
+			</if>
+			<if test="repayRentDt != null">
+				REPAY_RENT_DT,
+			</if>
+			<if test="bLockPeriod != null">
+				B_LOCK_PERIOD,
+			</if>
+			<if test="tLockPeriod != null">
+				T_LOCK_PERIOD,
+			</if>
+			<if test="nonmBackDt != null">
+				NONM_BACK_DT,
+			</if>
+			<if test="contractDt != null">
+				CONTRACT_DT,
+			</if>
+			<if test="breBackCheck != null">
+				BRE_BACK_CHECK,
+			</if>
+			<if test="breBackDt != null">
+				BRE_BACK_DT,
+			</if>
+			<if test="transfers != null">
+				TRANSFERS,
+			</if>
+			<if test="financePortion != null">
+				FINANCE_PORTION,
+			</if>
+			<if test="financeScale != null">
+				FINANCE_SCALE,
+			</if>
+			<if test="unitCost != null">
+				UNIT_COST,
+			</if>
+			<if test="lockScale != null">
+				LOCK_SCALE,
+			</if>
+			<if test="dayFinanceAmt != null">
+				DAY_FINANCE_AMT,
+			</if>
+			<if test="confFinanceAmt != null">
+				CONF_FINANCE_AMT,
+			</if>
+			<if test="realFinanceAmt != null">
+				REAL_FINANCE_AMT,
+			</if>
+			<if test="establishCondition != null">
+				ESTABLISH_CONDITION,
+			</if>
+			<if test="establishRatio != null">
+				ESTABLISH_RATIO,
+			</if>
+			<if test="establishMinimum != null">
+				ESTABLISH_MINIMUM,
+			</if>
+			<if test="establishDate != null">
+				ESTABLISH_DATE,
+			</if>
+			<if test="expectEarnRate != null">
+				EXPECT_EARN_RATE,
+			</if>
+			<if test="actEarnRate != null">
+				ACT_EARN_RATE,
+			</if>
+			<if test="remainTerms != null">
+				REMAIN_TERMS,
+			</if>
+			<if test="redType != null">
+				RED_TYPE,
+			</if>
+			<if test="subsidySumAmt != null">
+				SUBSIDY_SUM_AMT,
+			</if>
+			<if test="subsidyRate != null">
+				SUBSIDY_RATE,
+			</if>
+			<if test="investMax != null">
+				INVEST_MAX,
+			</if>
+			<if test="financeId != null">
+				FINANCE_ID,
+			</if>
+			<if test="financeName != null">
+				FINANCE_NAME,
+			</if>
+			<if test="financeIntro != null">
+				FINANCE_INTRO,
+			</if>
+			<if test="productStatus != null">
+				PRODUCT_STATUS,
+			</if>
+			<if test="contractId != null">
+				CONTRACT_ID,
+			</if>
+			<if test="remark1 != null">
+				REMARK1,
+			</if>
+			<if test="remark2 != null">
+				REMARK2,
+			</if>
+			<if test="checkInfo != null">
+				CHECK_INFO,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="collectStartTime != null">
+				COLLECT_START_TIME,
+			</if>
+			<if test="investMin != null">
+				INVEST_MIN,
+			</if>
+			<if test="productLittleType != null">
+				PRODUCT_LITTLE_TYPE,
+			</if>
+			<if test="collectEndTime != null">
+				COLLECT_END_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="productId != null">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="productName != null">
+				#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="assetId != null">
+				#{assetId,jdbcType=VARCHAR},
+			</if>
+			<if test="assetName != null">
+				#{assetName,jdbcType=VARCHAR},
+			</if>
+			<if test="productType != null">
+				#{productType,jdbcType=CHAR},
+			</if>
+			<if test="sellType != null">
+				#{sellType,jdbcType=CHAR},
+			</if>
+			<if test="sellRate != null">
+				#{sellRate,jdbcType=DECIMAL},
+			</if>
+			<if test="transferFlag != null">
+				#{transferFlag,jdbcType=CHAR},
+			</if>
+			<if test="subsidyDay != null">
+				#{subsidyDay,jdbcType=CHAR},
+			</if>
+			<if test="isEstablish != null">
+				#{isEstablish,jdbcType=CHAR},
+			</if>
+			<if test="assetRepayStatus != null">
+				#{assetRepayStatus,jdbcType=CHAR},
+			</if>
+			<if test="repayMode != null">
+				#{repayMode,jdbcType=DECIMAL},
+			</if>
+			<if test="collectStartDt != null">
+				#{collectStartDt,jdbcType=CHAR},
+			</if>
+			<if test="collectEndDt != null">
+				#{collectEndDt,jdbcType=CHAR},
+			</if>
+			<if test="holdPeriod != null">
+				#{holdPeriod,jdbcType=CHAR},
+			</if>
+			<if test="rentType != null">
+				#{rentType,jdbcType=CHAR},
+			</if>
+			<if test="repayRentType != null">
+				#{repayRentType,jdbcType=CHAR},
+			</if>
+			<if test="repayRentDt != null">
+				#{repayRentDt,jdbcType=CHAR},
+			</if>
+			<if test="bLockPeriod != null">
+				#{bLockPeriod,jdbcType=CHAR},
+			</if>
+			<if test="tLockPeriod != null">
+				#{tLockPeriod,jdbcType=CHAR},
+			</if>
+			<if test="nonmBackDt != null">
+				#{nonmBackDt,jdbcType=CHAR},
+			</if>
+			<if test="contractDt != null">
+				#{contractDt,jdbcType=CHAR},
+			</if>
+			<if test="breBackCheck != null">
+				#{breBackCheck,jdbcType=VARCHAR},
+			</if>
+			<if test="breBackDt != null">
+				#{breBackDt,jdbcType=CHAR},
+			</if>
+			<if test="transfers != null">
+				#{transfers,jdbcType=VARCHAR},
+			</if>
+			<if test="financePortion != null">
+				#{financePortion,jdbcType=DECIMAL},
+			</if>
+			<if test="financeScale != null">
+				#{financeScale,jdbcType=DECIMAL},
+			</if>
+			<if test="unitCost != null">
+				#{unitCost,jdbcType=DECIMAL},
+			</if>
+			<if test="lockScale != null">
+				#{lockScale,jdbcType=DECIMAL},
+			</if>
+			<if test="dayFinanceAmt != null">
+				#{dayFinanceAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="confFinanceAmt != null">
+				#{confFinanceAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="realFinanceAmt != null">
+				#{realFinanceAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="establishCondition != null">
+				#{establishCondition,jdbcType=CHAR},
+			</if>
+			<if test="establishRatio != null">
+				#{establishRatio,jdbcType=DECIMAL},
+			</if>
+			<if test="establishMinimum != null">
+				#{establishMinimum,jdbcType=DECIMAL},
+			</if>
+			<if test="establishDate != null">
+				#{establishDate,jdbcType=CHAR},
+			</if>
+			<if test="expectEarnRate != null">
+				#{expectEarnRate,jdbcType=DECIMAL},
+			</if>
+			<if test="actEarnRate != null">
+				#{actEarnRate,jdbcType=DECIMAL},
+			</if>
+			<if test="remainTerms != null">
+				#{remainTerms,jdbcType=DECIMAL},
+			</if>
+			<if test="redType != null">
+				#{redType,jdbcType=CHAR},
+			</if>
+			<if test="subsidySumAmt != null">
+				#{subsidySumAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="subsidyRate != null">
+				#{subsidyRate,jdbcType=DECIMAL},
+			</if>
+			<if test="investMax != null">
+				#{investMax,jdbcType=DECIMAL},
+			</if>
+			<if test="financeId != null">
+				#{financeId,jdbcType=VARCHAR},
+			</if>
+			<if test="financeName != null">
+				#{financeName,jdbcType=VARCHAR},
+			</if>
+			<if test="financeIntro != null">
+				#{financeIntro,jdbcType=VARCHAR},
+			</if>
+			<if test="productStatus != null">
+				#{productStatus,jdbcType=CHAR},
+			</if>
+			<if test="contractId != null">
+				#{contractId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark1 != null">
+				#{remark1,jdbcType=VARCHAR},
+			</if>
+			<if test="remark2 != null">
+				#{remark2,jdbcType=VARCHAR},
+			</if>
+			<if test="checkInfo != null">
+				#{checkInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="collectStartTime != null">
+				#{collectStartTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="investMin != null">
+				#{investMin,jdbcType=DECIMAL},
+			</if>
+			<if test="productLittleType != null">
+				#{productLittleType,jdbcType=CHAR},
+			</if>
+			<if test="collectEndTime != null">
+				#{collectEndTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.ProductCommon">
+		update T_PRODUCT_COMMON
+		<set>
+			<if test="productName != null">
+				PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="assetId != null">
+				ASSET_ID = #{assetId,jdbcType=VARCHAR},
+			</if>
+			<if test="assetName != null">
+				ASSET_NAME = #{assetName,jdbcType=VARCHAR},
+			</if>
+			<if test="productType != null">
+				PRODUCT_TYPE = #{productType,jdbcType=CHAR},
+			</if>
+			<if test="sellType != null">
+				SELL_TYPE = #{sellType,jdbcType=CHAR},
+			</if>
+			<if test="sellRate != null">
+				SELL_RATE = #{sellRate,jdbcType=DECIMAL},
+			</if>
+			<if test="transferFlag != null">
+				TRANSFER_FLAG = #{transferFlag,jdbcType=CHAR},
+			</if>
+			<if test="subsidyDay != null">
+				SUBSIDY_DAY = #{subsidyDay,jdbcType=CHAR},
+			</if>
+			<if test="isEstablish != null">
+				IS_ESTABLISH = #{isEstablish,jdbcType=CHAR},
+			</if>
+			<if test="assetRepayStatus != null">
+				ASSET_REPAY_STATUS = #{assetRepayStatus,jdbcType=CHAR},
+			</if>
+			<if test="repayMode != null">
+				REPAY_MODE = #{repayMode,jdbcType=DECIMAL},
+			</if>
+			<if test="collectStartDt != null">
+				COLLECT_START_DT = #{collectStartDt,jdbcType=CHAR},
+			</if>
+			<if test="collectEndDt != null">
+				COLLECT_END_DT = #{collectEndDt,jdbcType=CHAR},
+			</if>
+			<if test="holdPeriod != null">
+				HOLD_PERIOD = #{holdPeriod,jdbcType=CHAR},
+			</if>
+			<if test="rentType != null">
+				RENT_TYPE = #{rentType,jdbcType=CHAR},
+			</if>
+			<if test="repayRentType != null">
+				REPAY_RENT_TYPE = #{repayRentType,jdbcType=CHAR},
+			</if>
+			<if test="repayRentDt != null">
+				REPAY_RENT_DT = #{repayRentDt,jdbcType=CHAR},
+			</if>
+			<if test="bLockPeriod != null">
+				B_LOCK_PERIOD = #{bLockPeriod,jdbcType=CHAR},
+			</if>
+			<if test="tLockPeriod != null">
+				T_LOCK_PERIOD = #{tLockPeriod,jdbcType=CHAR},
+			</if>
+			<if test="nonmBackDt != null">
+				NONM_BACK_DT = #{nonmBackDt,jdbcType=CHAR},
+			</if>
+			<if test="contractDt != null">
+				CONTRACT_DT = #{contractDt,jdbcType=CHAR},
+			</if>
+			<if test="breBackCheck != null">
+				BRE_BACK_CHECK = #{breBackCheck,jdbcType=VARCHAR},
+			</if>
+			<if test="breBackDt != null">
+				BRE_BACK_DT = #{breBackDt,jdbcType=CHAR},
+			</if>
+			<if test="transfers != null">
+				TRANSFERS = #{transfers,jdbcType=VARCHAR},
+			</if>
+			<if test="financePortion != null">
+				FINANCE_PORTION = #{financePortion,jdbcType=DECIMAL},
+			</if>
+			<if test="financeScale != null">
+				FINANCE_SCALE = #{financeScale,jdbcType=DECIMAL},
+			</if>
+			<if test="unitCost != null">
+				UNIT_COST = #{unitCost,jdbcType=DECIMAL},
+			</if>
+			<if test="lockScale != null">
+				LOCK_SCALE = #{lockScale,jdbcType=DECIMAL},
+			</if>
+			<if test="dayFinanceAmt != null">
+				DAY_FINANCE_AMT = #{dayFinanceAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="confFinanceAmt != null">
+				CONF_FINANCE_AMT = #{confFinanceAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="realFinanceAmt != null">
+				REAL_FINANCE_AMT = #{realFinanceAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="establishCondition != null">
+				ESTABLISH_CONDITION = #{establishCondition,jdbcType=CHAR},
+			</if>
+			<if test="establishRatio != null">
+				ESTABLISH_RATIO = #{establishRatio,jdbcType=DECIMAL},
+			</if>
+			<if test="establishMinimum != null">
+				ESTABLISH_MINIMUM = #{establishMinimum,jdbcType=DECIMAL},
+			</if>
+			<if test="establishDate != null">
+				ESTABLISH_DATE = #{establishDate,jdbcType=CHAR},
+			</if>
+			<if test="expectEarnRate != null">
+				EXPECT_EARN_RATE = #{expectEarnRate,jdbcType=DECIMAL},
+			</if>
+			<if test="actEarnRate != null">
+				ACT_EARN_RATE = #{actEarnRate,jdbcType=DECIMAL},
+			</if>
+			<if test="remainTerms != null">
+				REMAIN_TERMS = #{remainTerms,jdbcType=DECIMAL},
+			</if>
+			<if test="redType != null">
+				RED_TYPE = #{redType,jdbcType=CHAR},
+			</if>
+			<if test="subsidySumAmt != null">
+				SUBSIDY_SUM_AMT = #{subsidySumAmt,jdbcType=DECIMAL},
+			</if>
+			<if test="subsidyRate != null">
+				SUBSIDY_RATE = #{subsidyRate,jdbcType=DECIMAL},
+			</if>
+			<if test="investMax != null">
+				INVEST_MAX = #{investMax,jdbcType=DECIMAL},
+			</if>
+			<if test="financeId != null">
+				FINANCE_ID = #{financeId,jdbcType=VARCHAR},
+			</if>
+			<if test="financeName != null">
+				FINANCE_NAME = #{financeName,jdbcType=VARCHAR},
+			</if>
+			<if test="financeIntro != null">
+				FINANCE_INTRO = #{financeIntro,jdbcType=VARCHAR},
+			</if>
+			<if test="productStatus != null">
+				PRODUCT_STATUS = #{productStatus,jdbcType=CHAR},
+			</if>
+			<if test="contractId != null">
+				CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark1 != null">
+				REMARK1 = #{remark1,jdbcType=VARCHAR},
+			</if>
+			<if test="remark2 != null">
+				REMARK2 = #{remark2,jdbcType=VARCHAR},
+			</if>
+			<if test="checkInfo != null">
+				CHECK_INFO = #{checkInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="collectStartTime != null">
+				COLLECT_START_TIME = #{collectStartTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="investMin != null">
+				INVEST_MIN = #{investMin,jdbcType=DECIMAL},
+			</if>
+			<if test="productLittleType != null">
+				PRODUCT_LITTLE_TYPE = #{productLittleType,jdbcType=CHAR},
+			</if>
+			<if test="collectEndTime != null">
+				COLLECT_END_TIME = #{collectEndTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.ProductCommon">
+		update T_PRODUCT_COMMON
+		set PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+		ASSET_ID = #{assetId,jdbcType=VARCHAR},
+		ASSET_NAME = #{assetName,jdbcType=VARCHAR},
+		PRODUCT_TYPE = #{productType,jdbcType=CHAR},
+		SELL_TYPE = #{sellType,jdbcType=CHAR},
+		SELL_RATE = #{sellRate,jdbcType=DECIMAL},
+		TRANSFER_FLAG = #{transferFlag,jdbcType=CHAR},
+		SUBSIDY_DAY = #{subsidyDay,jdbcType=CHAR},
+		IS_ESTABLISH = #{isEstablish,jdbcType=CHAR},
+		ASSET_REPAY_STATUS = #{assetRepayStatus,jdbcType=CHAR},
+		REPAY_MODE = #{repayMode,jdbcType=DECIMAL},
+		COLLECT_START_DT = #{collectStartDt,jdbcType=CHAR},
+		COLLECT_END_DT = #{collectEndDt,jdbcType=CHAR},
+		HOLD_PERIOD = #{holdPeriod,jdbcType=CHAR},
+		RENT_TYPE = #{rentType,jdbcType=CHAR},
+		REPAY_RENT_TYPE = #{repayRentType,jdbcType=CHAR},
+		REPAY_RENT_DT = #{repayRentDt,jdbcType=CHAR},
+		B_LOCK_PERIOD = #{bLockPeriod,jdbcType=CHAR},
+		T_LOCK_PERIOD = #{tLockPeriod,jdbcType=CHAR},
+		NONM_BACK_DT = #{nonmBackDt,jdbcType=CHAR},
+		CONTRACT_DT = #{contractDt,jdbcType=CHAR},
+		BRE_BACK_CHECK = #{breBackCheck,jdbcType=VARCHAR},
+		BRE_BACK_DT = #{breBackDt,jdbcType=CHAR},
+		TRANSFERS = #{transfers,jdbcType=VARCHAR},
+		FINANCE_PORTION = #{financePortion,jdbcType=DECIMAL},
+		FINANCE_SCALE = #{financeScale,jdbcType=DECIMAL},
+		UNIT_COST = #{unitCost,jdbcType=DECIMAL},
+		LOCK_SCALE = #{lockScale,jdbcType=DECIMAL},
+		DAY_FINANCE_AMT = #{dayFinanceAmt,jdbcType=DECIMAL},
+		CONF_FINANCE_AMT = #{confFinanceAmt,jdbcType=DECIMAL},
+		REAL_FINANCE_AMT = #{realFinanceAmt,jdbcType=DECIMAL},
+		ESTABLISH_CONDITION = #{establishCondition,jdbcType=CHAR},
+		ESTABLISH_RATIO = #{establishRatio,jdbcType=DECIMAL},
+		ESTABLISH_MINIMUM = #{establishMinimum,jdbcType=DECIMAL},
+		ESTABLISH_DATE = #{establishDate,jdbcType=CHAR},
+		EXPECT_EARN_RATE = #{expectEarnRate,jdbcType=DECIMAL},
+		ACT_EARN_RATE = #{actEarnRate,jdbcType=DECIMAL},
+		REMAIN_TERMS = #{remainTerms,jdbcType=DECIMAL},
+		RED_TYPE = #{redType,jdbcType=CHAR},
+		SUBSIDY_SUM_AMT = #{subsidySumAmt,jdbcType=DECIMAL},
+		SUBSIDY_RATE = #{subsidyRate,jdbcType=DECIMAL},
+		INVEST_MAX = #{investMax,jdbcType=DECIMAL},
+		FINANCE_ID = #{financeId,jdbcType=VARCHAR},
+		FINANCE_NAME = #{financeName,jdbcType=VARCHAR},
+		FINANCE_INTRO = #{financeIntro,jdbcType=VARCHAR},
+		PRODUCT_STATUS = #{productStatus,jdbcType=CHAR},
+		CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
+		REMARK1 = #{remark1,jdbcType=VARCHAR},
+		REMARK2 = #{remark2,jdbcType=VARCHAR},
+		CHECK_INFO = #{checkInfo,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		COLLECT_START_TIME = #{collectStartTime,jdbcType=TIMESTAMP},
+		INVEST_MIN = #{investMin,jdbcType=DECIMAL},
+		PRODUCT_LITTLE_TYPE = #{productLittleType,jdbcType=CHAR},
+		COLLECT_END_TIME = #{collectEndTime,jdbcType=TIMESTAMP}
+		where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateAuditStatus" parameterType="com.zlebank.model.ProductCommon">
+
+		update T_PRODUCT_COMMON
+		<set>
+			<if test="productStatus != null">
+				PRODUCT_STATUS = #{productStatus,jdbcType=CHAR},
+			</if>
+			<if test="remark1 != null">
+				REMARK1 = #{remark1,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+
+	</update>
+	<!-- personal -->
+	<sql id="Join_Column_List">
+		comm.PRODUCT_ID PRODUCT_ID ,
+		comm.PRODUCT_NAME PRODUCT_NAME
+		,
+		comm.ASSET_ID ASSET_ID ,
+		comm.ASSET_NAME ASSET_NAME ,
+		comm.PRODUCT_TYPE PRODUCT_TYPE ,
+		comm.SELL_TYPE SELL_TYPE ,
+		comm.SELL_RATE SELL_RATE ,
+		comm.IS_ESTABLISH IS_ESTABLISH ,
+		comm.ASSET_REPAY_STATUS ASSET_REPAY_STATUS ,
+		comm.REPAY_MODE REPAY_MODE
+		,
+		comm.COLLECT_START_DT COLLECT_START_DT ,
+		comm.COLLECT_START_TIME
+		COLLECT_START_TIME ,
+		comm.COLLECT_END_DT
+		COLLECT_END_DT ,
+		comm.HOLD_PERIOD HOLD_PERIOD ,
+		comm.RENT_TYPE RENT_TYPE
+		,
+		comm.REPAY_RENT_TYPE REPAY_RENT_TYPE ,
+		comm.REPAY_RENT_DT
+		REPAY_RENT_DT
+		,
+		comm.B_LOCK_PERIOD B_LOCK_PERIOD ,
+		comm.T_LOCK_PERIOD
+		T_LOCK_PERIOD ,
+		comm.NONM_BACK_DT
+		NONM_BACK_DT ,
+		comm.CONTRACT_DT
+		CONTRACT_DT ,
+		comm.BRE_BACK_CHECK
+		BRE_BACK_CHECK ,
+		comm.BRE_BACK_DT
+		BRE_BACK_DT ,
+		comm.TRANSFERS TRANSFERS
+		,
+		comm.FINANCE_PORTION
+		FINANCE_PORTION ,
+		comm.FINANCE_SCALE
+		FINANCE_SCALE ,
+		comm.UNIT_COST
+		UNIT_COST ,
+		comm.LOCK_SCALE LOCK_SCALE ,
+		comm.DAY_FINANCE_AMT
+		DAY_FINANCE_AMT ,
+		comm.CONF_FINANCE_AMT
+		CONF_FINANCE_AMT ,
+		comm.REAL_FINANCE_AMT
+		REAL_FINANCE_AMT ,
+		comm.ESTABLISH_CONDITION
+		ESTABLISH_CONDITION ,
+		comm.ESTABLISH_RATIO
+		ESTABLISH_RATIO ,
+		comm.ESTABLISH_MINIMUM
+		ESTABLISH_MINIMUM ,
+		comm.ESTABLISH_DATE
+		ESTABLISH_DATE ,
+		comm.EXPECT_EARN_RATE
+		EXPECT_EARN_RATE ,
+		comm.SUBSIDY_SUM_AMT
+		SUBSIDY_SUM_AMT ,
+		comm.SUBSIDY_RATE SUBSIDY_RATE ,
+		comm.INVEST_MAX
+		INVEST_MAX ,
+		comm.INVEST_MIN
+		INVEST_MIN ,
+		comm.FINANCE_ID FINANCE_ID ,
+		comm.FINANCE_NAME FINANCE_NAME
+		,
+		comm.FINANCE_INTRO FINANCE_INTRO ,
+		comm.PRODUCT_STATUS PRODUCT_STATUS
+		,
+		comm.CONTRACT_ID CONTRACT_ID ,
+		comm.REMARK1 REMARK1 ,
+		comm.REMARK2
+		REMARK2 ,
+		comm.CHECK_INFO CHECK_INFO
+		,
+		comm.CREATE_TIME CREATE_TIME,
+		comm.TRANSFER_FLAG TRANSFER_FLAG,
+		comm.PRODUCT_LITTLE_TYPE PRODUCT_LITTLE_TYPE
+
+	</sql>
+	<select id="selectByMutiCond" resultMap="BaseResultMap">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="prdIdxDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="prdIdxDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="prdIdxDynamicQuery">
+		select
+		<include refid="Base_Column_List" />
+		from T_PRODUCT_COMMON
+		<include refid="dynamicPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by CREATE_TIME desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+
+	<sql id="dynamicPageWhere">
+		<where>
+			1=1
+			<if test="proIdxVo.productType!=null and proIdxVo.productType!=''">
+			   <![CDATA[ and PRODUCT_TYPE = #{proIdxVo.productType,jdbcType=VARCHAR}]]>
+			</if>
+			<if
+				test="proIdxVo.unitCostMin!=null and proIdxVo.unitCostMin!='' and proIdxVo.unitCostMax!=null and proIdxVo.unitCostMax!=''">
+			 <![CDATA[  and UNIT_COST >#{proIdxVo.unitCostMin,jdbcType=DECIMAL} and UNIT_COST <#{proIdxVo.unitCostMax,jdbcType=DECIMAL}]]>
+			</if>
+			<if
+				test="proIdxVo.unitCostMin!=null and proIdxVo.unitCostMin!='' and (proIdxVo.unitCostMax==null or proIdxVo.unitCostMax=='')">
+			 <![CDATA[  and UNIT_COST >#{proIdxVo.unitCostMin,jdbcType=DECIMAL} ]]>
+			</if>
+			<if
+				test="(proIdxVo.unitCostMin==null or proIdxVo.unitCostMin=='' )and proIdxVo.unitCostMax!=null and proIdxVo.unitCostMax!=''">
+			 <![CDATA[  and UNIT_COST <#{proIdxVo.unitCostMax,jdbcType=DECIMAL}]]>
+			</if>
+			<if
+				test="proIdxVo.expectEarnRateMin!=null and proIdxVo.expectEarnRateMin!='' and proIdxVo.expectEarnRateMax!=null and proIdxVo.expectEarnRateMax!=''">
+			 <![CDATA[  and EXPECT_EARN_RATE >#{proIdxVo.expectEarnRateMin,jdbcType=DECIMAL} and EXPECT_EARN_RATE <#{proIdxVo.expectEarnRateMax,jdbcType=DECIMAL}]]>
+			</if>
+			<if
+				test="proIdxVo.expectEarnRateMin!=null and proIdxVo.expectEarnRateMin!='' and (proIdxVo.expectEarnRateMax==null or proIdxVo.expectEarnRateMax=='')">
+			 <![CDATA[  and EXPECT_EARN_RATE >#{proIdxVo.expectEarnRateMin,jdbcType=DECIMAL} ]]>
+			</if>
+			<if
+				test="(proIdxVo.expectEarnRateMin==null or proIdxVo.expectEarnRateMin=='' )and proIdxVo.expectEarnRateMax!=null and proIdxVo.expectEarnRateMax!=''">
+			 <![CDATA[  and EXPECT_EARN_RATE <#{proIdxVo.expectEarnRateMax,jdbcType=DECIMAL}]]>
+			</if>
+			<if
+				test="proIdxVo.lockPeriodMin!=null and proIdxVo.lockPeriodMin!='' and proIdxVo.lockPeriodMax!=null and proIdxVo.lockPeriodMax!=''">
+			 <![CDATA[  and B_LOCK_PERIOD >#{proIdxVo.lockPeriodMin,jdbcType=CHAR} and B_LOCK_PERIOD <#{proIdxVo.lockPeriodMax,jdbcType=CHAR}]]>
+			</if>
+			<if
+				test="proIdxVo.lockPeriodMin!=null and proIdxVo.lockPeriodMin!='' and (proIdxVo.lockPeriodMax==null or proIdxVo.lockPeriodMax=='')">
+			 <![CDATA[  and B_LOCK_PERIOD >#{proIdxVo.lockPeriodMin,jdbcType=CHAR} ]]>
+			</if>
+			<if
+				test="(proIdxVo.lockPeriodMin==null or proIdxVo.lockPeriodMin=='' )and proIdxVo.lockPeriodMax!=null and proIdxVo.lockPeriodMax!=''">
+			 <![CDATA[  and B_LOCK_PERIOD <#{proIdxVo.lockPeriodMax,jdbcType=CHAR}]]>
+			</if>
+			<if
+				test="proIdxVo.productLittleType!=null and proIdxVo.productLittleType!=''">
+			   <![CDATA[ and PRODUCT_LITTLE_TYPE = #{proIdxVo.productLittleType,jdbcType=VARCHAR}]]>
+			</if>
+			<if
+				test="proIdxVo.productLittleType!=null and proIdxVo.productLittleType!=''">
+			   <![CDATA[ and PRODUCT_LITTLE_TYPE = #{proIdxVo.productLittleType,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="proIdxVo.productStatus != null and proIdxVo.productStatus != ''">
+				and PRODUCT_STATUS in
+				<foreach collection="proIdxVo.productStatus" item="productStatus"
+					open="(" separator="," close=")">
+					#{productStatus}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectByMutiCondCount" resultType="java.lang.Integer">
+		select
+		count(*)
+		from T_PRODUCT_COMMON
+		<include refid="dynamicPageWhere" />
+	</select>
+
+	<select id="selectByExhType" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Join_Column_List" />
+		from T_PRODUCT_SHELF shelf join T_PRODUCT_COMMON comm on
+		shelf.product_id=comm.product_id
+		where shelf.EXH_TYPE =
+		#{exhType,jdbcType=VARCHAR} and
+		shelf.STATUS=1
+	</select>
+
+
+
+
+
+	<!-- 分页查询总数 -->
+	<select id="findListPageCount" resultType="int">
+		select count(PRODUCT_ID) from T_PRODUCT_COMMON
+		<include refid="dynamicPageWhereM" />
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="findListPage" resultMap="BaseResultMap">
+		<choose>
+			<when test=" pageVO.size&lt;0">
+				<include refid="baseDynamicQueryM" />
+			</when>
+			<otherwise>
+				<include refid="baseDynamicQueryM" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="baseDynamicQueryM">
+		select * from T_PRODUCT_COMMON
+		<include refid="dynamicPageWhereM" />
+		order by CREATE_TIME desc
+	</sql>
+	<sql id="dynamicPageWhereM">
+		<where>
+			1=1
+			<if
+				test="productCommonVo.productId != null and productCommonVo.productId != ''">
+				and PRODUCT_ID = #{productCommonVo.productId,jdbcType=VARCHAR}
+			</if>
+			<if
+				test="productCommonVo.productType != null and productCommonVo.productType != ''">
+				and PRODUCT_TYPE =
+				#{productCommonVo.productType,jdbcType=VARCHAR}
+			</if>
+			<if
+				test="productCommonVo.sellType != null and productCommonVo.sellType != ''">
+				and SELL_TYPE = #{productCommonVo.sellType,jdbcType=VARCHAR}
+			</if>
+			<if
+				test="productCommonVo.collectStartDt != null and productCommonVo.collectStartDt != '' ">
+       			<![CDATA[ and COLLECT_START_DT >= #{productCommonVo.collectStartDt,jdbcType=CHAR}]]>
+			</if>
+			<if
+				test="productCommonVo.collectEndDt != null and productCommonVo.collectEndDt != '' ">
+        		<![CDATA[ and COLLECT_END_DT <= #{productCommonVo.collectEndDt,jdbcType=CHAR}]]>
+			</if>
+			<if
+				test="productCommonVo.repayMode != null and productCommonVo.repayMode != ''">
+				and REPAY_MODE = #{productCommonVo.repayMode,jdbcType=DECIMAL}
+			</if>
+			<if
+				test="productCommonVo.productStatus != null and productCommonVo.productStatus != ''">
+				and PRODUCT_STATUS = #{productCommonVo.productStatus,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+
+	<select id="selectByRefundCond" resultMap="BaseResultMap">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="refundDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="refundDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+	<sql id="refundDynamicQuery">
+		select
+		<include refid="Base_Column_List" />
+		from T_PRODUCT_COMMON
+		<include refid="refundPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by CREATE_TIME desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+	<sql id="refundPageWhere">
+		<where>
+			1=1
+			<if test="prdRefundVo.productId!=null and prdRefundVo.productId!=''">
+			   <![CDATA[ and PRODUCT_ID = #{prdRefundVo.productId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="prdRefundVo.productName!=null and prdRefundVo.productName!=''">
+			   <![CDATA[ and PRODUCT_NAME = #{prdRefundVo.productName,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="prdRefundVo.financeId!=null and prdRefundVo.financeId!=''">
+			   <![CDATA[ and FINANCE_ID = #{prdRefundVo.financeId,jdbcType=VARCHAR}]]>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectByRefundCondCount" resultType="java.lang.Integer">
+		select
+		count(*)
+		from T_PRODUCT_COMMON
+		<include refid="refundPageWhere" />
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_PRODUCT_COMMON
+		where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+		for update
+	</select>
+
+	<update id="updateByPrdIdsAndPorts" parameterType="com.zlebank.model.vo.PrdBatchUpdVo">
+		update T_PRODUCT_COMMON
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="LOCK_SCALE=case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					when PRODUCT_ID=#{i.prdId} then LOCK_SCALE-#{i.portion}
+				</foreach>
+			</trim>
+			<trim prefix="FINANCE_SCALE=case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					when PRODUCT_ID=#{i.prdId} then FINANCE_SCALE+#{i.portion}
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+			PRODUCT_ID=#{i.prdId}
+		</foreach>
+	</update>
+
+</mapper>

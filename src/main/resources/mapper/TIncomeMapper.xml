@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.TIncomeDao">
+	<resultMap id="BaseResultMap" type="com.zlebank.model.TIncome">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+		<result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+		<result column="POSITION_ID" property="positionId" jdbcType="VARCHAR" />
+		<result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+		<result column="PROJECT_NAME" property="projectName" jdbcType="VARCHAR" />
+		<result column="EARNING" property="earning" jdbcType="DECIMAL" />
+		<result column="CAPITAL" property="capital" jdbcType="DECIMAL" />
+		<result column="AMT" property="amt" jdbcType="DECIMAL" />
+		<result column="ACCOUNT_DATE" property="accountDate" jdbcType="CHAR" />
+		<result column="REPAY_MODE" property="repayMode" jdbcType="CHAR" />
+		<result column="INCOME_TYPE" property="incomeType" jdbcType="CHAR" />
+		<result column="PRO_INCOME_TERM" property="proIncomeTerm"
+			jdbcType="DECIMAL" />
+		<result column="IS_FINISH" property="isFinish" jdbcType="CHAR" />
+		<result column="ENABLED" property="enabled" jdbcType="CHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="EXPECT_ANNU_RATE" property="expectAnnuRate"
+			jdbcType="DECIMAL" />
+		<result column="ANNU_RATE" property="annuRate" jdbcType="DECIMAL" />
+		<result column="EXPECT_EARNING" property="expectEarning"
+			jdbcType="DECIMAL" />
+		<result column="PRODUCT_TYPE" property="productType" jdbcType="CHAR" />
+		<result column="RED_ENV_AMT" property="redEnvAmt" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, CUST_ID, PROJECT_ID, POSITION_ID, CUST_NAME,
+		PROJECT_NAME, EARNING,
+		CAPITAL,
+		AMT, ACCOUNT_DATE, REPAY_MODE,
+		INCOME_TYPE, PRO_INCOME_TERM, IS_FINISH,
+		ENABLED,
+		REMARK, CREATE_DATE,
+		EXPECT_ANNU_RATE, ANNU_RATE, EXPECT_EARNING,
+		PRODUCT_TYPE, RED_ENV_AMT
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_INCOME
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		T_INCOME
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zlebank.model.TIncome">
+		insert into T_INCOME (ID,
+		CUST_ID, PROJECT_ID,
+		POSITION_ID, CUST_NAME, PROJECT_NAME,
+		EARNING,
+		CAPITAL, AMT,
+		ACCOUNT_DATE, REPAY_MODE, INCOME_TYPE,
+		PRO_INCOME_TERM,
+		IS_FINISH, ENABLED,
+		REMARK, CREATE_DATE, EXPECT_ANNU_RATE,
+		ANNU_RATE,
+		EXPECT_EARNING, PRODUCT_TYPE,
+		RED_ENV_AMT)
+		values
+		(#{id,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR},
+		#{projectId,jdbcType=VARCHAR},
+		#{positionId,jdbcType=VARCHAR},
+		#{custName,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR},
+		#{earning,jdbcType=DECIMAL}, #{capital,jdbcType=DECIMAL},
+		#{amt,jdbcType=DECIMAL},
+		#{accountDate,jdbcType=CHAR},
+		#{repayMode,jdbcType=CHAR}, #{incomeType,jdbcType=CHAR},
+		#{proIncomeTerm,jdbcType=DECIMAL}, #{isFinish,jdbcType=CHAR},
+		#{enabled,jdbcType=CHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP}, #{expectAnnuRate,jdbcType=DECIMAL},
+		#{annuRate,jdbcType=DECIMAL}, #{expectEarning,jdbcType=DECIMAL},
+		#{productType,jdbcType=CHAR},
+		#{redEnvAmt,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zlebank.model.TIncome">
+		insert into T_INCOME
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="custId != null">
+				CUST_ID,
+			</if>
+			<if test="projectId != null">
+				PROJECT_ID,
+			</if>
+			<if test="positionId != null">
+				POSITION_ID,
+			</if>
+			<if test="custName != null">
+				CUST_NAME,
+			</if>
+			<if test="projectName != null">
+				PROJECT_NAME,
+			</if>
+			<if test="earning != null">
+				EARNING,
+			</if>
+			<if test="capital != null">
+				CAPITAL,
+			</if>
+			<if test="amt != null">
+				AMT,
+			</if>
+			<if test="accountDate != null">
+				ACCOUNT_DATE,
+			</if>
+			<if test="repayMode != null">
+				REPAY_MODE,
+			</if>
+			<if test="incomeType != null">
+				INCOME_TYPE,
+			</if>
+			<if test="proIncomeTerm != null">
+				PRO_INCOME_TERM,
+			</if>
+			<if test="isFinish != null">
+				IS_FINISH,
+			</if>
+			<if test="enabled != null">
+				ENABLED,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="expectAnnuRate != null">
+				EXPECT_ANNU_RATE,
+			</if>
+			<if test="annuRate != null">
+				ANNU_RATE,
+			</if>
+			<if test="expectEarning != null">
+				EXPECT_EARNING,
+			</if>
+			<if test="productType != null">
+				PRODUCT_TYPE,
+			</if>
+			<if test="redEnvAmt != null">
+				RED_ENV_AMT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="custId != null">
+				#{custId,jdbcType=VARCHAR},
+			</if>
+			<if test="projectId != null">
+				#{projectId,jdbcType=VARCHAR},
+			</if>
+			<if test="positionId != null">
+				#{positionId,jdbcType=VARCHAR},
+			</if>
+			<if test="custName != null">
+				#{custName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectName != null">
+				#{projectName,jdbcType=VARCHAR},
+			</if>
+			<if test="earning != null">
+				#{earning,jdbcType=DECIMAL},
+			</if>
+			<if test="capital != null">
+				#{capital,jdbcType=DECIMAL},
+			</if>
+			<if test="amt != null">
+				#{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="accountDate != null">
+				#{accountDate,jdbcType=CHAR},
+			</if>
+			<if test="repayMode != null">
+				#{repayMode,jdbcType=CHAR},
+			</if>
+			<if test="incomeType != null">
+				#{incomeType,jdbcType=CHAR},
+			</if>
+			<if test="proIncomeTerm != null">
+				#{proIncomeTerm,jdbcType=DECIMAL},
+			</if>
+			<if test="isFinish != null">
+				#{isFinish,jdbcType=CHAR},
+			</if>
+			<if test="enabled != null">
+				#{enabled,jdbcType=CHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expectAnnuRate != null">
+				#{expectAnnuRate,jdbcType=DECIMAL},
+			</if>
+			<if test="annuRate != null">
+				#{annuRate,jdbcType=DECIMAL},
+			</if>
+			<if test="expectEarning != null">
+				#{expectEarning,jdbcType=DECIMAL},
+			</if>
+			<if test="productType != null">
+				#{productType,jdbcType=CHAR},
+			</if>
+			<if test="redEnvAmt != null">
+				#{redEnvAmt,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.TIncome">
+		update T_INCOME
+		<set>
+			<if test="custId != null">
+				CUST_ID = #{custId,jdbcType=VARCHAR},
+			</if>
+			<if test="projectId != null">
+				PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+			</if>
+			<if test="positionId != null">
+				POSITION_ID = #{positionId,jdbcType=VARCHAR},
+			</if>
+			<if test="custName != null">
+				CUST_NAME = #{custName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectName != null">
+				PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+			</if>
+			<if test="earning != null">
+				EARNING = #{earning,jdbcType=DECIMAL},
+			</if>
+			<if test="capital != null">
+				CAPITAL = #{capital,jdbcType=DECIMAL},
+			</if>
+			<if test="amt != null">
+				AMT = #{amt,jdbcType=DECIMAL},
+			</if>
+			<if test="accountDate != null">
+				ACCOUNT_DATE = #{accountDate,jdbcType=CHAR},
+			</if>
+			<if test="repayMode != null">
+				REPAY_MODE = #{repayMode,jdbcType=CHAR},
+			</if>
+			<if test="incomeType != null">
+				INCOME_TYPE = #{incomeType,jdbcType=CHAR},
+			</if>
+			<if test="proIncomeTerm != null">
+				PRO_INCOME_TERM = #{proIncomeTerm,jdbcType=DECIMAL},
+			</if>
+			<if test="isFinish != null">
+				IS_FINISH = #{isFinish,jdbcType=CHAR},
+			</if>
+			<if test="enabled != null">
+				ENABLED = #{enabled,jdbcType=CHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expectAnnuRate != null">
+				EXPECT_ANNU_RATE = #{expectAnnuRate,jdbcType=DECIMAL},
+			</if>
+			<if test="annuRate != null">
+				ANNU_RATE = #{annuRate,jdbcType=DECIMAL},
+			</if>
+			<if test="expectEarning != null">
+				EXPECT_EARNING = #{expectEarning,jdbcType=DECIMAL},
+			</if>
+			<if test="productType != null">
+				PRODUCT_TYPE = #{productType,jdbcType=CHAR},
+			</if>
+			<if test="redEnvAmt != null">
+				RED_ENV_AMT = #{redEnvAmt,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.TIncome">
+		update T_INCOME
+		set CUST_ID = #{custId,jdbcType=VARCHAR},
+		PROJECT_ID =
+		#{projectId,jdbcType=VARCHAR},
+		POSITION_ID =
+		#{positionId,jdbcType=VARCHAR},
+		CUST_NAME =
+		#{custName,jdbcType=VARCHAR},
+		PROJECT_NAME =
+		#{projectName,jdbcType=VARCHAR},
+		EARNING = #{earning,jdbcType=DECIMAL},
+		CAPITAL = #{capital,jdbcType=DECIMAL},
+		AMT = #{amt,jdbcType=DECIMAL},
+		ACCOUNT_DATE = #{accountDate,jdbcType=CHAR},
+		REPAY_MODE =
+		#{repayMode,jdbcType=CHAR},
+		INCOME_TYPE = #{incomeType,jdbcType=CHAR},
+		PRO_INCOME_TERM = #{proIncomeTerm,jdbcType=DECIMAL},
+		IS_FINISH =
+		#{isFinish,jdbcType=CHAR},
+		ENABLED = #{enabled,jdbcType=CHAR},
+		REMARK =
+		#{remark,jdbcType=VARCHAR},
+		CREATE_DATE =
+		#{createDate,jdbcType=TIMESTAMP},
+		EXPECT_ANNU_RATE =
+		#{expectAnnuRate,jdbcType=DECIMAL},
+		ANNU_RATE =
+		#{annuRate,jdbcType=DECIMAL},
+		EXPECT_EARNING =
+		#{expectEarning,jdbcType=DECIMAL},
+		PRODUCT_TYPE =
+		#{productType,jdbcType=CHAR},
+		RED_ENV_AMT =
+		#{redEnvAmt,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectSumAmtAndCapital" resultType="map"
+		parameterType="java.lang.String">
+		select
+		IFNULL(sum(EARNING),0) as
+		EARNING,IFNULL(sum(CAPITAL),0) as CAPITAL,IFNULL(sum(AMT),0) as
+		AMT
+		from T_INCOME
+		where PROJECT_ID = #{projectId,jdbcType=VARCHAR} and
+		PRO_INCOME_TERM =
+		#{proIncomeTerm,jdbcType=DECIMAL}
+		and REPAY_MODE =
+		#{repayMode,jdbcType=CHAR}
+	</select>
+
+	<select id="getTIncomes" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_INCOME
+		<include refid="dynamicPageWhere" />
+	</select>
+
+	<sql id="baseDynamicQuery">
+		select * from T_INCOME
+		<include refid="dynamicPageWhere" />
+		<if test="pageVO!=null">
+			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
+				order by PRO_INCOME_TERM desc
+			</if>
+			<if test="pageVO.orderBy!=null and pageVO.orderBy!=''">
+				order by ${pageVO.orderBy}
+			</if>
+		</if>
+	</sql>
+
+	<select id="findIncomes" resultMap="BaseResultMap">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="baseDynamicQuery" />
+			</when>
+			<otherwise>
+				<include refid="baseDynamicQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="findIncomeCount" resultType="int">
+		select count(*)
+		from T_INCOME
+		<include refid="dynamicPageWhere" />
+	</select>
+
+	<sql id="dynamicPageWhere">
+		<where>
+			1=1
+			<if test="incomeVo.id!=null and incomeVo.id!=''">
+			   <![CDATA[ and ID = #{incomeVo.id,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="incomeVo.custId!=null and incomeVo.custId!=''">
+			   <![CDATA[ and CUST_ID = #{incomeVo.custId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="incomeVo.projectId!=null and incomeVo.projectId!=''">
+			   <![CDATA[ and PROJECT_ID = #{incomeVo.projectId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="incomeVo.positionId!=null and incomeVo.positionId!=''">
+			   <![CDATA[ and POSITION_ID = #{incomeVo.positionId,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="incomeVo.repayMode!=null and incomeVo.repayMode!=''">
+			   <![CDATA[ and REPAY_MODE = #{incomeVo.repayMode,jdbcType=VARCHAR}]]>
+			</if>
+			<if test="incomeVo.proIncomeTerm!=null">
+			   <![CDATA[ and PRO_INCOME_TERM = #{incomeVo.proIncomeTerm,jdbcType=DECIMAL}]]>
+			</if>
+
+			<if test="incomeVo.isFinish!=null and incomeVo.isFinish!=''">
+			   <![CDATA[ and IS_FINISH = #{incomeVo.isFinish,jdbcType=VARCHAR}]]>
+			</if>
+
+			<if test="incomeVo.enabled!=null and incomeVo.enabled!=''">
+			   <![CDATA[ and ENABLED = #{incomeVo.enabled,jdbcType=VARCHAR}]]>
+			</if>
+
+			<if test="incomeVo.incomeTypes!=null and incomeVo.incomeTypes.size > 0">
+				and INCOME_TYPE in
+				<foreach collection="incomeVo.incomeTypes" item="incomeType"
+					open="(" separator="," close=")">
+					#{incomeType}
+				</foreach>
+			</if>
+
+		</where>
+	</sql>
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_INCOME
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="findListPageCount" resultType="int">
+		select count(ID) from T_INCOME
+		<include refid="dynamicPageNoWhere" />
+	</select>
+
+	<select id="findListPage" resultMap="BaseResultMap">
+		<choose>
+			<when test=" pageVO.size&lt;0">
+				<include refid="baseQueryPage" />
+			</when>
+			<otherwise>
+				<include refid="baseQueryPage" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="baseQueryPage">
+		select * from T_INCOME
+		<include refid="dynamicPageNoWhere" />
+		order by CREATE_DATE desc
+	</sql>
+	<sql id="dynamicPageNoWhere">
+		<where>
+			1=1
+			<if test="income.id != null and income.id !=''">
+				and ID = #{income.id,jdbcType=VARCHAR}
+			</if>
+			<if test="income.custId != null and income.custId !=''">
+				and CUST_ID = #{income.custId,jdbcType=VARCHAR}
+			</if>
+			<if test="income.projectId != null and income.projectId !=''">
+				and PROJECT_ID = #{income.projectId,jdbcType=VARCHAR}
+			</if>
+			<if test="income.repayMode != null and income.repayMode !=''">
+				and REPAY_MODE = #{income.repayMode,jdbcType=CHAR}
+			</if>
+			<if test="income.incomeType != null and income.incomeType !=''">
+				and INCOME_TYPE = #{income.incomeType,jdbcType=CHAR}
+			</if>
+			<if test="income.isFinish != null and income.isFinish !=''">
+				and IS_FINISH = #{income.isFinish,jdbcType=CHAR}
+			</if>
+		</where>
+	</sql>
+
+
+	<select id="selectIncomeInFundFlow" resultMap="TIncOrdVoMap">
+		<choose>
+			<when test="pageVO==null or pageVO.size&lt;0">
+				<include refid="selectIncomeInFundFlowQuery" />
+			</when>
+			<otherwise>
+				<include refid="selectIncomeInFundFlowQuery" />
+				limit #{pageVO.startSize, jdbcType=INTEGER}, #{pageVO.size,
+				jdbcType=INTEGER}
+			</otherwise>
+		</choose>
+	</select>
+
+	<sql id="selectIncomeInFundFlowQuery">
+		select
+		<include refid="Inc_Ord_Column" />
+		FROM
+		T_INCOME com,
+		T_TRADE_BILL bill,
+		T_TRADE_ORDER ord
+		<include refid="incOrdWhere" />
+	</sql>
+
+	<sql id="Inc_Ord_Column">
+		com.CREATE_DATE CREATE_DATE,
+		ord.REMARK REMARK,
+		ord.ID
+		ORDER_ID,
+		ord.ORDER_STATUS STATUS,
+		com.EARNING BENEFIT
+	</sql>
+
+	<sql id="incOrdWhere">
+		<where>
+			com.POSITION_ID=bill.POSITION_ID
+			AND ord.ID=bill.TRADE_ORDER_ID
+			<if test="incomeVo.custId != null and incomeVo.custId !=''">
+				and com.Cust_Id= #{incomeVo.custId,jdbcType=VARCHAR}
+			</if>
+			<if test="incomeVo.beginDate!=null and incomeVo.endDate!=null">
+			 <![CDATA[  and com.CREATE_TIME >=#{incomeVo.beginDate,jdbcType=TIMESTAMP} and com.CREATE_TIME <=#{incomeVo.endDate,jdbcType=TIMESTAMP}]]>
+			</if>
+			<if test="incomeVo.isFinish != null and incomeVo.isFinish !=''">
+				and com.IS_FINISH= #{incomeVo.isFinish,jdbcType=VARCHAR}
+			</if>
+			<if test="incomeVo.enabled != null and incomeVo.enabled !=''">
+				and com.ENABLED= #{incomeVo.enabled,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+	<resultMap id="TIncOrdVoMap" type="com.zlebank.model.vo.TIncOrdVo">
+		<id column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+		<result column="CREATE_DATE" property="tradeTime" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="BENEFIT" property="benefit" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectIncomeInFundFlowCount" resultType="int">
+		select
+		count(*)
+		FROM
+		T_INCOME com,
+		T_TRADE_BILL bill,
+		T_TRADE_ORDER ord
+		<include refid="incOrdWhere" />
+	</select>
+</mapper>

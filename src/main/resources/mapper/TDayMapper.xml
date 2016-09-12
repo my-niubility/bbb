@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlebank.dao.TDayDao" >
+  <resultMap id="BaseResultMap" type="com.zlebank.model.TDay" >
+    <id column="DAY" property="day" jdbcType="CHAR" />
+    <result column="FESTIVAL_FLAG" property="festivalFlag" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DAY, FESTIVAL_FLAG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_DAY
+    where DAY = #{day,jdbcType=CHAR}
+  </select>
+   <select id="selectByFestivalFlag" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_DAY
+    where FESTIVAL_FLAG = #{day,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_DAY
+    where DAY = #{day,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlebank.model.TDay" >
+    insert into T_DAY (DAY, FESTIVAL_FLAG)
+    values (#{day,jdbcType=CHAR}, #{festivalFlag,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlebank.model.TDay" >
+    insert into T_DAY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="day != null" >
+        DAY,
+      </if>
+      <if test="festivalFlag != null" >
+        FESTIVAL_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="day != null" >
+        #{day,jdbcType=CHAR},
+      </if>
+      <if test="festivalFlag != null" >
+        #{festivalFlag,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.TDay" >
+    update T_DAY
+    <set >
+      <if test="festivalFlag != null" >
+        FESTIVAL_FLAG = #{festivalFlag,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DAY = #{day,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.TDay" >
+    update T_DAY
+    set FESTIVAL_FLAG = #{festivalFlag,jdbcType=DECIMAL}
+    where DAY = #{day,jdbcType=CHAR}
+  </update>
+  
+  <select id="queryLikeDay" resultType="int" parameterType="java.lang.String" >
+    select count(*)
+    from T_DAY
+    <include refid="likeWhere" />
+  </select>
+  <sql id="likeWhere">
+  		<where>
+  			1=1
+  			<if test="day!=null and day!=''">
+  				<![CDATA[ and DAY like '%'||#{day,jdbcType=CHAR}||'%']]>
+  			</if>
+  		</where>
+  </sql>
+</mapper>
