@@ -11,138 +11,138 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
 	default-lazy-init="false">
 
-	<dubbo:service interface="com.zlebank.service.DubboConsumerInterface"
+	<dubbo:service interface="com.nbl.service.DubboConsumerInterface"
 		ref="portalInterfaceImpl" group="group01" version="1.0" provider="business_4_all">
 		<dubbo:method name="getName" timeout="1000" />
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.PublishProductApp"
+	<dubbo:service interface="com.nbl.service.business.app.PublishProductApp"
 		ref="publishProductApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.RechargeApp"
+	<dubbo:service interface="com.nbl.service.business.app.RechargeApp"
 		ref="rechargeApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.WithdrawApp"
+	<dubbo:service interface="com.nbl.service.business.app.WithdrawApp"
 		ref="withdrawApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.PrdPchApp"
+	<dubbo:service interface="com.nbl.service.business.app.PrdPchApp"
 		ref="prdPchApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.OrderPaymentApp"
+	<dubbo:service interface="com.nbl.service.business.app.OrderPaymentApp"
 		ref="orderPaymentApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.ChargeApp"
+	<dubbo:service interface="com.nbl.service.business.app.ChargeApp"
 		ref="chargeApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.RechargeQryApp"
+	<dubbo:service interface="com.nbl.service.business.app.RechargeQryApp"
 		ref="rechargeQryApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.WithdrawQryApp"
+	<dubbo:service interface="com.nbl.service.business.app.WithdrawQryApp"
 		ref="withdrawQryApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.TrdOrdQryApp"
+	<dubbo:service interface="com.nbl.service.business.app.TrdOrdQryApp"
 		ref="trdOrdQryApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.TrdOrdQryDtlApp"
+	<dubbo:service interface="com.nbl.service.business.app.TrdOrdQryDtlApp"
 		ref="trdOrdQryDtlApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.ProductQueryApp"
+	<dubbo:service interface="com.nbl.service.business.app.ProductQueryApp"
 		ref="productQueryApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.TrdOrdMgeApp"
+	<dubbo:service interface="com.nbl.service.business.app.TrdOrdMgeApp"
 		ref="trdOrdMgeApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.business.app.CustFundsQryApp"
+	<dubbo:service interface="com.nbl.service.business.app.CustFundsQryApp"
 		ref="custFundsQryApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
-	<dubbo:service interface="com.zlebank.service.manager.app.TradeOrderApp"
+	<dubbo:service interface="com.nbl.service.manager.app.TradeOrderApp"
 		ref="tradeOrderApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.TradeProcessApp"
+	<dubbo:service interface="com.nbl.service.manager.app.TradeProcessApp"
 		ref="tradeProcessApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.NewRechargeApp"
+	<dubbo:service interface="com.nbl.service.manager.app.NewRechargeApp"
 		ref="newRechargeApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.NewWithdrawApp"
+	<dubbo:service interface="com.nbl.service.manager.app.NewWithdrawApp"
 		ref="newWithdrawApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.PositiveApp"
+	<dubbo:service interface="com.nbl.service.manager.app.PositiveApp"
 		ref="positiveApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.PositionApp"
+	<dubbo:service interface="com.nbl.service.manager.app.PositionApp"
 		ref="positionApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.IncomeApp"
+	<dubbo:service interface="com.nbl.service.manager.app.IncomeApp"
 		ref="incomeApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
 	<dubbo:service
-		interface="com.zlebank.service.manager.app.StandardProductQueryApp"
+		interface="com.nbl.service.manager.app.StandardProductQueryApp"
 		ref="standardProductQueryApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.BillBalanceApp"
+	<dubbo:service interface="com.nbl.service.manager.app.BillBalanceApp"
 		ref="billBalanceApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.DealTypeApp"
+	<dubbo:service interface="com.nbl.service.manager.app.DealTypeApp"
 		ref="dealTypeApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.AccountRuleApp"
+	<dubbo:service interface="com.nbl.service.manager.app.AccountRuleApp"
 		ref="accountRuleApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.GeneralParameterApp"
+	<dubbo:service interface="com.nbl.service.manager.app.GeneralParameterApp"
 		ref="generalParameterApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.ProductShelfApp"
+	<dubbo:service interface="com.nbl.service.manager.app.ProductShelfApp"
 		ref="productShelfApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 	
-	<dubbo:service interface="com.zlebank.service.business.app.ProductAuditApp"
+	<dubbo:service interface="com.nbl.service.business.app.ProductAuditApp"
 		ref="productAuditApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 	
 	
 
-	<dubbo:service interface="com.zlebank.service.manager.app.DayApp"
+	<dubbo:service interface="com.nbl.service.manager.app.DayApp"
 		ref="dayApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 
-	<dubbo:service interface="com.zlebank.service.manager.app.RiskBlackWhiteApp"
+	<dubbo:service interface="com.nbl.service.manager.app.RiskBlackWhiteApp"
 		ref="riskBlackWhiteApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 	
-	<dubbo:service interface="com.zlebank.service.manager.app.PaymentApp"
+	<dubbo:service interface="com.nbl.service.manager.app.PaymentApp"
 		ref="paymentApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 	
-	<dubbo:service interface="com.zlebank.service.business.app.UserMessageApp"
+	<dubbo:service interface="com.nbl.service.business.app.UserMessageApp"
 		ref="userMessageApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 	
-	<dubbo:service interface="com.zlebank.service.business.app.DisableTradeOrderApp"
+	<dubbo:service interface="com.nbl.service.business.app.DisableTradeOrderApp"
 		ref="disableTradeOrderApp" group="group01" version="1.0" provider="business_4_all">
 	</dubbo:service>
 </beans>

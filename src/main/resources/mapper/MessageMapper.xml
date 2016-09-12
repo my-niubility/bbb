@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.MessageDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.Message" >
+<mapper namespace="com.nbl.dao.MessageDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.Message" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
     <result column="TITLE" property="title" jdbcType="VARCHAR" />
@@ -12,7 +12,7 @@
     <result column="ISREADSTATUS" property="isreadstatus" jdbcType="VARCHAR" />
   </resultMap>
   
-  <resultMap id="BaseResultMap2" type="com.zlebank.model.Message" >
+  <resultMap id="BaseResultMap2" type="com.nbl.model.Message" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
     <result column="TITLE" property="title" jdbcType="VARCHAR" />
@@ -34,7 +34,7 @@
     delete from T_MESSAGE
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.Message" >
+  <insert id="insert" parameterType="com.nbl.model.Message" >
     insert into T_MESSAGE (ID, USER_ID, TITLE, 
       CONTENT, CREATE_TIME, STATUS, 
       MESSAGE_TYPE)
@@ -42,7 +42,7 @@
       #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
       #{messageType,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.Message" >
+  <insert id="insertSelective" parameterType="com.nbl.model.Message" >
     insert into T_MESSAGE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -91,7 +91,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.Message" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.Message" >
     update T_MESSAGE
     <set >
       <if test="userId != null" >
@@ -115,7 +115,7 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.Message" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.Message" >
     update T_MESSAGE
     set USER_ID = #{userId,jdbcType=VARCHAR},
       TITLE = #{title,jdbcType=VARCHAR},

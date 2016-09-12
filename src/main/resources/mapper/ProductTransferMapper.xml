@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.ProductTransferDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.ProductTransfer" >
+<mapper namespace="com.nbl.dao.ProductTransferDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.ProductTransfer" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="CONTRACT_ID" property="contractId" jdbcType="VARCHAR" />
     <result column="POSITION_ID" property="positionId" jdbcType="VARCHAR" />
@@ -36,7 +36,7 @@
     delete from T_PRODUCT_TRANSFER
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.ProductTransfer" >
+  <insert id="insert" parameterType="com.nbl.model.ProductTransfer" >
     insert into T_PRODUCT_TRANSFER (ID, CONTRACT_ID, POSITION_ID, 
       PRODUCT_ID, PRODUCT_NANE, TRANSFER_CUST_ID, 
       TRANSFER_CUST_NAME, TRANSFER_AMT, TRANSFEREE_PURCHASE_ID, 
@@ -52,7 +52,7 @@
       #{transferTime,jdbcType=TIMESTAMP}, #{settleTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.ProductTransfer" >
+  <insert id="insertSelective" parameterType="com.nbl.model.ProductTransfer" >
     insert into T_PRODUCT_TRANSFER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -167,7 +167,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.ProductTransfer" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.ProductTransfer" >
     update T_PRODUCT_TRANSFER
     <set >
       <if test="contractId != null" >
@@ -224,7 +224,7 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.ProductTransfer" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.ProductTransfer" >
     update T_PRODUCT_TRANSFER
     set CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
       POSITION_ID = #{positionId,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.RentRegisterDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.RentRegister" >
+<mapper namespace="com.nbl.dao.RentRegisterDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.RentRegister" >
     <id column="RENT_ID" property="rentId" jdbcType="VARCHAR" />
     <result column="RENT_NAME" property="rentName" jdbcType="VARCHAR" />
     <result column="EXTENDS_ID" property="extendsId" jdbcType="VARCHAR" />
@@ -29,7 +29,7 @@
     delete from T_RENT_REGISTER
     where RENT_ID = #{rentId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.RentRegister" >
+  <insert id="insert" parameterType="com.nbl.model.RentRegister" >
     insert into T_RENT_REGISTER (RENT_ID, RENT_NAME, EXTENDS_ID, 
       PROJECT_INTRO, RENT_MESSAGE, RENT_PRODUCE, 
       PRODUCE_INTR, OTHER_REMARK1, OTHER_REMARK2, 
@@ -41,7 +41,7 @@
       #{otherRemark3,jdbcType=VARCHAR}, #{otherRemark4,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.RentRegister" >
+  <insert id="insertSelective" parameterType="com.nbl.model.RentRegister" >
     insert into T_RENT_REGISTER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="rentId != null" >
@@ -120,7 +120,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.RentRegister" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.RentRegister" >
     update T_RENT_REGISTER
     <set >
       <if test="rentName != null" >
@@ -159,7 +159,7 @@
     </set>
     where RENT_ID = #{rentId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.RentRegister" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.RentRegister" >
     update T_RENT_REGISTER
     set RENT_NAME = #{rentName,jdbcType=VARCHAR},
       EXTENDS_ID = #{extendsId,jdbcType=VARCHAR},

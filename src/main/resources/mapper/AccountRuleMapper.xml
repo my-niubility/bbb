@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.AccountRuleDao">
-	<resultMap id="BaseResultMap" type="com.zlebank.model.AccountRule">
+<mapper namespace="com.nbl.dao.AccountRuleDao">
+	<resultMap id="BaseResultMap" type="com.nbl.model.AccountRule">
 		<id column="RULE_ID" property="ruleId" jdbcType="CHAR" />
 		<result column="ACCOUNT_TYPE" property="accountType" jdbcType="CHAR" />
 		<result column="PAYER_SUBJECT_NO" property="payerSubjectNo"
@@ -31,7 +31,7 @@
 		T_ACCOUNT_RULE
 		where RULE_ID = #{ruleId,jdbcType=CHAR}
 	</delete>
-	<insert id="insert" parameterType="com.zlebank.model.AccountRule">
+	<insert id="insert" parameterType="com.nbl.model.AccountRule">
 		insert into T_ACCOUNT_RULE
 		(RULE_ID, ACCOUNT_TYPE, PAYER_SUBJECT_NO,
 		PAYER_FLAG, PAYEE_SUBJECT_NO,
@@ -45,7 +45,7 @@
 		#{updateTime,jdbcType=TIMESTAMP},
 		#{remark,jdbcType=VARCHAR})
 	</insert>
-	<insert id="insertSelective" parameterType="com.zlebank.model.AccountRule">
+	<insert id="insertSelective" parameterType="com.nbl.model.AccountRule">
 		insert into T_ACCOUNT_RULE
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="ruleId != null">
@@ -100,7 +100,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.AccountRule">
+	<update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.AccountRule">
 		update T_ACCOUNT_RULE
 		<set>
 			<if test="accountType != null">
@@ -127,7 +127,7 @@
 		</set>
 		where RULE_ID = #{ruleId,jdbcType=CHAR}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.AccountRule">
+	<update id="updateByPrimaryKey" parameterType="com.nbl.model.AccountRule">
 		update
 		T_ACCOUNT_RULE
 		set ACCOUNT_TYPE = #{accountType,jdbcType=CHAR},

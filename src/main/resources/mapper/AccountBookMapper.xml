@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.AccountBookDao">
-	<resultMap id="BaseResultMap" type="com.zlebank.model.AccountBook">
+<mapper namespace="com.nbl.dao.AccountBookDao">
+	<resultMap id="BaseResultMap" type="com.nbl.model.AccountBook">
 		<id column="BOOK_ID" property="bookId" jdbcType="INTEGER" />
 		<result column="ACCOUNT_DATE" property="accountDate" jdbcType="CHAR" />
 		<result column="RULE_ID" property="ruleId" jdbcType="CHAR" />
@@ -36,7 +36,7 @@
 		T_ACCOUNT_BOOK
 		where BOOK_ID = #{bookId,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.zlebank.model.AccountBook">
+	<insert id="insert" parameterType="com.nbl.model.AccountBook">
 		insert into T_ACCOUNT_BOOK
 		(BOOK_ID, ACCOUNT_DATE, RULE_ID,
 		ORDER_ID, PAY_ID, OPT_CODE,
@@ -64,14 +64,14 @@
 		DESC ]]>
 	</select>
 
-	<update id="updateAccountBookState" parameterType="com.zlebank.model.AccountBook">
+	<update id="updateAccountBookState" parameterType="com.nbl.model.AccountBook">
 	<![CDATA[
 		update T_ACCOUNT_BOOK set BOOK_STATE = #{bookState} where BOOK_ID = #{bookId}
 	]]>
 	</update>
 
 
-	<insert id="insertSelective" parameterType="com.zlebank.model.AccountBook">
+	<insert id="insertSelective" parameterType="com.nbl.model.AccountBook">
 		insert into T_ACCOUNT_BOOK
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="bookId != null">
@@ -162,7 +162,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.AccountBook">
+	<update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.AccountBook">
 		update T_ACCOUNT_BOOK
 		<set>
 			<if test="accountDate != null">
@@ -207,7 +207,7 @@
 		</set>
 		where BOOK_ID = #{bookId,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.AccountBook">
+	<update id="updateByPrimaryKey" parameterType="com.nbl.model.AccountBook">
 		update
 		T_ACCOUNT_BOOK
 		set ACCOUNT_DATE = #{accountDate,jdbcType=CHAR},

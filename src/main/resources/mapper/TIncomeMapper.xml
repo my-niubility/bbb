@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.TIncomeDao">
-	<resultMap id="BaseResultMap" type="com.zlebank.model.TIncome">
+<mapper namespace="com.nbl.dao.TIncomeDao">
+	<resultMap id="BaseResultMap" type="com.nbl.model.TIncome">
 		<id column="ID" property="id" jdbcType="VARCHAR" />
 		<result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
 		<result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
@@ -51,7 +51,7 @@
 		T_INCOME
 		where ID = #{id,jdbcType=VARCHAR}
 	</delete>
-	<insert id="insert" parameterType="com.zlebank.model.TIncome">
+	<insert id="insert" parameterType="com.nbl.model.TIncome">
 		insert into T_INCOME (ID,
 		CUST_ID, PROJECT_ID,
 		POSITION_ID, CUST_NAME, PROJECT_NAME,
@@ -81,7 +81,7 @@
 		#{productType,jdbcType=CHAR},
 		#{redEnvAmt,jdbcType=DECIMAL})
 	</insert>
-	<insert id="insertSelective" parameterType="com.zlebank.model.TIncome">
+	<insert id="insertSelective" parameterType="com.nbl.model.TIncome">
 		insert into T_INCOME
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -220,7 +220,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.TIncome">
+	<update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.TIncome">
 		update T_INCOME
 		<set>
 			<if test="custId != null">
@@ -289,7 +289,7 @@
 		</set>
 		where ID = #{id,jdbcType=VARCHAR}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.TIncome">
+	<update id="updateByPrimaryKey" parameterType="com.nbl.model.TIncome">
 		update T_INCOME
 		set CUST_ID = #{custId,jdbcType=VARCHAR},
 		PROJECT_ID =
@@ -527,7 +527,7 @@
 		</where>
 	</sql>
 
-	<resultMap id="TIncOrdVoMap" type="com.zlebank.model.vo.TIncOrdVo">
+	<resultMap id="TIncOrdVoMap" type="com.nbl.model.vo.TIncOrdVo">
 		<id column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
 		<result column="CREATE_DATE" property="tradeTime" jdbcType="VARCHAR" />
 		<result column="REMARK" property="remark" jdbcType="VARCHAR" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.AssetBalanceDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.AssetBalance" >
+<mapper namespace="com.nbl.dao.AssetBalanceDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.AssetBalance" >
     <id column="CUST_ID" property="custId" jdbcType="VARCHAR" />
     <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
     <result column="ACCOUNT_BALANCE" property="accountBalance" jdbcType="DECIMAL" />
@@ -21,13 +21,13 @@
     delete from T_ASSET_BALANCE
     where CUST_ID = #{custId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.AssetBalance" >
+  <insert id="insert" parameterType="com.nbl.model.AssetBalance" >
     insert into T_ASSET_BALANCE (CUST_ID, CUST_NAME, ACCOUNT_BALANCE, 
       CREATE_TIME, UPDATE_TIME)
     values (#{custId,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, #{accountBalance,jdbcType=DECIMAL}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.AssetBalance" >
+  <insert id="insertSelective" parameterType="com.nbl.model.AssetBalance" >
     insert into T_ASSET_BALANCE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="custId != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.AssetBalance" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.AssetBalance" >
     update T_ASSET_BALANCE
     <set >
       <if test="custName != null" >
@@ -82,7 +82,7 @@
     </set>
     where CUST_ID = #{custId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.AssetBalance" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.AssetBalance" >
     update T_ASSET_BALANCE
     set CUST_NAME = #{custName,jdbcType=VARCHAR},
       ACCOUNT_BALANCE = #{accountBalance,jdbcType=DECIMAL},

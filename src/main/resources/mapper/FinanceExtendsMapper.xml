@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.FinanceExtendsDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.FinanceExtends" >
+<mapper namespace="com.nbl.dao.FinanceExtendsDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.FinanceExtends" >
     <id column="EXTENDS_ID" property="extendsId" jdbcType="VARCHAR" />
     <result column="FINANCE_ID" property="financeId" jdbcType="VARCHAR" />
     <result column="FINANCE_NAME" property="financeName" jdbcType="VARCHAR" />
@@ -29,7 +29,7 @@
     delete from T_FINANCE_EXTENDS
     where EXTENDS_ID = #{extendsId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.FinanceExtends" >
+  <insert id="insert" parameterType="com.nbl.model.FinanceExtends" >
     insert into T_FINANCE_EXTENDS (EXTENDS_ID, FINANCE_ID, FINANCE_NAME, 
       FINANCE_INTRO, RENT_MESSAGE, RENT_TOTAL, 
       RENT_TRANSFER, GUARANTEE_TYPE, OTHER_REMARK1, 
@@ -41,7 +41,7 @@
       #{otherRemark2,jdbcType=VARCHAR}, #{otherRemark3,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.FinanceExtends" >
+  <insert id="insertSelective" parameterType="com.nbl.model.FinanceExtends" >
     insert into T_FINANCE_EXTENDS
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="extendsId != null" >
@@ -120,7 +120,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.FinanceExtends" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.FinanceExtends" >
     update T_FINANCE_EXTENDS
     <set >
       <if test="financeId != null" >
@@ -159,7 +159,7 @@
     </set>
     where EXTENDS_ID = #{extendsId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.FinanceExtends" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.FinanceExtends" >
     update T_FINANCE_EXTENDS
     set FINANCE_ID = #{financeId,jdbcType=VARCHAR},
       FINANCE_NAME = #{financeName,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.CheckMsgBeforehandDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.CheckMsgBeforehand" >
+<mapper namespace="com.nbl.dao.CheckMsgBeforehandDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.CheckMsgBeforehand" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="HT_SEQID" property="htSeqid" jdbcType="VARCHAR" />
     <result column="ZL_SEQID" property="zlSeqid" jdbcType="VARCHAR" />
@@ -35,7 +35,7 @@
     delete from T_CHECK_MSG_BEFOREHAND
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.CheckMsgBeforehand" >
+  <insert id="insert" parameterType="com.nbl.model.CheckMsgBeforehand" >
     insert into T_CHECK_MSG_BEFOREHAND (ID, HT_SEQID, ZL_SEQID, 
       ENTRUST_DATE, LIQ_DATE, CHECK_DATE, 
       MERCHANT_ID, HT_TRANS_AMT, ZL_TRANS_AMT, 
@@ -49,7 +49,7 @@
       #{custId,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
       #{checkStatus,jdbcType=CHAR}, #{msgType,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.CheckMsgBeforehand" >
+  <insert id="insertSelective" parameterType="com.nbl.model.CheckMsgBeforehand" >
     insert into T_CHECK_MSG_BEFOREHAND
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.CheckMsgBeforehand" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.CheckMsgBeforehand" >
     update T_CHECK_MSG_BEFOREHAND
     <set >
       <if test="htSeqid != null" >
@@ -212,7 +212,7 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.CheckMsgBeforehand" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.CheckMsgBeforehand" >
     update T_CHECK_MSG_BEFOREHAND
     set HT_SEQID = #{htSeqid,jdbcType=VARCHAR},
       ZL_SEQID = #{zlSeqid,jdbcType=VARCHAR},

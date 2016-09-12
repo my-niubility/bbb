@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.InterstSubsidyDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.InterstSubsidy" >
+<mapper namespace="com.nbl.dao.InterstSubsidyDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.InterstSubsidy" >
     <id column="PAYMENT_ID" property="paymentId" jdbcType="VARCHAR" />
     <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
     <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
@@ -25,7 +25,7 @@
     delete from T_INTEREST_SUBSIDY
     where PAYMENT_ID = #{paymentId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.InterstSubsidy" >
+  <insert id="insert" parameterType="com.nbl.model.InterstSubsidy" >
     insert into T_INTEREST_SUBSIDY (PAYMENT_ID, CUST_ID, CUST_NAME, 
       PROJECT_ID, INVEST_AMT, EXPECT_EARNING, 
       PAYMENT_DATE, BEGIN_INTEREST_DATE)
@@ -33,7 +33,7 @@
       #{projectId,jdbcType=VARCHAR}, #{investAmt,jdbcType=DECIMAL}, #{expectEarning,jdbcType=DECIMAL}, 
       #{paymentDate,jdbcType=CHAR}, #{beginInterestDate,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.InterstSubsidy" >
+  <insert id="insertSelective" parameterType="com.nbl.model.InterstSubsidy" >
     insert into T_INTEREST_SUBSIDY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="paymentId != null" >
@@ -88,7 +88,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.InterstSubsidy" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.InterstSubsidy" >
     update T_INTEREST_SUBSIDY
     <set >
       <if test="custId != null" >
@@ -115,7 +115,7 @@
     </set>
     where PAYMENT_ID = #{paymentId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.InterstSubsidy" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.InterstSubsidy" >
     update T_INTEREST_SUBSIDY
     set CUST_ID = #{custId,jdbcType=VARCHAR},
       CUST_NAME = #{custName,jdbcType=VARCHAR},

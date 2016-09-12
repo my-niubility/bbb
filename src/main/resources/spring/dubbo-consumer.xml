@@ -12,26 +12,26 @@
 	default-lazy-init="false">
 
 	<dubbo:reference id="demoServiceRemote"
-		interface="com.zlebank.service.DubboProducerInterface" version="1.0" />
+		interface="com.nbl.service.DubboProducerInterface" version="1.0" />
 
 	<dubbo:reference id="custAccountApp"
-		interface="com.zlebank.service.user.app.CustAccountApp" group="group01"
+		interface="com.nbl.service.user.app.CustAccountApp" group="group01"
 		version="1.0" />
 
 	<dubbo:reference id="paymentProxyApp"
-		interface="com.zlebank.service.user.app.PaymentProxyApp" group="group01"
+		interface="com.nbl.service.user.app.PaymentProxyApp" group="group01"
 		version="1.0" />
 
 	<dubbo:reference id="rechargeProxyApp"
-		interface="com.zlebank.service.user.app.RechargeProxyApp" group="group01"
+		interface="com.nbl.service.user.app.RechargeProxyApp" group="group01"
 		version="1.0" />
 
 	<dubbo:reference id="withdrawProxyApp"
-		interface="com.zlebank.service.user.app.WithdrawProxyApp" group="group01"
+		interface="com.nbl.service.user.app.WithdrawProxyApp" group="group01"
 		version="1.0" />
 
 	<dubbo:reference id="serialRefProxyApp"
-		interface="com.zlebank.service.user.app.SerialRefProxyApp" group="group01"
+		interface="com.nbl.service.user.app.SerialRefProxyApp" group="group01"
 		version="1.0" />
 
 </beans>

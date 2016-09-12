@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.BINpSequenceDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.BINpSequenceKey" >
+<mapper namespace="com.nbl.dao.BINpSequenceDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.BINpSequenceKey" >
     <id column="ID" property="id" jdbcType="INTEGER" />
     <id column="CURDATE" property="curdate" jdbcType="CHAR" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="com.zlebank.model.BINpSequenceKey" >
+  <delete id="deleteByPrimaryKey" parameterType="com.nbl.model.BINpSequenceKey" >
     delete from BI_NP_SEQUENCE
     where ID = #{id,jdbcType=INTEGER}
       and CURDATE = #{curdate,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.BINpSequenceKey" >
+  <insert id="insert" parameterType="com.nbl.model.BINpSequenceKey" >
     <selectKey resultType="java.lang.Integer"  order="AFTER" keyProperty="id" >   
       SELECT LAST_INSERT_ID() AS ID   
     </selectKey>   
     insert into BI_NP_SEQUENCE (ID, CURDATE)
     values (#{id,jdbcType=INTEGER}, #{curdate,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.BINpSequenceKey" >
+  <insert id="insertSelective" parameterType="com.nbl.model.BINpSequenceKey" >
     insert into BI_NP_SEQUENCE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

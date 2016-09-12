@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.CheckMsgResultDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.CheckMsgResult" >
+<mapper namespace="com.nbl.dao.CheckMsgResultDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.CheckMsgResult" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="HT_SEQID" property="htSeqid" jdbcType="VARCHAR" />
     <result column="ZL_SEQID" property="zlSeqid" jdbcType="VARCHAR" />
@@ -37,7 +37,7 @@
     delete from T_CHECK_MSG_RESULT
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.CheckMsgResult" >
+  <insert id="insert" parameterType="com.nbl.model.CheckMsgResult" >
     insert into T_CHECK_MSG_RESULT (ID, HT_SEQID, ZL_SEQID, 
       ENTRUST_DATE, LIQ_DATE, CHECK_DATE, 
       MERCHANT_ID, HT_TRANS_AMT, ZL_TRANS_AMT, 
@@ -53,7 +53,7 @@
       #{frCheckStatus,jdbcType=CHAR}, #{msgType,jdbcType=CHAR}, #{dealStatus,jdbcType=CHAR}, 
       #{laCheckStatus,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.CheckMsgResult" >
+  <insert id="insertSelective" parameterType="com.nbl.model.CheckMsgResult" >
     insert into T_CHECK_MSG_RESULT
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -174,7 +174,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.CheckMsgResult" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.CheckMsgResult" >
     update T_CHECK_MSG_RESULT
     <set >
       <if test="htSeqid != null" >
@@ -234,7 +234,7 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.CheckMsgResult" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.CheckMsgResult" >
     update T_CHECK_MSG_RESULT
     set HT_SEQID = #{htSeqid,jdbcType=VARCHAR},
       ZL_SEQID = #{zlSeqid,jdbcType=VARCHAR},

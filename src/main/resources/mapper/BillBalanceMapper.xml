@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.BillBalanceDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.BillBalance" >
+<mapper namespace="com.nbl.dao.BillBalanceDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.BillBalance" >
     <id column="ID" property="id" jdbcType="INTEGER" />
     <result column="CAL_TIME" property="calTime" jdbcType="TIMESTAMP" />
     <result column="ACCOUNT_DATE" property="accountDate" jdbcType="CHAR" />
@@ -30,7 +30,7 @@
     delete from T_BILL_BALANCE
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.BillBalance" >
+  <insert id="insert" parameterType="com.nbl.model.BillBalance" >
     insert into T_BILL_BALANCE (ID, CAL_TIME, ACCOUNT_DATE, 
       CUST_ID, MERCHANT_ID, PROJECT_ID, 
       DR_AMOUNT, CR_AMOUNT, ASSET_AMOUNT, 
@@ -42,7 +42,7 @@
       #{liabilityAmount,jdbcType=DECIMAL}, #{chBalanceFlag,jdbcType=CHAR}, #{lsBalanceFlag,jdbcType=CHAR}, 
       #{msg,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.BillBalance" >
+  <insert id="insertSelective" parameterType="com.nbl.model.BillBalance" >
     insert into T_BILL_BALANCE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -127,7 +127,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.BillBalance" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.BillBalance" >
     update T_BILL_BALANCE
     <set >
       <if test="calTime != null" >
@@ -169,7 +169,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.BillBalance" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.BillBalance" >
     update T_BILL_BALANCE
     set CAL_TIME = #{calTime,jdbcType=TIMESTAMP},
       ACCOUNT_DATE = #{accountDate,jdbcType=CHAR},

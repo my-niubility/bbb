@@ -14,14 +14,14 @@
 	default-lazy-init="false">
 
 	<description>Spring</description>
-	<context:component-scan base-package="com.zlebank.services"></context:component-scan>
-	<context:component-scan base-package="com.zlebank.app"></context:component-scan>
-	<context:component-scan base-package="com.zlebank.utils"></context:component-scan>
+	<context:component-scan base-package="com.nbl.services"></context:component-scan>
+	<context:component-scan base-package="com.nbl.app"></context:component-scan>
+	<context:component-scan base-package="com.nbl.utils"></context:component-scan>
 
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	<bean class="com.zlebank.utils.LogUtil" />
+	<bean class="com.nbl.utils.LogUtil" />
 
-	<bean id="propertyPlaceholder" class="com.zlebank.utils.PropertyPlaceholder">
+	<bean id="propertyPlaceholder" class="com.nbl.utils.PropertyPlaceholder">
 		<property name="location" value="classpath:/properties/product.properties" />
 	</bean>
 </beans>

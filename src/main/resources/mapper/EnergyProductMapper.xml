@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.EnergyProductDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.EnergyProduct" >
+<mapper namespace="com.nbl.dao.EnergyProductDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.EnergyProduct" >
     <id column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
     <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
     <result column="PROJECT_STEP" property="projectStep" jdbcType="CHAR" />
@@ -40,7 +40,7 @@
     delete from T_PRODUCT_COMMON
     where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.EnergyProduct" >
+  <insert id="insert" parameterType="com.nbl.model.EnergyProduct" >
     insert into T_PRODUCT_COMMON (PRODUCT_ID, PROJECT_ID, PROJECT_STEP, 
       PROJECT_SCALE, PROJECT_ADDR, PRODUCT_SUB_CAND, 
       PRODUCT_SUB_NUM, PRODUCT_SUB_TYPE, PROJECT_CARBON, 
@@ -58,7 +58,7 @@
       #{projectRemark3,jdbcType=VARCHAR}, #{projectRemark4,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.EnergyProduct" >
+  <insert id="insertSelective" parameterType="com.nbl.model.EnergyProduct" >
     insert into T_PRODUCT_COMMON
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="productId != null" >
@@ -191,7 +191,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.EnergyProduct" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.EnergyProduct" >
     update T_PRODUCT_COMMON
     <set >
       <if test="projectId != null" >
@@ -257,7 +257,7 @@
     </set>
     where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.EnergyProduct" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.EnergyProduct" >
     update T_PRODUCT_COMMON
     set PROJECT_ID = #{projectId,jdbcType=VARCHAR},
       PROJECT_STEP = #{projectStep,jdbcType=CHAR},

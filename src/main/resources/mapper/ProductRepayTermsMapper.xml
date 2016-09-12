@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.ProductRepayTermsDao">
-	<resultMap id="BaseResultMap" type="com.zlebank.model.ProductRepayTerms">
+<mapper namespace="com.nbl.dao.ProductRepayTermsDao">
+	<resultMap id="BaseResultMap" type="com.nbl.model.ProductRepayTerms">
 		<id column="ID" property="id" jdbcType="VARCHAR" />
 		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
 		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
@@ -38,7 +38,7 @@
 		T_PRODUCT_REPAY_TERMS
 		where ID = #{id,jdbcType=VARCHAR}
 	</delete>
-	<insert id="insert" parameterType="com.zlebank.model.ProductRepayTerms">
+	<insert id="insert" parameterType="com.nbl.model.ProductRepayTerms">
 		insert into
 		T_PRODUCT_REPAY_TERMS (ID, PRODUCT_ID, PRODUCT_NAME,
 		REPAY_CUST_ID,
@@ -57,7 +57,7 @@
 		#{enabled,jdbcType=DECIMAL}, #{isFinish,jdbcType=DECIMAL},
 		#{repayType,jdbcType=CHAR})
 	</insert>
-	<insert id="insertSelective" parameterType="com.zlebank.model.ProductRepayTerms">
+	<insert id="insertSelective" parameterType="com.nbl.model.ProductRepayTerms">
 		insert into T_PRODUCT_REPAY_TERMS
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -142,7 +142,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.ProductRepayTerms">
+	<update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.ProductRepayTerms">
 		update T_PRODUCT_REPAY_TERMS
 		<set>
 			<if test="productId != null">
@@ -184,7 +184,7 @@
 		</set>
 		where ID = #{id,jdbcType=VARCHAR}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.ProductRepayTerms">
+	<update id="updateByPrimaryKey" parameterType="com.nbl.model.ProductRepayTerms">
 		update
 		T_PRODUCT_REPAY_TERMS
 		set PRODUCT_ID = #{productId,jdbcType=VARCHAR},

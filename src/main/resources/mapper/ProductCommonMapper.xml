@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.ProductCommonDao">
-	<resultMap id="BaseResultMap" type="com.zlebank.model.ProductCommon">
+<mapper namespace="com.nbl.dao.ProductCommonDao">
+	<resultMap id="BaseResultMap" type="com.nbl.model.ProductCommon">
 		<id column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
 		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
 		<result column="ASSET_ID" property="assetId" jdbcType="VARCHAR" />
@@ -111,7 +111,7 @@
 		delete from T_PRODUCT_COMMON
 		where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
 	</delete>
-	<insert id="insert" parameterType="com.zlebank.model.ProductCommon">
+	<insert id="insert" parameterType="com.nbl.model.ProductCommon">
 		insert into T_PRODUCT_COMMON (PRODUCT_ID, PRODUCT_NAME, ASSET_ID,
 		ASSET_NAME, PRODUCT_TYPE, SELL_TYPE,
 		SELL_RATE, TRANSFER_FLAG, SUBSIDY_DAY,
@@ -163,7 +163,7 @@
 		#{investMin,jdbcType=DECIMAL},
 		#{productLittleType,jdbcType=CHAR}, #{collectEndTime,jdbcType=TIMESTAMP})
 	</insert>
-	<insert id="insertSelective" parameterType="com.zlebank.model.ProductCommon">
+	<insert id="insertSelective" parameterType="com.nbl.model.ProductCommon">
 		insert into T_PRODUCT_COMMON
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="productId != null">
@@ -506,7 +506,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.ProductCommon">
+	<update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.ProductCommon">
 		update T_PRODUCT_COMMON
 		<set>
 			<if test="productName != null">
@@ -677,7 +677,7 @@
 		</set>
 		where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.ProductCommon">
+	<update id="updateByPrimaryKey" parameterType="com.nbl.model.ProductCommon">
 		update T_PRODUCT_COMMON
 		set PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
 		ASSET_ID = #{assetId,jdbcType=VARCHAR},
@@ -737,7 +737,7 @@
 		where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
 	</update>
 
-	<update id="updateAuditStatus" parameterType="com.zlebank.model.ProductCommon">
+	<update id="updateAuditStatus" parameterType="com.nbl.model.ProductCommon">
 
 		update T_PRODUCT_COMMON
 		<set>
@@ -1065,7 +1065,7 @@
 		for update
 	</select>
 
-	<update id="updateByPrdIdsAndPorts" parameterType="com.zlebank.model.vo.PrdBatchUpdVo">
+	<update id="updateByPrdIdsAndPorts" parameterType="com.nbl.model.vo.PrdBatchUpdVo">
 		update T_PRODUCT_COMMON
 		<trim prefix="set" suffixOverrides=",">
 			<trim prefix="LOCK_SCALE=case" suffix="end,">

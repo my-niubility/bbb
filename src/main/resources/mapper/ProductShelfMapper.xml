@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.ProductShelfDao">
-	<resultMap id="BaseResultMap" type="com.zlebank.model.ProductShelf">
+<mapper namespace="com.nbl.dao.ProductShelfDao">
+	<resultMap id="BaseResultMap" type="com.nbl.model.ProductShelf">
 		<id column="ID" property="id" jdbcType="DECIMAL" />
 		<result column="EXH_TYPE" property="exhType" jdbcType="CHAR" />
 		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
@@ -27,7 +27,7 @@
 		delete from T_PRODUCT_SHELF
 		where ID = #{id,jdbcType=DECIMAL}
 	</delete>
-	<insert id="insert" parameterType="com.zlebank.model.ProductShelf">
+	<insert id="insert" parameterType="com.nbl.model.ProductShelf">
 		insert into T_PRODUCT_SHELF (ID, EXH_TYPE, PRODUCT_ID,
 		STATUS, CREATE_DATE, UPDATE_DATE,
 		EFFECTIVE_DATE, EXPIRY_DATE)
@@ -36,7 +36,7 @@
 		#{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
 		#{effectiveDate,jdbcType=TIMESTAMP}, #{expiryDate,jdbcType=TIMESTAMP})
 	</insert>
-	<insert id="insertSelective" parameterType="com.zlebank.model.ProductShelf">
+	<insert id="insertSelective" parameterType="com.nbl.model.ProductShelf">
 		insert into T_PRODUCT_SHELF
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -91,7 +91,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.ProductShelf">
+	<update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.ProductShelf">
 		update T_PRODUCT_SHELF
 		<set>
 			<if test="exhType != null">
@@ -118,7 +118,7 @@
 		</set>
 		where ID = #{id,jdbcType=DECIMAL}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.ProductShelf">
+	<update id="updateByPrimaryKey" parameterType="com.nbl.model.ProductShelf">
 		update T_PRODUCT_SHELF
 		set EXH_TYPE = #{exhType,jdbcType=CHAR},
 		PRODUCT_ID = #{productId,jdbcType=VARCHAR},
@@ -131,7 +131,7 @@
 	</update>
 	
 	
-	<resultMap id="ShelfProduct" type="com.zlebank.model.vo.ProductShelfVo">
+	<resultMap id="ShelfProduct" type="com.nbl.model.vo.ProductShelfVo">
 		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
 		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
 		<result column="EXH_TYPE" property="shelfNum" jdbcType="CHAR" />
@@ -160,7 +160,7 @@
     	</foreach>  
 	</insert>
 	
-	<update id="batchUpdateShelf" parameterType="com.zlebank.model.ProductShelf">
+	<update id="batchUpdateShelf" parameterType="com.nbl.model.ProductShelf">
 		update T_PRODUCT_SHELF set STATUS = '0' where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and EXH_TYPE = #{exhType,jdbcType=CHAR};
 	</update>
 	

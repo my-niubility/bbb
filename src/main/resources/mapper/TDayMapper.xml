@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.TDayDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.TDay" >
+<mapper namespace="com.nbl.dao.TDayDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.TDay" >
     <id column="DAY" property="day" jdbcType="CHAR" />
     <result column="FESTIVAL_FLAG" property="festivalFlag" jdbcType="DECIMAL" />
   </resultMap>
@@ -24,11 +24,11 @@
     delete from T_DAY
     where DAY = #{day,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.TDay" >
+  <insert id="insert" parameterType="com.nbl.model.TDay" >
     insert into T_DAY (DAY, FESTIVAL_FLAG)
     values (#{day,jdbcType=CHAR}, #{festivalFlag,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.TDay" >
+  <insert id="insertSelective" parameterType="com.nbl.model.TDay" >
     insert into T_DAY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="day != null" >
@@ -47,7 +47,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.TDay" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.TDay" >
     update T_DAY
     <set >
       <if test="festivalFlag != null" >
@@ -56,7 +56,7 @@
     </set>
     where DAY = #{day,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.TDay" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.TDay" >
     update T_DAY
     set FESTIVAL_FLAG = #{festivalFlag,jdbcType=DECIMAL}
     where DAY = #{day,jdbcType=CHAR}

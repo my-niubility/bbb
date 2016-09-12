@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.PositionDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.Position" >
+<mapper namespace="com.nbl.dao.PositionDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.Position" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="CONTRACT_ID" property="contractId" jdbcType="VARCHAR" />
     <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
@@ -53,7 +53,7 @@
     delete from T_POSITION
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.Position" >
+  <insert id="insert" parameterType="com.nbl.model.Position" >
     insert into T_POSITION (ID, CONTRACT_ID, CUST_ID, 
       CUST_NAME, PRODUCT_ID, PRODUCT_NANE, 
       POSITION_CUST_TYPE, ORDER_ID, SUBJECT_NO, 
@@ -130,7 +130,7 @@
     where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and POSITION_CUST_TYPE='03' 
   </update>
   
-  <update id="updateHoldStatusAndPossPortion" parameterType="com.zlebank.model.Position">
+  <update id="updateHoldStatusAndPossPortion" parameterType="com.nbl.model.Position">
     update T_POSITION
        set HOLD_STATUS = #{holdStatus,jdbcType=CHAR},
            POSSESS_PORTION = #{possessPortion,jdbcType=DECIMAL},
@@ -145,7 +145,7 @@
     where PRODUCT_ID = #{productId,jdbcType=VARCHAR} and HOLD_STATUS=#{oldHoldStatus,jdbcType=CHAR} 
   </update>
   
-  <update id="updateAssetPossPortion" parameterType="com.zlebank.model.Position">
+  <update id="updateAssetPossPortion" parameterType="com.nbl.model.Position">
     update T_POSITION
        set POSSESS_PORTION = POSSESS_PORTION + #{possessPortion,jdbcType=DECIMAL},
            UPDATE_TIME =  #{updateTime,jdbcType=TIMESTAMP}
@@ -256,7 +256,7 @@
     select 1 from T_POSITION  d for update
   </select>
   
-  <update id="updateAccountAmt" parameterType="com.zlebank.model.Position">
+  <update id="updateAccountAmt" parameterType="com.nbl.model.Position">
 		<![CDATA[
 			update T_POSITION set POSSESS_PORTION = #{possessPortion},INITIAL_PORTION = #{initialPortion}, 
 			EXPECT_EARNING = #{expectEarning} ,
@@ -277,7 +277,7 @@
     and POSITION_CUST_TYPE= #{positionCustType,jdbcType=VARCHAR} 
   </select>
   
-  <insert id="insertSelective" parameterType="com.zlebank.model.Position" >
+  <insert id="insertSelective" parameterType="com.nbl.model.Position" >
     insert into T_POSITION
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -440,7 +440,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.Position" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.Position" >
     update T_POSITION
     <set >
       <if test="contractId != null" >
@@ -521,7 +521,7 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.Position" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.Position" >
     update T_POSITION
     set CONTRACT_ID = #{contractId,jdbcType=VARCHAR},
       CUST_ID = #{custId,jdbcType=VARCHAR},

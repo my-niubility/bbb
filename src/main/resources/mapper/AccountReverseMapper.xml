@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.AccountReverseDao" >
-  <resultMap id="BaseResultMap" type="com.zlebank.model.AccountReverse" >
+<mapper namespace="com.nbl.dao.AccountReverseDao" >
+  <resultMap id="BaseResultMap" type="com.nbl.model.AccountReverse" >
     <id column="REVERSE_ID" property="reverseId" jdbcType="INTEGER" />
     <result column="DR_SUBJECT_NO" property="drSubjectNo" jdbcType="VARCHAR" />
     <result column="DR_CUST_ID" property="drCustId" jdbcType="VARCHAR" />
@@ -32,7 +32,7 @@
     delete from T_ACCOUNT_REVERSE
     where REVERSE_ID = #{reverseId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.zlebank.model.AccountReverse" >
+  <insert id="insert" parameterType="com.nbl.model.AccountReverse" >
     insert into T_ACCOUNT_REVERSE (REVERSE_ID, DR_SUBJECT_NO, DR_CUST_ID, 
       CR_SUBJECT_NO, CR_CUST_ID, REVERSE_AMOUNT, 
       REVERSE_DESC, REVERSE_ACCOUNT_DATE, REVERSE_TIME, 
@@ -44,7 +44,7 @@
       #{orgBookId,jdbcType=DECIMAL}, #{orgPayId,jdbcType=VARCHAR}, #{orgAmount,jdbcType=DECIMAL}, 
       #{orgAccountDate,jdbcType=CHAR}, #{payId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlebank.model.AccountReverse" >
+  <insert id="insertSelective" parameterType="com.nbl.model.AccountReverse" >
     insert into T_ACCOUNT_REVERSE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="reverseId != null" >
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.AccountReverse" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.AccountReverse" >
     update T_ACCOUNT_REVERSE
     <set >
       <if test="drSubjectNo != null" >
@@ -180,7 +180,7 @@
     </set>
     where REVERSE_ID = #{reverseId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlebank.model.AccountReverse" >
+  <update id="updateByPrimaryKey" parameterType="com.nbl.model.AccountReverse" >
     update T_ACCOUNT_REVERSE
     set DR_SUBJECT_NO = #{drSubjectNo,jdbcType=VARCHAR},
       DR_CUST_ID = #{drCustId,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlebank.dao.PaymentDao">
-	<resultMap id="BaseResultMap" type="com.zlebank.model.Payment">
+<mapper namespace="com.nbl.dao.PaymentDao">
+	<resultMap id="BaseResultMap" type="com.nbl.model.Payment">
 		<id column="ID" property="id" jdbcType="VARCHAR" />
 		<result column="PAY_ID" property="payId" jdbcType="VARCHAR" />
 		<result column="TOTAL_ID" property="totalId" jdbcType="VARCHAR" />
@@ -64,7 +64,7 @@
 		delete from T_PAYMENT
 		where ID = #{id,jdbcType=VARCHAR}
 	</delete>
-	<insert id="insert" parameterType="com.zlebank.model.Payment">
+	<insert id="insert" parameterType="com.nbl.model.Payment">
 		insert into T_PAYMENT (ID, PAY_ID, TOTAL_ID,
 		BATCH_ID, CONTRACT_ID, PRODUCT_ID,
 		PRODUCT_NANE, FUNDS_TYPE, TRADE_AMT,
@@ -93,7 +93,7 @@
 		#{updateTime,jdbcType=TIMESTAMP}, #{tradeTalAmt,jdbcType=DECIMAL}, #{redEnvAmt,jdbcType=DECIMAL}
 		)
 	</insert>
-	<insert id="insertSelective" parameterType="com.zlebank.model.Payment">
+	<insert id="insertSelective" parameterType="com.nbl.model.Payment">
 		insert into T_PAYMENT
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -280,7 +280,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.zlebank.model.Payment">
+	<update id="updateByPrimaryKeySelective" parameterType="com.nbl.model.Payment">
 		update T_PAYMENT
 		<set>
 			<if test="payId != null">
@@ -373,7 +373,7 @@
 		</set>
 		where ID = #{id,jdbcType=VARCHAR}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.zlebank.model.Payment">
+	<update id="updateByPrimaryKey" parameterType="com.nbl.model.Payment">
 		update T_PAYMENT
 		set PAY_ID = #{payId,jdbcType=VARCHAR},
 		TOTAL_ID = #{totalId,jdbcType=VARCHAR},
