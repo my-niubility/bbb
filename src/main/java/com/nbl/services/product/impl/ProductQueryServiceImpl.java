@@ -35,6 +35,8 @@ import com.nbl.service.business.dto.res.PrdExhResItemDto;
 import com.nbl.services.product.ProductQueryService;
 import com.nbl.services.product.feature.PrdFeatureService;
 import com.nbl.utils.BeanParseUtils;
+import com.nbl.service.business.constant.ProductShelfStatus;
+import com.nbl.services.product.impl.ProductQueryServiceImpl;
 
 @Service("productQueryService")
 public class ProductQueryServiceImpl implements ProductQueryService {
@@ -104,7 +106,7 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 		}
 		return list;
 	}
-
+	
 	@Override
 	public CommRespDto productsMutiCondQuery(MutiCndQryPrdsDto mutiCndQryPrdsDto) {
 		logger.info("[enter productsMutiCondQuery inparam is :]" + mutiCndQryPrdsDto.toString());
@@ -116,11 +118,15 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 		if (StringUtils.isNotEmpty(mutiCndQryPrdsDto.getOrderColumn()) && StringUtils.isNotEmpty(mutiCndQryPrdsDto.getOrderFlag())) {
 			StringBuffer orderBy = new StringBuffer();
 			orderBy.append(PrdIdxOrderByCol.parseOf(mutiCndQryPrdsDto.getOrderColumn()));
+			//按照锁定期排序时需要把排序列*1，数据库锁定期为varchar无法按照number排序，需要*1转换为按照number类型数字大小排序
+			if(PrdIdxOrderByCol.HOLD_PERIOD.getValue().equals(mutiCndQryPrdsDto.getOrderColumn())){
+				orderBy.append("*1");
+			}
 			orderBy.append(" ");
 			orderBy.append(OrderByFlag.parseOf(mutiCndQryPrdsDto.getOrderFlag()));
 			pageVO.setOrderBy(orderBy.toString());
 		}
-
+		
 		pageVO.setStartSize(mutiCndQryPrdsDto.getStartIndex());
 		pageVO.setSize(mutiCndQryPrdsDto.getRecordNum());
 		List<String> productStatus = new ArrayList<String>();
@@ -129,7 +135,9 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 		productStatus.add(ProductStatus.PRODUCT_STATUS05.getValue());
 		productStatus.add(ProductStatus.PRODUCT_STATUS09.getValue());
 		proIdxVo.setProductStatus(productStatus);
-		List<ProductCommon> prdInfoTrans = productCommonDao.selectByMutiCond(pageVO, proIdxVo);
+		//货架内商品的状态（下架、展示）设置为展示
+		String exhTypeStatus=ProductShelfStatus.PRODUCT_SHELF_STATUS1.getValue();
+		List<ProductCommon> prdInfoTrans = productCommonDao.selectByMutiCond(pageVO, proIdxVo,exhTypeStatus);
 		if (prdInfoTrans == null || prdInfoTrans.size() == 0) {
 			logger.warn("【no product to exhibition】");
 			return new CommRespDto().success();
@@ -140,7 +148,7 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 
 		return new CommRespDto().success(result);
 	}
-
+	
 	@Override
 	public CommRespDto productDetailsQuery(PrdDtlInfoQryDto prdDtlInfoQryDto) {
 		Object result = null;
@@ -178,7 +186,9 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 		productStatus.add(ProductStatus.PRODUCT_STATUS05.getValue());
 		productStatus.add(ProductStatus.PRODUCT_STATUS09.getValue());
 		proIdxVo.setProductStatus(productStatus);
-		Integer count = productCommonDao.selectByMutiCondCount(proIdxVo);
+		//货架内商品的状态（下架、展示）设置为展示
+		String exhTypeStatus=ProductShelfStatus.PRODUCT_SHELF_STATUS1.getValue();
+		Integer count = productCommonDao.selectByMutiCondCount(proIdxVo,exhTypeStatus);
 		countStr = count == null ? null : Integer.toString(count);
 		return countStr;
 	}
@@ -300,5 +310,4 @@ public class ProductQueryServiceImpl implements ProductQueryService {
 		retDto.setRentMode(product.getRepayMode().toString());
 		return retDto;
 	}
-
 }

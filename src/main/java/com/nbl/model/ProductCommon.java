@@ -229,15 +229,15 @@ public class ProductCommon {
         this.collectEndDt = collectEndDt == null ? null : collectEndDt.trim();
     }
 
-    public String getHoldPeriod() {
-        return holdPeriod;
-    }
+	public String getHoldPeriod() {
+		return holdPeriod;
+	}
 
-    public void setHoldPeriod(String holdPeriod) {
-        this.holdPeriod = holdPeriod == null ? null : holdPeriod.trim();
-    }
+	public void setHoldPeriod(String holdPeriod) {
+		this.holdPeriod = holdPeriod == null ? null : holdPeriod.trim();
+	}
 
-    public String getRentType() {
+	public String getRentType() {
         return rentType;
     }
 

@@ -851,9 +851,11 @@
 	</select>
 
 	<sql id="prdIdxDynamicQuery">
-		select
-		<include refid="Base_Column_List" />
-		from T_PRODUCT_COMMON
+		select distinct
+		<include refid="Join_Column_List" />
+		from T_PRODUCT_COMMON comm
+		join T_PRODUCT_SHELF shelf
+		on comm.PRODUCT_ID=shelf.PRODUCT_ID
 		<include refid="dynamicPageWhere" />
 		<if test="pageVO!=null">
 			<if test="pageVO.orderBy==null or pageVO.orderBy==''">
@@ -873,7 +875,7 @@
 			</if>
 			<if
 				test="proIdxVo.unitCostMin!=null and proIdxVo.unitCostMin!='' and proIdxVo.unitCostMax!=null and proIdxVo.unitCostMax!=''">
-			 <![CDATA[  and UNIT_COST >#{proIdxVo.unitCostMin,jdbcType=DECIMAL} and UNIT_COST <#{proIdxVo.unitCostMax,jdbcType=DECIMAL}]]>
+			 <![CDATA[  and UNIT_COST >#{proIdxVo.unitCostMin,jdbcType=DECIMAL} and UNIT_COST <=#{proIdxVo.unitCostMax,jdbcType=DECIMAL}]]>
 			</if>
 			<if
 				test="proIdxVo.unitCostMin!=null and proIdxVo.unitCostMin!='' and (proIdxVo.unitCostMax==null or proIdxVo.unitCostMax=='')">
@@ -881,11 +883,11 @@
 			</if>
 			<if
 				test="(proIdxVo.unitCostMin==null or proIdxVo.unitCostMin=='' )and proIdxVo.unitCostMax!=null and proIdxVo.unitCostMax!=''">
-			 <![CDATA[  and UNIT_COST <#{proIdxVo.unitCostMax,jdbcType=DECIMAL}]]>
+			 <![CDATA[  and UNIT_COST <=#{proIdxVo.unitCostMax,jdbcType=DECIMAL}]]>
 			</if>
 			<if
 				test="proIdxVo.expectEarnRateMin!=null and proIdxVo.expectEarnRateMin!='' and proIdxVo.expectEarnRateMax!=null and proIdxVo.expectEarnRateMax!=''">
-			 <![CDATA[  and EXPECT_EARN_RATE >#{proIdxVo.expectEarnRateMin,jdbcType=DECIMAL} and EXPECT_EARN_RATE <#{proIdxVo.expectEarnRateMax,jdbcType=DECIMAL}]]>
+			 <![CDATA[  and EXPECT_EARN_RATE >#{proIdxVo.expectEarnRateMin,jdbcType=DECIMAL} and EXPECT_EARN_RATE <=#{proIdxVo.expectEarnRateMax,jdbcType=DECIMAL}]]>
 			</if>
 			<if
 				test="proIdxVo.expectEarnRateMin!=null and proIdxVo.expectEarnRateMin!='' and (proIdxVo.expectEarnRateMax==null or proIdxVo.expectEarnRateMax=='')">
@@ -893,19 +895,19 @@
 			</if>
 			<if
 				test="(proIdxVo.expectEarnRateMin==null or proIdxVo.expectEarnRateMin=='' )and proIdxVo.expectEarnRateMax!=null and proIdxVo.expectEarnRateMax!=''">
-			 <![CDATA[  and EXPECT_EARN_RATE <#{proIdxVo.expectEarnRateMax,jdbcType=DECIMAL}]]>
+			 <![CDATA[  and EXPECT_EARN_RATE <=#{proIdxVo.expectEarnRateMax,jdbcType=DECIMAL}]]>
 			</if>
 			<if
 				test="proIdxVo.lockPeriodMin!=null and proIdxVo.lockPeriodMin!='' and proIdxVo.lockPeriodMax!=null and proIdxVo.lockPeriodMax!=''">
-			 <![CDATA[  and B_LOCK_PERIOD >#{proIdxVo.lockPeriodMin,jdbcType=CHAR} and B_LOCK_PERIOD <#{proIdxVo.lockPeriodMax,jdbcType=CHAR}]]>
+			 <![CDATA[  and HOLD_PERIOD >#{proIdxVo.lockPeriodMin,jdbcType=CHAR} and HOLD_PERIOD <=#{proIdxVo.lockPeriodMax,jdbcType=CHAR}]]>
 			</if>
 			<if
 				test="proIdxVo.lockPeriodMin!=null and proIdxVo.lockPeriodMin!='' and (proIdxVo.lockPeriodMax==null or proIdxVo.lockPeriodMax=='')">
-			 <![CDATA[  and B_LOCK_PERIOD >#{proIdxVo.lockPeriodMin,jdbcType=CHAR} ]]>
+			 <![CDATA[  and HOLD_PERIOD >#{proIdxVo.lockPeriodMin,jdbcType=CHAR} ]]>
 			</if>
 			<if
 				test="(proIdxVo.lockPeriodMin==null or proIdxVo.lockPeriodMin=='' )and proIdxVo.lockPeriodMax!=null and proIdxVo.lockPeriodMax!=''">
-			 <![CDATA[  and B_LOCK_PERIOD <#{proIdxVo.lockPeriodMax,jdbcType=CHAR}]]>
+			 <![CDATA[  and HOLD_PERIOD <=#{proIdxVo.lockPeriodMax,jdbcType=CHAR}]]>
 			</if>
 			<if
 				test="proIdxVo.productLittleType!=null and proIdxVo.productLittleType!=''">
@@ -914,6 +916,10 @@
 			<if
 				test="proIdxVo.productLittleType!=null and proIdxVo.productLittleType!=''">
 			   <![CDATA[ and PRODUCT_LITTLE_TYPE = #{proIdxVo.productLittleType,jdbcType=VARCHAR}]]>
+			</if>
+			<if
+				test="exhTypeStatus!=null and exhTypeStatus!=''">
+			   <![CDATA[ and shelf.STATUS = #{exhTypeStatus,jdbcType=VARCHAR}]]>
 			</if>
 			<if test="proIdxVo.productStatus != null and proIdxVo.productStatus != ''">
 				and PRODUCT_STATUS in
@@ -927,8 +933,10 @@
 
 	<select id="selectByMutiCondCount" resultType="java.lang.Integer">
 		select
-		count(*)
-		from T_PRODUCT_COMMON
+		count(distinct comm.PRODUCT_ID)
+		from T_PRODUCT_COMMON comm
+		join T_PRODUCT_SHELF shelf
+		on comm.PRODUCT_ID=shelf.PRODUCT_ID
 		<include refid="dynamicPageWhere" />
 	</select>
 
@@ -1084,5 +1092,4 @@
 			PRODUCT_ID=#{i.prdId}
 		</foreach>
 	</update>
-
 </mapper>

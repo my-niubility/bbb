@@ -31,9 +31,9 @@ public interface ProductCommonDao {
 	 * @param rechargeVo
 	 * @return
 	 */
-	List<ProductCommon> selectByMutiCond(@Param("pageVO") PageVO<ProIdxVo> pageVO, @Param("proIdxVo") ProIdxVo proIdxVo);
+	List<ProductCommon> selectByMutiCond(@Param("pageVO") PageVO<ProIdxVo> pageVO, @Param("proIdxVo") ProIdxVo proIdxVo,@Param("exhTypeStatus")String exhTypeStatus);
 
-	int selectByMutiCondCount(@Param("proIdxVo") ProIdxVo proIdxVo);
+	int selectByMutiCondCount(@Param("proIdxVo") ProIdxVo proIdxVo,@Param("exhTypeStatus")String exhTypeStatus);
 
 	/**
 	 * @param record
@@ -80,5 +80,6 @@ public interface ProductCommonDao {
 	 * @return
 	 */
 	int updateByPrdIdsAndPorts(List<PrdBatchUpdVo> vos);
+
 
 }
